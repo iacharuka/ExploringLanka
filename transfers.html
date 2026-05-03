@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Airport Transfers in Sri Lanka | ExploringLanka</title>
+
+  <meta
+    name="description"
+    content="Book private airport transfers, hotel pickups, and long-distance transport across Sri Lanka with ExploringLanka through WhatsApp or email."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar component -->
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero transfers-page-hero">
+      <div class="container page-hero-content">
+
+        <span class="page-badge">✈️ Private Transport in Sri Lanka</span>
+
+        <h1>Private Airport Transfers in Sri Lanka</h1>
+
+        <p>
+          Book reliable airport pickups, hotel transfers, city-to-city transport,
+          and private vehicles with trusted local drivers.
+        </p>
+
+        <div class="page-hero-actions">
+          <a href="#transferQuote" class="btn btn-primary">Request Transfer Quote</a>
+          <a href="#" class="btn btn-light js-whatsapp-help">Chat on WhatsApp</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= TRANSFER QUOTE FORM ================= -->
+    <section class="section transfer-quote-section" id="transferQuote">
+      <div class="container">
+
+        <div class="transfer-quote-layout">
+
+          <div class="transfer-info">
+            <span class="mini-label">Fast Quote</span>
+            <h2>Get your private transfer price</h2>
+            <p>
+              Share your pickup and drop-off details. Since this website has no backend,
+              your request will be sent directly to ExploringLanka through WhatsApp or email.
+            </p>
+
+            <div class="transfer-benefits">
+              <div>
+                <strong>✓ Flight tracking</strong>
+                <span>We adjust pickup time for airport arrivals.</span>
+              </div>
+
+              <div>
+                <strong>✓ Clean vehicles</strong>
+                <span>Comfortable cars, vans, and luxury vehicles.</span>
+              </div>
+
+              <div>
+                <strong>✓ Islandwide routes</strong>
+                <span>Colombo, Kandy, Ella, Galle, Sigiriya, Mirissa, and more.</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="transfer-form" id="transferQuoteForm">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="transferName">Your Name</label>
+                <input
+                  type="text"
+                  id="transferName"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="transferPhone">WhatsApp Number</label>
+                <input
+                  type="text"
+                  id="transferPhone"
+                  placeholder="+94 70 000 0000"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pickupLocationTransfer">Pickup Location</label>
+                <input
+                  type="text"
+                  id="pickupLocationTransfer"
+                  placeholder="Example: Colombo Airport"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="dropLocationTransfer">Drop-off Location</label>
+                <input
+                  type="text"
+                  id="dropLocationTransfer"
+                  placeholder="Example: Kandy hotel"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="transferDate">Date</label>
+                <input type="date" id="transferDate" />
+              </div>
+
+              <div class="form-group">
+                <label for="transferTime">Time</label>
+                <input type="time" id="transferTime" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vehicleType">Vehicle Type</label>
+                <select id="vehicleType">
+                  <option>Comfort Car</option>
+                  <option>Family Van</option>
+                  <option>Luxury Car</option>
+                  <option>Mini Bus</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="transferPassengers">Passengers</label>
+                <select id="transferPassengers">
+                  <option>1 Passenger</option>
+                  <option>2 Passengers</option>
+                  <option>3 Passengers</option>
+                  <option>4 Passengers</option>
+                  <option>5 Passengers</option>
+                  <option>6+ Passengers</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="transferLuggage">Luggage Details</label>
+              <input
+                type="text"
+                id="transferLuggage"
+                placeholder="Example: 2 large bags, 2 backpacks"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="transferMessage">Special Notes</label>
+              <textarea
+                id="transferMessage"
+                rows="4"
+                placeholder="Flight number, child seats, extra stops, etc."
+              ></textarea>
+            </div>
+
+            <p class="form-error" id="transferError"></p>
+
+            <div class="modal-actions">
+              <button type="submit" class="btn btn-whatsapp">
+                Request Quote via WhatsApp
+              </button>
+
+              <button type="button" class="btn btn-primary" id="transferEmailBtn">
+                Request Quote via Email
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= POPULAR ROUTES ================= -->
+    <section class="section popular-routes-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Popular Routes</span>
+          <h2>Most requested Sri Lanka transfer routes</h2>
+          <p>
+            Choose a common route and send a quick WhatsApp quote request.
+          </p>
+        </div>
+
+        <div class="route-grid">
+
+          <article class="route-card">
+            <div class="route-icon">✈️</div>
+            <div>
+              <h3>Colombo Airport → Colombo</h3>
+              <p>Approx. 45 mins • From $25</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Colombo">
+              Quote
+            </button>
+          </article>
+
+          <article class="route-card">
+            <div class="route-icon">🚗</div>
+            <div>
+              <h3>Colombo Airport → Kandy</h3>
+              <p>Approx. 3.5 hours • From $60</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Kandy">
+              Quote
+            </button>
+          </article>
+
+          <article class="route-card">
+            <div class="route-icon">🚐</div>
+            <div>
+              <h3>Colombo Airport → Ella</h3>
+              <p>Approx. 6.5 hours • From $120</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Ella">
+              Quote
+            </button>
+          </article>
+
+          <article class="route-card">
+            <div class="route-icon">🌊</div>
+            <div>
+              <h3>Colombo Airport → Galle</h3>
+              <p>Approx. 2.5 hours • From $75</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Galle">
+              Quote
+            </button>
+          </article>
+
+          <article class="route-card">
+            <div class="route-icon">🪨</div>
+            <div>
+              <h3>Colombo Airport → Sigiriya</h3>
+              <p>Approx. 4 hours • From $90</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Sigiriya">
+              Quote
+            </button>
+          </article>
+
+          <article class="route-card">
+            <div class="route-icon">🏖️</div>
+            <div>
+              <h3>Colombo Airport → Mirissa</h3>
+              <p>Approx. 3 hours • From $95</p>
+            </div>
+            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Mirissa">
+              Quote
+            </button>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= VEHICLE TYPES ================= -->
+    <section class="section vehicle-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Vehicle Options</span>
+          <h2>Choose the right vehicle for your journey</h2>
+          <p>
+            Comfortable private transport options for couples, families, groups, and luxury travelers.
+          </p>
+        </div>
+
+        <div class="vehicle-grid">
+
+          <article class="vehicle-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80"
+              alt="Comfort car for Sri Lanka transfer"
+              loading="lazy"
+            />
+            <div class="vehicle-body">
+              <h3>Comfort Car</h3>
+              <p>Best for couples or solo travelers.</p>
+              <ul>
+                <li>1–3 passengers</li>
+                <li>2 large bags</li>
+                <li>Air-conditioned</li>
+              </ul>
+              <button class="btn btn-card route-quote-btn" data-route="Comfort Car Transfer">
+                Request Quote
+              </button>
+            </div>
+          </article>
+
+          <article class="vehicle-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80"
+              alt="Family van for Sri Lanka transfer"
+              loading="lazy"
+            />
+            <div class="vehicle-body">
+              <h3>Family Van</h3>
+              <p>Best for families and small groups.</p>
+              <ul>
+                <li>4–7 passengers</li>
+                <li>More luggage space</li>
+                <li>Comfortable long rides</li>
+              </ul>
+              <button class="btn btn-card route-quote-btn" data-route="Family Van Transfer">
+                Request Quote
+              </button>
+            </div>
+          </article>
+
+          <article class="vehicle-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80"
+              alt="Luxury car for Sri Lanka transfer"
+              loading="lazy"
+            />
+            <div class="vehicle-body">
+              <h3>Luxury Vehicle</h3>
+              <p>Best for premium travel experiences.</p>
+              <ul>
+                <li>Executive comfort</li>
+                <li>Professional driver</li>
+                <li>Premium interior</li>
+              </ul>
+              <button class="btn btn-card route-quote-btn" data-route="Luxury Vehicle Transfer">
+                Request Quote
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= TRANSFER CTA ================= -->
+    <section class="custom-cta transfer-cta">
+      <div class="container cta-content">
+        <span>Islandwide Private Transport</span>
+        <h2>Need a driver for multiple days?</h2>
+        <p>
+          ExploringLanka can arrange a private driver for your full Sri Lanka itinerary,
+          including airport pickup, hotel transfers, sightseeing stops, and drop-off.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="custom-tour.html" class="btn btn-primary">Plan Full Trip</a>
+          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Ask on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer component -->
+  <div id="footer"></div>
+
+  <!-- Floating Buttons -->
+  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
+    💬
+  </a>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
+
+  <!-- JavaScript -->
+  <script src="js/components.js" defer></script>
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>

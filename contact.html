@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact ExploringLanka | Sri Lanka Tours & Transfers</title>
+
+  <meta
+    name="description"
+    content="Contact ExploringLanka for Sri Lanka tours, airport transfers, custom travel planning, safari bookings, cultural experiences, and private driver services."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar component -->
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- ================= CONTACT HERO ================= -->
+    <section class="page-hero contact-page-hero">
+      <div class="container page-hero-content">
+
+        <span class="page-badge">💬 Contact ExploringLanka</span>
+
+        <h1>Let’s plan your Sri Lanka journey together.</h1>
+
+        <p>
+          Have a question about private tours, airport transfers, custom travel packages,
+          safaris, or hotel pickups? Contact us through WhatsApp or email.
+        </p>
+
+        <div class="page-hero-actions">
+          <a href="#contactFormSection" class="btn btn-primary">Send Message</a>
+          <a href="#" class="btn btn-light js-whatsapp-help">Chat on WhatsApp</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CONTACT CARDS ================= -->
+    <section class="section contact-cards-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Get in Touch</span>
+          <h2>Fast support for your travel questions</h2>
+          <p>
+            Since this website does not use a backend, all contact requests are sent
+            directly through WhatsApp or email.
+          </p>
+        </div>
+
+        <div class="contact-card-grid">
+
+          <article class="contact-card">
+            <div class="contact-icon">💬</div>
+            <h3>WhatsApp</h3>
+            <p>Best for fast travel questions and booking requests.</p>
+            <a href="#" class="js-whatsapp-help">Chat on WhatsApp</a>
+          </article>
+
+          <article class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <h3>Email</h3>
+            <p>Send detailed custom tour requests and transfer inquiries.</p>
+            <a href="mailto:exploringlankaofficial@gmail.com">
+              exploringlankaofficial@gmail.com
+            </a>
+          </article>
+
+          <article class="contact-card">
+            <div class="contact-icon">📍</div>
+            <h3>Location</h3>
+            <p>ExploringLanka is focused on islandwide travel in Sri Lanka.</p>
+            <span>Sri Lanka</span>
+          </article>
+
+          <article class="contact-card">
+            <div class="contact-icon">⏰</div>
+            <h3>Support Hours</h3>
+            <p>Travel support available for booking inquiries and planning help.</p>
+            <span>24/7 WhatsApp Support</span>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CONTACT FORM ================= -->
+    <section class="section contact-form-section" id="contactFormSection">
+      <div class="container">
+
+        <div class="contact-layout">
+
+          <div class="contact-info-panel">
+            <span class="mini-label">Message Us</span>
+            <h2>Send your inquiry in a simple way</h2>
+            <p>
+              Fill this form and choose WhatsApp or email. Your message will open
+              automatically with all the details included.
+            </p>
+
+            <div class="contact-info-list">
+
+              <div>
+                <strong>Tour questions</strong>
+                <span>Ask about destinations, prices, pickup options, and duration.</span>
+              </div>
+
+              <div>
+                <strong>Transfer requests</strong>
+                <span>Share pickup, drop-off, date, time, vehicle, and passengers.</span>
+              </div>
+
+              <div>
+                <strong>Custom trip planning</strong>
+                <span>Tell us your travel dates, budget, and preferred experiences.</span>
+              </div>
+
+            </div>
+          </div>
+
+
+          <form class="contact-form" id="contactForm">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Full Name</label>
+                <input
+                  type="text"
+                  id="contactName"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input
+                  type="email"
+                  id="contactEmail"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactPhone">WhatsApp Number</label>
+                <input
+                  type="text"
+                  id="contactPhone"
+                  placeholder="+94 70 000 0000"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <select id="contactSubject">
+                  <option>General Question</option>
+                  <option>Tour Booking Inquiry</option>
+                  <option>Airport Transfer Inquiry</option>
+                  <option>Custom Tour Planning</option>
+                  <option>Safari Booking</option>
+                  <option>Private Driver Request</option>
+                  <option>Partnership Inquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea
+                id="contactMessage"
+                rows="6"
+                placeholder="Type your message here..."
+              ></textarea>
+            </div>
+
+            <p class="form-error" id="contactError"></p>
+
+            <div class="modal-actions">
+              <button type="submit" class="btn btn-whatsapp">
+                Send via WhatsApp
+              </button>
+
+              <button type="button" class="btn btn-primary" id="contactEmailBtn">
+                Send via Email
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= MAP SECTION ================= -->
+    <section class="section map-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Find Us</span>
+          <h2>Based in Sri Lanka</h2>
+          <p>
+            We arrange islandwide tours, airport transfers, and private driver services
+            for travelers visiting Sri Lanka.
+          </p>
+        </div>
+
+        <div class="map-card">
+          <iframe
+            title="Google Map showing Sri Lanka"
+            src="https://www.google.com/maps?q=Sri%20Lanka&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="section faq-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>FAQ</span>
+          <h2>Frequently asked questions</h2>
+          <p>
+            Simple answers for tourists using ExploringLanka.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+
+          <article class="faq-card">
+            <h3>How can I book a tour?</h3>
+            <p>
+              Click the Book Now button on a tour card, fill the booking form,
+              and send your details through WhatsApp or email.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>Do I need to pay online?</h3>
+            <p>
+              This demo website does not include online payments. Booking confirmation
+              is handled through WhatsApp or email.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>Can I customize my tour?</h3>
+            <p>
+              Yes. Use the Custom Tour page to request a private itinerary based on
+              your destinations, dates, budget, and travel style.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>Do you provide airport transfers?</h3>
+            <p>
+              Yes. You can request airport pickups, hotel transfers, city-to-city
+              transport, and private vehicles.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>Are the tours private?</h3>
+            <p>
+              Many tours can be arranged as private experiences depending on availability,
+              vehicle type, and traveler requirements.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>Can I cancel my booking?</h3>
+            <p>
+              Cancellation conditions depend on the selected experience and will be
+              confirmed during WhatsApp or email communication.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+    <section class="custom-cta contact-cta">
+      <div class="container cta-content">
+        <span>Quick Support</span>
+        <h2>Need help choosing the best route?</h2>
+        <p>
+          Send us a WhatsApp message and we will help you choose tours, transfers,
+          and destinations based on your travel dates.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Chat on WhatsApp</a>
+          <a href="custom-tour.html" class="btn btn-primary">Plan Custom Trip</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer component -->
+  <div id="footer"></div>
+
+  <!-- Floating Buttons -->
+  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
+    💬
+  </a>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
+
+  <!-- JavaScript -->
+  <script src="js/components.js" defer></script>
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>

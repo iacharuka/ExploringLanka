@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Plan Custom Sri Lanka Tour | ExploringLanka</title>
+
+  <meta
+    name="description"
+    content="Plan a custom Sri Lanka private tour with ExploringLanka. Request personalized itineraries, private drivers, airport transfers, safaris, beach holidays, and cultural tours."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar component -->
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero custom-page-hero">
+      <div class="container page-hero-content">
+
+        <span class="page-badge">🧭 Personalized Sri Lanka Travel Planning</span>
+
+        <h1>Plan Your Custom Sri Lanka Tour</h1>
+
+        <p>
+          Tell us your travel dates, destinations, interests, hotel plans, and group size.
+          ExploringLanka will help you create a private island journey designed around you.
+        </p>
+
+        <div class="page-hero-actions">
+          <a href="#customTourFormSection" class="btn btn-primary">Start Planning</a>
+          <a href="#" class="btn btn-light js-whatsapp-help">Ask on WhatsApp</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CUSTOM TOUR INTRO ================= -->
+    <section class="section custom-intro-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Build Your Own Journey</span>
+          <h2>Your Sri Lanka trip, designed your way</h2>
+          <p>
+            Choose your destinations, travel style, activities, and budget.
+            We will convert your idea into a clear private travel plan.
+          </p>
+        </div>
+
+        <div class="custom-feature-grid">
+
+          <article class="custom-feature-card">
+            <div class="custom-feature-icon">🛣️</div>
+            <h3>Flexible Routes</h3>
+            <p>
+              Start from Colombo, Negombo, Kandy, Ella, Galle, or any hotel location in Sri Lanka.
+            </p>
+          </article>
+
+          <article class="custom-feature-card">
+            <div class="custom-feature-icon">🚘</div>
+            <h3>Private Driver</h3>
+            <p>
+              Travel comfortably with a private vehicle and trusted local driver.
+            </p>
+          </article>
+
+          <article class="custom-feature-card">
+            <div class="custom-feature-icon">🐘</div>
+            <h3>Experiences Included</h3>
+            <p>
+              Add safaris, temples, beaches, food tours, waterfalls, hiking, and photography stops.
+            </p>
+          </article>
+
+          <article class="custom-feature-card">
+            <div class="custom-feature-icon">💬</div>
+            <h3>WhatsApp Planning</h3>
+            <p>
+              Send your request directly through WhatsApp or email without a backend system.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CUSTOM TOUR FORM ================= -->
+    <section class="section custom-form-section" id="customTourFormSection">
+      <div class="container">
+
+        <div class="custom-form-layout">
+
+          <!-- Left content -->
+          <aside class="custom-form-sidebar">
+            <span class="mini-label">Trip Request</span>
+            <h2>Share your dream Sri Lanka itinerary</h2>
+            <p>
+              Fill this form and send your details to ExploringLanka. We can help create a
+              private itinerary with transport, attractions, pickup plan, and travel timing.
+            </p>
+
+            <div class="planning-steps">
+
+              <div class="planning-step">
+                <strong>01</strong>
+                <div>
+                  <h3>Tell us your route</h3>
+                  <p>Select destinations and starting location.</p>
+                </div>
+              </div>
+
+              <div class="planning-step">
+                <strong>02</strong>
+                <div>
+                  <h3>Choose your travel style</h3>
+                  <p>Pick culture, wildlife, beaches, food, hiking, or luxury travel.</p>
+                </div>
+              </div>
+
+              <div class="planning-step">
+                <strong>03</strong>
+                <div>
+                  <h3>Receive quote by WhatsApp</h3>
+                  <p>Your request opens directly in WhatsApp or email.</p>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
+
+          <!-- Right form -->
+          <form class="custom-tour-form" id="customTourForm">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customName">Full Name</label>
+                <input
+                  type="text"
+                  id="customName"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="customEmail">Email</label>
+                <input
+                  type="email"
+                  id="customEmail"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customPhone">WhatsApp Number</label>
+                <input
+                  type="text"
+                  id="customPhone"
+                  placeholder="+94 70 000 0000"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="customTravelers">Number of Travelers</label>
+                <select id="customTravelers">
+                  <option>1 Traveler</option>
+                  <option>2 Travelers</option>
+                  <option>3 Travelers</option>
+                  <option>4 Travelers</option>
+                  <option>5 Travelers</option>
+                  <option>6+ Travelers</option>
+                  <option>10+ Travelers</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="arrivalDate">Arrival Date</label>
+                <input type="date" id="arrivalDate" />
+              </div>
+
+              <div class="form-group">
+                <label for="departureDate">Departure Date</label>
+                <input type="date" id="departureDate" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="startLocation">Starting Location</label>
+                <input
+                  type="text"
+                  id="startLocation"
+                  placeholder="Example: Colombo Airport"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="endLocation">Ending Location</label>
+                <input
+                  type="text"
+                  id="endLocation"
+                  placeholder="Example: Galle / Airport / Hotel"
+                />
+              </div>
+            </div>
+
+
+            <!-- Destination Checkboxes -->
+            <div class="form-group">
+              <label>Preferred Destinations</label>
+
+              <div class="checkbox-grid">
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Colombo" />
+                  <span>Colombo</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Negombo" />
+                  <span>Negombo</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Sigiriya" />
+                  <span>Sigiriya</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Dambulla" />
+                  <span>Dambulla</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Kandy" />
+                  <span>Kandy</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Ella" />
+                  <span>Ella</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Nuwara Eliya" />
+                  <span>Nuwara Eliya</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Yala" />
+                  <span>Yala</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Udawalawe" />
+                  <span>Udawalawe</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Galle" />
+                  <span>Galle</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Mirissa" />
+                  <span>Mirissa</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Trincomalee" />
+                  <span>Trincomalee</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Anuradhapura" />
+                  <span>Anuradhapura</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Polonnaruwa" />
+                  <span>Polonnaruwa</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="destinations" value="Pasikuda" />
+                  <span>Pasikuda</span>
+                </label>
+
+              </div>
+            </div>
+
+
+            <!-- Interest Checkboxes -->
+            <div class="form-group">
+              <label>Travel Interests</label>
+
+              <div class="checkbox-grid">
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Culture" />
+                  <span>Culture</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Wildlife" />
+                  <span>Wildlife</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Beaches" />
+                  <span>Beaches</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Hiking" />
+                  <span>Hiking</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Food" />
+                  <span>Food</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Photography" />
+                  <span>Photography</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Adventure" />
+                  <span>Adventure</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Honeymoon" />
+                  <span>Honeymoon</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Family Friendly" />
+                  <span>Family Friendly</span>
+                </label>
+
+                <label class="checkbox-tile">
+                  <input type="checkbox" name="interests" value="Luxury Travel" />
+                  <span>Luxury Travel</span>
+                </label>
+
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="budgetRange">Budget Range</label>
+                <select id="budgetRange">
+                  <option>Budget</option>
+                  <option>Mid-range</option>
+                  <option>Luxury</option>
+                  <option>Premium Luxury</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="accommodationPreference">Accommodation Preference</label>
+                <select id="accommodationPreference">
+                  <option>No accommodation needed</option>
+                  <option>Budget hotels</option>
+                  <option>3-star hotels</option>
+                  <option>4-star hotels</option>
+                  <option>5-star hotels</option>
+                  <option>Boutique hotels</option>
+                  <option>Villa stays</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="transportPreference">Transport Preference</label>
+              <select id="transportPreference">
+                <option>Car with driver</option>
+                <option>Van with driver</option>
+                <option>Luxury vehicle</option>
+                <option>Mini bus</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="customMessage">Special Requests</label>
+              <textarea
+                id="customMessage"
+                rows="5"
+                placeholder="Tell us about your dream trip, preferred hotels, food needs, kids, elderly travelers, photography stops, or any special requirements."
+              ></textarea>
+            </div>
+
+            <p class="form-error" id="customTourError"></p>
+
+            <div class="modal-actions">
+              <button type="submit" class="btn btn-whatsapp">
+                Send Request via WhatsApp
+              </button>
+
+              <button type="button" class="btn btn-primary" id="customTourEmailBtn">
+                Send Request via Email
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= SAMPLE ITINERARIES ================= -->
+    <section class="section sample-itinerary-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Travel Ideas</span>
+          <h2>Popular custom tour ideas</h2>
+          <p>
+            Use these routes as inspiration for your own Sri Lanka journey.
+          </p>
+        </div>
+
+        <div class="itinerary-grid">
+
+          <article class="itinerary-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80"
+              alt="7 day Sri Lanka classic itinerary"
+              loading="lazy"
+            />
+            <div class="itinerary-body">
+              <span>7 Days</span>
+              <h3>Classic Sri Lanka Highlights</h3>
+              <p>
+                Colombo, Sigiriya, Kandy, Nuwara Eliya, Ella, Yala, and Galle.
+              </p>
+              <button class="btn btn-card itinerary-btn" data-itinerary="7 Day Classic Sri Lanka Highlights">
+                Request This Plan
+              </button>
+            </div>
+          </article>
+
+          <article class="itinerary-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"
+              alt="Sri Lanka wildlife and nature itinerary"
+              loading="lazy"
+            />
+            <div class="itinerary-body">
+              <span>5 Days</span>
+              <h3>Wildlife & Nature Escape</h3>
+              <p>
+                Udawalawe, Yala, Ella waterfalls, tea country, and scenic viewpoints.
+              </p>
+              <button class="btn btn-card itinerary-btn" data-itinerary="5 Day Wildlife and Nature Escape">
+                Request This Plan
+              </button>
+            </div>
+          </article>
+
+          <article class="itinerary-card">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+              alt="Sri Lanka beach holiday itinerary"
+              loading="lazy"
+            />
+            <div class="itinerary-body">
+              <span>6 Days</span>
+              <h3>South Coast Beach Holiday</h3>
+              <p>
+                Galle, Mirissa, Unawatuna, Bentota, whale watching, and sunset beaches.
+              </p>
+              <button class="btn btn-card itinerary-btn" data-itinerary="6 Day South Coast Beach Holiday">
+                Request This Plan
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+    <section class="custom-cta">
+      <div class="container cta-content">
+        <span>Still not sure?</span>
+        <h2>Chat with us and build your route together.</h2>
+        <p>
+          Send a quick WhatsApp message and we will help you choose the best Sri Lanka
+          route based on your days, budget, and travel style.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Chat on WhatsApp</a>
+          <a href="tours.html" class="btn btn-primary">Browse Tours</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer component -->
+  <div id="footer"></div>
+
+  <!-- Floating Buttons -->
+  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
+    💬
+  </a>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
+
+  <!-- JavaScript -->
+  <script src="js/components.js" defer></script>
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>

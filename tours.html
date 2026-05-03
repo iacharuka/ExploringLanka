@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sri Lanka Tours & Experiences | ExploringLanka</title>
+
+  <meta
+    name="description"
+    content="Explore Sri Lanka tours, private trips, airport transfers, wildlife safaris, cultural experiences, beach tours, and hill country adventures with ExploringLanka."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar component -->
+  <div id="navbar"></div>
+
+  <main>
+
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero tours-page-hero">
+      <div class="page-hero-overlay"></div>
+
+      <div class="container page-hero-content">
+        <span class="page-badge">🇱🇰 Sri Lanka Tour Marketplace</span>
+
+        <h1>Sri Lanka Tours & Experiences</h1>
+
+        <p>
+          Discover private tours, cultural experiences, wildlife safaris, beach trips,
+          hill country adventures, airport transfers, and custom travel packages.
+        </p>
+
+        <div class="page-hero-actions">
+          <a href="#tourResults" class="btn btn-primary">View Experiences</a>
+          <a href="custom-tour.html" class="btn btn-light">Request Custom Tour</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= TOURS MARKETPLACE ================= -->
+    <section class="section marketplace-section" id="tourResults">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>Marketplace</span>
+          <h2>Find your perfect Sri Lanka experience</h2>
+          <p>
+            Filter by destination, experience type, duration, and rating.
+            Booking works through WhatsApp or email.
+          </p>
+        </div>
+
+        <div class="marketplace-layout">
+
+          <!-- ================= FILTER SIDEBAR ================= -->
+          <aside class="filter-sidebar">
+
+            <div class="filter-header">
+              <h3>Filter Experiences</h3>
+              <p>Refine your search visually</p>
+            </div>
+
+            <div class="filter-group">
+              <label for="tourSearchInput">Search Tours</label>
+              <input
+                type="text"
+                id="tourSearchInput"
+                placeholder="Search by title or destination"
+              />
+            </div>
+
+            <div class="filter-group">
+              <h4>Destination</h4>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Sigiriya" class="tour-filter" />
+                <span>Sigiriya</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Kandy" class="tour-filter" />
+                <span>Kandy</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Ella" class="tour-filter" />
+                <span>Ella</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Yala" class="tour-filter" />
+                <span>Yala</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Galle" class="tour-filter" />
+                <span>Galle</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Mirissa" class="tour-filter" />
+                <span>Mirissa</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Nuwara Eliya" class="tour-filter" />
+                <span>Nuwara Eliya</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Anuradhapura" class="tour-filter" />
+                <span>Anuradhapura</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Experience Type</h4>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Private Tour" class="tour-filter" />
+                <span>Private Tour</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Cultural Tour" class="tour-filter" />
+                <span>Cultural Tour</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Wildlife Safari" class="tour-filter" />
+                <span>Wildlife Safari</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Airport Transfer" class="tour-filter" />
+                <span>Airport Transfer</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Beach Experience" class="tour-filter" />
+                <span>Beach Experience</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" value="Hill Country Tour" class="tour-filter" />
+                <span>Hill Country Tour</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Price Range</h4>
+
+              <div class="range-box">
+                <input type="range" min="10" max="250" value="120" />
+                <div class="range-values">
+                  <span>$10</span>
+                  <span>$250+</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Rating</h4>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>★★★★★ 5 Star</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>★★★★☆ 4 Star & Up</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>★★★☆☆ 3 Star & Up</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Languages</h4>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>English</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>French</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>German</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>Arabic</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Booking Options</h4>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>Free Cancellation</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>Hotel Pickup Available</span>
+              </label>
+            </div>
+
+          </aside>
+
+
+          <!-- ================= RESULTS AREA ================= -->
+          <div class="results-area">
+
+            <div class="results-topbar">
+              <div>
+                <h3>Showing top Sri Lanka experiences</h3>
+                <p id="resultsCount">12 experiences available</p>
+              </div>
+
+              <select id="sortSelect" aria-label="Sort tours">
+                <option>Recommended</option>
+                <option>Price Low to High</option>
+                <option>Top Rated</option>
+                <option>Duration</option>
+              </select>
+            </div>
+
+            <div class="tour-grid results-grid">
+
+              <!-- Tour 1 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Sigiriya Cultural Tour Private Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2?auto=format&fit=crop&w=800&q=80"
+                    alt="Sigiriya Rock Fortress Guided Morning Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge">Best Seller</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Cultural Tour</span>
+                  <h3>Sigiriya Rock Fortress Guided Morning Tour</h3>
+
+                  <p class="tour-description">
+                    Climb the iconic Lion Rock with a local guide and enjoy sunrise views.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.9</strong>
+                    <small>(2,500 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 4 Hours</span>
+                    <span>🚘 Hotel pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$45</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Sigiriya Rock Fortress Guided Morning Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 2 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Kandy Cultural Tour Temple Private Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1605649461784-9d0a5a3f5b73?auto=format&fit=crop&w=800&q=80"
+                    alt="Kandy Temple of the Tooth and city highlights tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge green">Top Rated</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Cultural Experience</span>
+                  <h3>Kandy Temple of the Tooth & City Highlights Tour</h3>
+
+                  <p class="tour-description">
+                    Visit the sacred Temple of the Tooth, viewpoints, markets, and landmarks.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.8</strong>
+                    <small>(1,870 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 6 Hours</span>
+                    <span>🚘 Private pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$55</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Kandy Temple of the Tooth & City Highlights Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 3 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Ella Hill Country Tour Private Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80"
+                    alt="Ella Nine Arch Bridge and Little Adam’s Peak Adventure"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge blue">Private Tour</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Hill Country Tour</span>
+                  <h3>Ella Nine Arch Bridge and Little Adam’s Peak Adventure</h3>
+
+                  <p class="tour-description">
+                    Discover Ella’s scenic trails, mountain views, waterfalls, and railway bridge.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.9</strong>
+                    <small>(980 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 5 Hours</span>
+                    <span>🚘 Hotel pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$40</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Ella Nine Arch Bridge and Little Adam’s Peak Adventure"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 4 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Yala Wildlife Safari Private Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"
+                    alt="Yala National Park Private Jeep Safari"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge orange">Likely to Sell Out</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Wildlife Safari</span>
+                  <h3>Yala National Park Private Jeep Safari</h3>
+
+                  <p class="tour-description">
+                    Explore Sri Lanka’s famous national park with elephants, crocodiles, and leopards.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.9</strong>
+                    <small>(3,200 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 7 Hours</span>
+                    <span>🚙 Safari jeep</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$70</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Yala National Park Private Jeep Safari"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 5 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Colombo Airport Transfer Kandy Private Driver"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80"
+                    alt="Colombo Airport to Kandy Private Transfer"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge green">Easy Booking</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Airport Transfer</span>
+                  <h3>Colombo Airport to Kandy Private Transfer</h3>
+
+                  <p class="tour-description">
+                    Comfortable private vehicle transfer from Bandaranaike Airport to Kandy.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.7</strong>
+                    <small>(1,100 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 3.5 Hours</span>
+                    <span>✈️ Airport pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$60</strong>
+                      <span>per vehicle</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Colombo Airport to Kandy Private Transfer"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 6 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Galle Bentota South Coast Beach Experience"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&w=800&q=80"
+                    alt="Galle Fort Bentota River Safari and South Coast Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge">Best Seller</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">South Coast Tour</span>
+                  <h3>Galle Fort, Bentota River Safari & South Coast Tour</h3>
+
+                  <p class="tour-description">
+                    Explore Galle Fort, beaches, turtle stops, and Bentota river safari.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.8</strong>
+                    <small>(2,050 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 10 Hours</span>
+                    <span>🚘 Hotel pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$85</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Galle Fort, Bentota River Safari & South Coast Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 7 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Nuwara Eliya Tea Country Tour Waterfalls"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
+                    alt="Nuwara Eliya Tea Plantation and Waterfall Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge green">Top Rated</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Tea Country Tour</span>
+                  <h3>Nuwara Eliya Tea Plantation and Waterfall Tour</h3>
+
+                  <p class="tour-description">
+                    Visit tea estates, waterfalls, viewpoints, and cool hill country landscapes.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.8</strong>
+                    <small>(1,430 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 8 Hours</span>
+                    <span>🚘 Private pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$75</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Nuwara Eliya Tea Plantation and Waterfall Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 8 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Mirissa Whale Watching Beach Experience"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+                    alt="Mirissa Whale Watching and Beach Day Experience"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge blue">Ocean Adventure</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Beach Experience</span>
+                  <h3>Mirissa Whale Watching and Beach Day Experience</h3>
+
+                  <p class="tour-description">
+                    Enjoy whale watching, beach time, seafood, and sunset views on the south coast.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.6</strong>
+                    <small>(890 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 6 Hours</span>
+                    <span>🚘 Optional pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$50</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Mirissa Whale Watching and Beach Day Experience"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 9 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Anuradhapura Ancient City Cultural Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80"
+                    alt="Anuradhapura Ancient City Private Day Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge">Heritage Pick</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Ancient City Tour</span>
+                  <h3>Anuradhapura Ancient City Private Day Tour</h3>
+
+                  <p class="tour-description">
+                    Discover sacred temples, ancient stupas, and Buddhist heritage sites.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.8</strong>
+                    <small>(1,240 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 9 Hours</span>
+                    <span>🚘 Hotel pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$80</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Anuradhapura Ancient City Private Day Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 10 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Udawalawe Wildlife Safari Elephant"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80"
+                    alt="Udawalawe Elephant Safari Experience"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge green">Family Friendly</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Wildlife Safari</span>
+                  <h3>Udawalawe Elephant Safari Experience</h3>
+
+                  <p class="tour-description">
+                    Enjoy an elephant-focused safari experience ideal for families and nature lovers.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.9</strong>
+                    <small>(1,760 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 5 Hours</span>
+                    <span>🚙 Safari jeep</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$65</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Udawalawe Elephant Safari Experience"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 11 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Colombo City Food Experience Cultural Tour"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80"
+                    alt="Colombo City Highlights and Street Food Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge blue">Local Favorite</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Food Experience</span>
+                  <h3>Colombo City Highlights and Street Food Tour</h3>
+
+                  <p class="tour-description">
+                    Taste local food, explore markets, visit landmarks, and enjoy Colombo life.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.7</strong>
+                    <small>(940 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 4 Hours</span>
+                    <span>📍 Meeting point</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$35</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Colombo City Highlights and Street Food Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+
+              <!-- Tour 12 -->
+              <article
+                class="tour-card tour-result-card"
+                data-search="Trincomalee Beach Holiday Snorkeling Temple"
+              >
+                <div class="tour-image">
+                  <img decoding="async"
+                    src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80"
+                    alt="Trincomalee Beach Snorkeling and Temple Tour"
+                    loading="lazy"
+                  />
+                  <span class="tour-badge orange">Seasonal Favorite</span>
+                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
+                </div>
+
+                <div class="tour-body">
+                  <span class="tour-category">Beach Holiday</span>
+                  <h3>Trincomalee Beach, Snorkeling and Temple Tour</h3>
+
+                  <p class="tour-description">
+                    Explore beaches, snorkeling spots, Koneswaram Temple, and east coast scenery.
+                  </p>
+
+                  <div class="rating">
+                    <span>★★★★★</span>
+                    <strong>4.8</strong>
+                    <small>(780 reviews)</small>
+                  </div>
+
+                  <div class="tour-meta">
+                    <span>⏱ 8 Hours</span>
+                    <span>🚘 Hotel pickup</span>
+                  </div>
+
+                  <div class="tour-footer">
+                    <div>
+                      <small>From</small>
+                      <strong>$75</strong>
+                      <span>per person</span>
+                    </div>
+
+                    <button
+                      class="btn btn-card book-now-btn"
+                      data-tour="Trincomalee Beach, Snorkeling and Temple Tour"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= CUSTOM TOUR CTA ================= -->
+    <section class="custom-cta">
+      <div class="container cta-content">
+        <span>Need something special?</span>
+        <h2>Plan a private Sri Lanka tour around your travel style.</h2>
+        <p>
+          Share your travel dates, group size, hotel location, and preferred destinations.
+          ExploringLanka will help you create a custom route.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="custom-tour.html" class="btn btn-primary">Plan Custom Tour</a>
+          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ================= BOOKING MODAL ================= -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="booking-box">
+
+      <button class="modal-close" id="modalClose" aria-label="Close booking modal">
+        ×
+      </button>
+
+      <h2>Booking Request</h2>
+      <p class="modal-subtitle">Send your booking details through WhatsApp or email.</p>
+
+      <form id="bookingForm">
+
+        <div class="form-group">
+          <label for="modalTourName">Tour Name</label>
+          <input type="text" id="modalTourName" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="customerName">Your Name</label>
+          <input type="text" id="customerName" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+          <label for="customerEmail">Email</label>
+          <input type="email" id="customerEmail" placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+          <label for="customerPhone">WhatsApp Number</label>
+          <input type="text" id="customerPhone" placeholder="+94 70 000 0000" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bookingDate">Travel Date</label>
+            <input type="date" id="bookingDate" />
+          </div>
+
+          <div class="form-group">
+            <label for="bookingGuests">Travelers</label>
+            <select id="bookingGuests">
+              <option>1 Traveler</option>
+              <option>2 Travelers</option>
+              <option>3 Travelers</option>
+              <option>4 Travelers</option>
+              <option>5+ Travelers</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pickupLocation">Pickup Location</label>
+          <input type="text" id="pickupLocation" placeholder="Hotel or pickup place" />
+        </div>
+
+        <div class="form-group">
+          <label for="specialMessage">Special Message</label>
+          <textarea
+            id="specialMessage"
+            rows="4"
+            placeholder="Any special request?"
+          ></textarea>
+        </div>
+
+        <p class="form-error" id="bookingError"></p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">
+            Send via WhatsApp
+          </button>
+
+          <button type="button" class="btn btn-primary" id="sendEmail">
+            Send via Email
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+
+  <!-- Footer component -->
+  <div id="footer"></div>
+
+
+  <!-- Floating Buttons -->
+  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
+    💬
+  </a>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
+
+
+  <!-- JavaScript -->
+  <script src="js/components.js" defer></script>
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>
