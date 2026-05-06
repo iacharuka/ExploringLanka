@@ -5288,6 +5288,40 @@ body.is-loading {
   }
 }
 
+/* Final mobile destination alignment */
+@media (max-width: 640px) {
+  .home-page .destination-grid,
+  .destination-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-rows: auto !important;
+    width: 100%;
+    gap: 18px;
+  }
+
+  .home-page .destination-card,
+  .destination-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100%;
+    min-width: 0;
+    min-height: 260px;
+    aspect-ratio: 16 / 11;
+  }
+
+  .home-page .destination-content,
+  .destination-content {
+    justify-content: flex-end;
+    padding: 18px;
+    text-align: left;
+  }
+
+  .home-page .destination-content h3,
+  .destination-content h3 {
+    margin: 0 0 6px;
+    font-size: clamp(1.45rem, 7vw, 1.9rem);
+  }
+}
+
 /* =====================================================
    Final Fleet Page Fix
    Keep this at the end so vehicle cards always show correctly.
