@@ -3,8 +3,8 @@
    WhatsApp + Email Booking System
 ===================================================== */
 
-const BUSINESS_WHATSAPP = "94700000000";
-const BUSINESS_EMAIL = "exploringlankaofficial@gmail.com";
+const BUSINESS_WHATSAPP = "94779892268";
+const BUSINESS_EMAIL = "dhanushka8997@gmail.com";
 
 function openWhatsApp(message) {
   const url = `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`;
@@ -55,6 +55,24 @@ function bindOnce(element, key, handler, eventName = "click") {
   if (!element || element.dataset[key] === "true") return;
   element.dataset[key] = "true";
   element.addEventListener(eventName, handler);
+}
+
+function initImagePerformance() {
+  document.querySelectorAll("img").forEach((image, index) => {
+    if (!image.hasAttribute("decoding")) {
+      image.setAttribute("decoding", "async");
+    }
+
+    const shouldLoadEagerly = image.closest(".site-header, .luxury-loader") || index < 2;
+
+    if (!shouldLoadEagerly && !image.hasAttribute("loading")) {
+      image.setAttribute("loading", "lazy");
+    }
+
+    if (!image.hasAttribute("width") || !image.hasAttribute("height")) {
+      image.style.aspectRatio = image.style.aspectRatio || "16 / 10";
+    }
+  });
 }
 
 function showToast(message, type = "success") {
@@ -180,7 +198,26 @@ function closeBookingModal() {
 function initBookingModal() {
   document.querySelectorAll(".book-now-btn, .book-btn").forEach((button) => {
     bindOnce(button, "bookingOpenBound", () => {
-      openBookingModal(button.dataset.tour || "Selected Tour");
+      const tourName = button.dataset.tour || "Selected Tour";
+      const message = `
+Hello ExploringLanka,
+
+I would like to book or inquire about this Sri Lanka travel experience.
+
+Tour: ${tourName}
+
+My travel details:
+Travel Date:
+Pickup Location:
+Number of Travelers:
+WhatsApp Number:
+Special Requests:
+
+Please send me availability, price, and booking details.
+`;
+
+      showToast("Opening WhatsApp booking inquiry...");
+      openWhatsApp(message);
     });
   });
 
@@ -327,12 +364,12 @@ function initBackToTop() {
   const backToTop = byId("backToTop") || document.querySelector(".back-to-top");
   if (!backToTop) return;
 
-  if (!document.documentElement.dataset.backToTopScrollBound) {
+    if (!document.documentElement.dataset.backToTopScrollBound) {
     document.documentElement.dataset.backToTopScrollBound = "true";
     window.addEventListener("scroll", () => {
       const button = byId("backToTop") || document.querySelector(".back-to-top");
       if (button) button.classList.toggle("show", window.scrollY > 500);
-    });
+    }, { passive: true });
   }
 
   bindOnce(backToTop, "backToTopBound", (event) => {
@@ -717,7 +754,430 @@ Special Requests:
   });
 }
 
+function initLuxuryLoader() {
+  const loader = byId("luxuryLoader");
+  const progress = byId("loaderProgress");
+  if (!loader || loader.dataset.loaderBound === "true") return;
+  loader.dataset.loaderBound = "true";
+
+  let progressValue = 0;
+  const progressTimer = setInterval(() => {
+    progressValue = Math.min(progressValue + Math.random() * 16, 92);
+    if (progress) progress.style.width = `${progressValue}%`;
+  }, 140);
+
+  function hideLoader() {
+    clearInterval(progressTimer);
+    if (progress) progress.style.width = "100%";
+
+    window.setTimeout(() => {
+      loader.classList.add("is-hidden");
+      document.body.classList.remove("is-loading");
+      document.dispatchEvent(new Event("luxuryLoaderHidden"));
+    }, 280);
+  }
+
+  document.body.classList.add("is-loading");
+
+  if (document.readyState === "complete") {
+    window.setTimeout(hideLoader, 450);
+    return;
+  }
+
+  window.addEventListener("load", () => {
+    window.setTimeout(hideLoader, 450);
+  }, { once: true });
+
+  window.setTimeout(hideLoader, 4200);
+}
+
+function initScrollAnimatedCards() {
+  const cardSelectors = [
+    ".category-card",
+    ".destination-card",
+    ".tour-card",
+    ".why-card",
+    ".review-card",
+    ".stat-card",
+    ".route-card",
+    ".vehicle-card",
+    ".contact-card",
+    ".faq-card",
+    ".fleet-card",
+    ".feature-card",
+    ".team-card",
+    ".mission-card",
+    ".itinerary-card",
+    ".custom-feature-card"
+  ];
+
+  const cards = document.querySelectorAll(cardSelectors.join(","));
+  if (!cards.length) return;
+
+  cards.forEach((card, index) => {
+    if (card.dataset.scrollCardReady === "true") return;
+    card.dataset.scrollCardReady = "true";
+    card.classList.add("scroll-card", "depth-card");
+    card.style.setProperty("--reveal-delay", `${Math.min(index % 8, 7) * 70}ms`);
+  });
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    cards.forEach((card) => card.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.16,
+    rootMargin: "0px 0px -8% 0px"
+  });
+
+  cards.forEach((card) => observer.observe(card));
+}
+
+function initHeroTextReveal() {
+  const heroItems = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-buttons, .hero-search, .hero-professional-note");
+  if (!heroItems.length || document.documentElement.dataset.heroRevealBound === "true") return;
+  document.documentElement.dataset.heroRevealBound = "true";
+
+  heroItems.forEach((item, index) => {
+    item.classList.add("hero-reveal");
+    item.style.setProperty("--hero-delay", `${index * 120}ms`);
+  });
+
+  const revealHero = () => {
+    heroItems.forEach((item) => item.classList.add("is-visible"));
+  };
+
+  const loader = byId("luxuryLoader");
+  if (loader && !loader.classList.contains("is-hidden")) {
+    document.addEventListener("luxuryLoaderHidden", revealHero, { once: true });
+    return;
+  }
+
+  requestAnimationFrame(revealHero);
+}
+
+function initNavbarFadeDown() {
+  const header = document.querySelector(".site-header, .header");
+  if (!header || header.dataset.navbarFadeBound === "true") return;
+  header.dataset.navbarFadeBound = "true";
+  header.classList.add("navbar-fade-down");
+}
+
+function parseStatValue(text) {
+  const trimmed = text.trim();
+  const numberMatch = trimmed.match(/[\d,.]+/);
+  if (!numberMatch) return null;
+
+  const numericText = numberMatch[0].replace(/,/g, "");
+  const value = Number(numericText);
+  if (Number.isNaN(value)) return null;
+
+  return {
+    value,
+    prefix: trimmed.slice(0, numberMatch.index),
+    suffix: trimmed.slice(numberMatch.index + numberMatch[0].length)
+  };
+}
+
+function initCountUpStats() {
+  const statNumbers = document.querySelectorAll(".stat-card strong, .stat b, [data-count]");
+  if (!statNumbers.length) return;
+
+  statNumbers.forEach((stat) => {
+    if (stat.dataset.countReady === "true") return;
+    const parsed = stat.dataset.count
+      ? { value: Number(stat.dataset.count), prefix: "", suffix: stat.dataset.suffix || "" }
+      : parseStatValue(stat.textContent);
+
+    if (!parsed || Number.isNaN(parsed.value)) return;
+
+    stat.dataset.countReady = "true";
+    stat.dataset.targetValue = String(parsed.value);
+    stat.dataset.countPrefix = parsed.prefix;
+    stat.dataset.countSuffix = parsed.suffix;
+    stat.textContent = `${parsed.prefix}0${parsed.suffix}`;
+  });
+
+  const readyStats = [...statNumbers].filter((stat) => stat.dataset.countReady === "true" && stat.dataset.countDone !== "true");
+  if (!readyStats.length) return;
+
+  const animateStat = (stat) => {
+    if (stat.dataset.countDone === "true") return;
+    stat.dataset.countDone = "true";
+
+    const target = Number(stat.dataset.targetValue);
+    const prefix = stat.dataset.countPrefix || "";
+    const suffix = stat.dataset.countSuffix || "";
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      stat.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    }
+
+    requestAnimationFrame(tick);
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    readyStats.forEach((stat) => {
+      stat.textContent = `${stat.dataset.countPrefix || ""}${Number(stat.dataset.targetValue).toLocaleString()}${stat.dataset.countSuffix || ""}`;
+      stat.dataset.countDone = "true";
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      animateStat(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+
+  readyStats.forEach((stat) => observer.observe(stat));
+}
+
+function initTimelineReveal() {
+  const timelineBlocks = document.querySelectorAll(".sample-itinerary-section, .itinerary-grid, .custom-cta, .transfer-cta, .fleet-cta");
+  if (!timelineBlocks.length) return;
+
+  timelineBlocks.forEach((block) => {
+    if (block.dataset.timelineReady === "true") return;
+    block.dataset.timelineReady = "true";
+    block.classList.add("timeline-reveal");
+  });
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    timelineBlocks.forEach((block) => block.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
+
+  timelineBlocks.forEach((block) => observer.observe(block));
+}
+
+function initTiltCards() {
+  const tiltCards = document.querySelectorAll(".depth-card");
+  if (!tiltCards.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  tiltCards.forEach((card) => {
+    if (card.dataset.tiltBound === "true") return;
+    card.dataset.tiltBound = "true";
+
+    card.addEventListener("mousemove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(1000px) translate3d(0, -10px, 24px) rotateX(${y * -6}deg) rotateY(${x * 7}deg) scale(1.012)`;
+    }, { passive: true });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
+
+function initMagneticButtons() {
+  const buttons = document.querySelectorAll(".btn");
+  if (!buttons.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  buttons.forEach((button) => {
+    if (button.dataset.magneticBound === "true") return;
+    button.dataset.magneticBound = "true";
+    button.classList.add("magnetic-btn");
+
+    button.addEventListener("mousemove", (event) => {
+      const rect = button.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      button.style.transform = `translate(${x * 0.12}px, ${y * 0.16}px)`;
+    }, { passive: true });
+
+    button.addEventListener("mouseleave", () => {
+      button.style.transform = "";
+    });
+  });
+}
+
+function initHeroParticles() {
+  const canvas = byId("heroParticleCanvas");
+  if (!canvas || canvas.dataset.particlesBound === "true") return;
+  if (!window.THREE || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    canvas.hidden = true;
+    return;
+  }
+
+  canvas.dataset.particlesBound = "true";
+
+  const isTablet = window.matchMedia("(max-width: 900px)").matches;
+  const particleCount = isTablet ? 55 : 140;
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, isTablet ? 1.15 : 1.6);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+  camera.position.z = 80;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: false,
+    powerPreference: "low-power"
+  });
+
+  renderer.setPixelRatio(pixelRatio);
+
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const speeds = new Float32Array(particleCount);
+
+  for (let index = 0; index < particleCount; index++) {
+    positions[index * 3] = (Math.random() - 0.5) * 170;
+    positions[index * 3 + 1] = (Math.random() - 0.5) * 100;
+    positions[index * 3 + 2] = (Math.random() - 0.5) * 70;
+    speeds[index] = 0.012 + Math.random() * 0.028;
+  }
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+  const material = new THREE.PointsMaterial({
+    color: 0xdba84a,
+    size: isTablet ? 1.15 : 1.45,
+    transparent: true,
+    opacity: isTablet ? 0.32 : 0.44,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
+
+  let animationFrame = null;
+  let isRunning = true;
+
+  function resizeRenderer() {
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.max(1, Math.floor(rect.width));
+    const height = Math.max(1, Math.floor(rect.height));
+
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+
+  function animate() {
+    if (!isRunning) return;
+
+    for (let index = 0; index < particleCount; index++) {
+      positions[index * 3 + 1] += speeds[index];
+
+      if (positions[index * 3 + 1] > 58) {
+        positions[index * 3 + 1] = -58;
+      }
+    }
+
+    geometry.attributes.position.needsUpdate = true;
+    particles.rotation.y += isTablet ? 0.00035 : 0.00065;
+    renderer.render(scene, camera);
+    animationFrame = requestAnimationFrame(animate);
+  }
+
+  function pauseParticles() {
+    isRunning = false;
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+  }
+
+  function resumeParticles() {
+    if (isRunning) return;
+    isRunning = true;
+    animate();
+  }
+
+  resizeRenderer();
+  animate();
+
+  window.addEventListener("resize", resizeRenderer, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pauseParticles();
+    } else {
+      resumeParticles();
+    }
+  });
+}
+
+async function initSplineScene() {
+  const shell = byId("heroSplineShell");
+  const canvas = byId("heroSplineCanvas");
+  const fallback = byId("heroSplineFallback");
+
+  if (!shell || !canvas || canvas.dataset.splineBound === "true") return;
+  canvas.dataset.splineBound = "true";
+
+  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+  const splineUrl = "https://prod.spline.design/YOUR-SPLINE-SCENE/scene.splinecode";
+
+  if (!isDesktop) {
+    shell.hidden = true;
+    return;
+  }
+
+  if (splineUrl.includes("YOUR-SPLINE-SCENE")) {
+    if (fallback) fallback.hidden = false;
+    return;
+  }
+
+  try {
+    const { Application } = await import("https://unpkg.com/@splinetool/runtime@1.9.82/build/runtime.js");
+    const splineApp = new Application(canvas);
+    window.exploringLankaSplineApp = splineApp;
+
+    await splineApp.load(splineUrl);
+    if (fallback) fallback.hidden = true;
+
+    // Example for later Book Now/Spline interaction:
+    // window.exploringLankaSplineApp.emitEvent("mouseDown", "ObjectName");
+  } catch (error) {
+    console.warn("Spline scene failed to load. Using static fallback.", error);
+    if (fallback) fallback.hidden = false;
+  }
+}
+
 function initPageScripts() {
+  /* Performance and loading */
+  initImagePerformance();
+  initLuxuryLoader();
+
+  /* Navigation */
+  initNavbarFadeDown();
+
+  /* Booking and contact */
+  initHeroTextReveal();
   initHeroSearch();
   initCategoryCards();
   initDestinationLinks();
@@ -734,8 +1194,17 @@ function initPageScripts() {
   initContactForm();
   initDetailsButtons();
   initNewsletterForms();
+
+  /* Visual systems */
   initHeroCarousel();
   initFleetQuoteButtons();
+  initScrollAnimatedCards();
+  initCountUpStats();
+  initTimelineReveal();
+  initTiltCards();
+  initMagneticButtons();
+  initHeroParticles();
+  initSplineScene();
 }
 
 document.addEventListener("DOMContentLoaded", initPageScripts);

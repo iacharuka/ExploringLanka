@@ -36,7 +36,7 @@ Open `index.html` directly in your browser, or use VS Code Live Server.
 Open `js/script.js` and change:
 
 ```js
-const BUSINESS_WHATSAPP = "94700000000";
+const BUSINESS_WHATSAPP = "94779892268";
 ```
 
 Use the number in international format without `+`.
@@ -46,7 +46,7 @@ Use the number in international format without `+`.
 Open `js/script.js` and change:
 
 ```js
-const BUSINESS_EMAIL = "exploringlankaofficial@gmail.com";
+const BUSINESS_EMAIL = "dhanushka8997@gmail.com";
 ```
 
 ## University Presentation Notes

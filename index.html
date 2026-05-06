@@ -10,6 +10,18 @@
     name="description"
     content="Explore Sri Lanka with ExploringLanka. Book private tours, airport transfers, wildlife safaris, cultural experiences, beach trips, and custom travel packages through WhatsApp or email."
   />
+  <meta property="og:title" content="ExploringLanka | Sri Lanka Tours, Transfers & Travel Experiences" />
+  <meta
+    property="og:description"
+    content="Book private Sri Lanka tours, airport transfers, safaris, cultural experiences, beach trips, and custom travel packages through WhatsApp or email."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/exploringlanka-logo-cropped.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Replace this placeholder with a dedicated favicon when available. -->
+  <link rel="icon" href="assets/images/exploringlanka-logo-cropped.png" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,9 +33,37 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Three.js for lightweight hero particles. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 
 <body class="home-page">
+  <!-- Luxury loading screen hides automatically after page assets are ready. -->
+  <div class="luxury-loader" id="luxuryLoader" aria-live="polite" aria-label="Loading ExploringLanka">
+    <div class="loader-glow-dots" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="loader-panel">
+      <img
+        src="assets/images/exploringlanka-logo-cropped.png"
+        alt="ExploringLanka Tourism Transport"
+        class="loader-logo"
+      />
+      <h1>ExploringLanka</h1>
+      <p>Sri Lanka Tours, Transfers &amp; Travel Experiences</p>
+      <div class="loader-progress" aria-hidden="true">
+        <span id="loaderProgress"></span>
+      </div>
+      <span class="loader-status">Preparing your island journey</span>
+    </div>
+  </div>
 
   <!-- Navbar component loads here -->
   <div id="navbar">
@@ -49,6 +89,13 @@
         ></div>
       </div>
       <div class="hero-overlay"></div>
+      <canvas class="hero-particle-canvas" id="heroParticleCanvas" aria-hidden="true"></canvas>
+      <div class="hero-spline-shell" id="heroSplineShell" aria-hidden="true">
+        <canvas class="hero-spline-canvas" id="heroSplineCanvas"></canvas>
+        <div class="hero-spline-fallback" id="heroSplineFallback">
+          <span></span>
+        </div>
+      </div>
 
       <div class="container hero-content">
 
