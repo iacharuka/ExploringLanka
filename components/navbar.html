@@ -1,37 +1,36 @@
-<!-- ================= NAVBAR COMPONENT ================= -->
-<header class="site-header">
+<header class="site-header site-header--travel">
   <div class="container header-wrapper">
-
-    <a href="index.html" class="logo" aria-label="ExploringLanka Tourism Transport home">
+    <a href="index.html" class="logo logo-text" aria-label="ExploringLanka home">
       <img
         src="assets/images/exploringlanka-logo-cropped.png"
-        alt="ExploringLanka Tourism Transport"
-        class="site-logo"
-        width="220"
-        height="58"
+        alt="ExploringLanka"
+        class="site-logo site-logo--img"
+        width="200"
+        height="48"
         decoding="async"
-      >
+      />
+      <span class="logo-wordmark">EXPLORINGLANKA</span>
     </a>
 
-  <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-  <a href="index.html">Home</a>
-  <a href="transfers.html">Airport Transfers</a>
-  <a href="tours.html">Private Tours</a>
-  <a href="fleet.html">Fleet</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="about.html">About</a>
+      <a href="index.html#destinations">Destination</a>
+      <a href="tours.html">Tour</a>
+      <a href="fleet.html">Fleet</a>
+      <a href="contact.html">Contact</a>
+    </nav>
 
     <div class="header-actions">
-     
-      <a href="#" class="btn btn-whatsapp js-whatsapp-help">
-        WhatsApp
-      </a>
+      <span class="lang-pill" aria-hidden="true">EN</span>
+      <a href="#" class="btn btn-login js-whatsapp-help">WhatsApp</a>
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mainNav"
+      >☰</button>
     </div>
-
-    <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
-      ☰
-    </button>
-
   </div>
 </header>

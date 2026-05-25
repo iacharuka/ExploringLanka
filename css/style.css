@@ -4961,7 +4961,6 @@ textarea:focus {
   transform: rotate(90deg);
 }
 
-body.is-loading {
   overflow: hidden;
 }
 

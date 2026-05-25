@@ -162,7 +162,7 @@ Please send me available experiences, prices, pickup options, and tour details.
 }
 
 function bookingModal() {
-  return byId("bookingModal") || byId("toursBookingModal");
+  return byId("bookingModal");
 }
 
 function openBookingModal(tourName) {
@@ -241,10 +241,10 @@ Please send me availability, price, and booking details.
 }
 
 function validateBookingForm() {
-  const name = getFirstValue(["customerName", "toursCustomerName", "bookingName"], "");
-  const phone = getFirstValue(["customerPhone", "toursCustomerPhone", "bookingPhone"], "");
-  const date = getValue("bookingDate") || getValue("toursBookingDate", "");
-  const errorBox = byId("bookingError") || byId("toursBookingError");
+  const name = getFirstValue(["customerName", "bookingName"], "");
+  const phone = getFirstValue(["customerPhone", "bookingPhone"], "");
+  const date = getValue("bookingDate", "");
+  const errorBox = byId("bookingError");
 
   if (!name || !phone || !date) {
     if (errorBox) {
@@ -264,14 +264,14 @@ Hello ExploringLanka,
 
 I would like to book this Sri Lanka travel experience.
 
-Tour: ${getFirstValue(["modalTourName", "toursModalTourName", "bookingTour"])}
-Name: ${getFirstValue(["customerName", "toursCustomerName", "bookingName"])}
-Email: ${getFirstValue(["customerEmail", "toursCustomerEmail", "bookingEmail"])}
-WhatsApp Number: ${getFirstValue(["customerPhone", "toursCustomerPhone", "bookingPhone"])}
+Tour: ${getFirstValue(["modalTourName", "bookingTour"])}
+Name: ${getFirstValue(["customerName", "bookingName"])}
+Email: ${getFirstValue(["customerEmail", "bookingEmail"])}
+WhatsApp Number: ${getFirstValue(["customerPhone", "bookingPhone"])}
 Travel Date: ${getValue("bookingDate")}
-Travelers: ${getFirstValue(["bookingGuests", "toursBookingGuests", "bookingTravelers"])}
-Pickup Location: ${getFirstValue(["pickupLocation", "toursPickupLocation", "bookingPickup"])}
-Special Message: ${getFirstValue(["specialMessage", "toursSpecialMessage", "bookingMessage"])}
+Travelers: ${getFirstValue(["bookingGuests", "bookingTravelers"])}
+Pickup Location: ${getFirstValue(["pickupLocation", "bookingPickup"])}
+Special Message: ${getFirstValue(["specialMessage", "bookingMessage"])}
 
 Please confirm availability, final price, pickup time, and payment details.
 `;
@@ -290,7 +290,7 @@ function initBookingActions() {
 
   bindOnce(emailButton, "bookingEmailBound", () => {
     if (!validateBookingForm()) return;
-    const tourName = getFirstValue(["modalTourName", "toursModalTourName", "bookingTour"], "Selected Tour");
+    const tourName = getFirstValue(["modalTourName", "bookingTour"], "Selected Tour");
     showToast("Opening email booking request...");
     openEmail(`Booking Request - ${tourName}`, buildBookingMessage());
     closeBookingModal();

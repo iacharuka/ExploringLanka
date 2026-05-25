@@ -11,19 +11,13 @@
     content="Explore Sri Lanka tours, private trips, airport transfers, wildlife safaris, cultural experiences, beach tours, and hill country adventures with ExploringLanka."
   />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
 </head>
 
-<body>
+<body class="tours-page">
 
   <!-- Navbar component -->
   <div id="navbar"></div>
@@ -32,21 +26,22 @@
 
     <!-- ================= PAGE HERO ================= -->
     <section class="page-hero tours-page-hero">
-      <div class="page-hero-overlay"></div>
+      <div class="page-hero-overlay" aria-hidden="true"></div>
 
       <div class="container page-hero-content">
-        <span class="page-badge">🇱🇰 Sri Lanka Tour Marketplace</span>
+        <span class="page-badge">Private tours · Sri Lanka</span>
 
-        <h1>Sri Lanka Tours & Experiences</h1>
+        <h1>Private tours & experiences</h1>
 
         <p>
-          Discover private tours, cultural experiences, wildlife safaris, beach trips,
-          hill country adventures, airport transfers, and custom travel packages.
+          Cultural routes, safaris, hill country, and beach days — filter by destination,
+          book in minutes via WhatsApp or email.
         </p>
 
         <div class="page-hero-actions">
-          <a href="#tourResults" class="btn btn-primary">View Experiences</a>
-          <a href="custom-tour.html" class="btn btn-light">Request Custom Tour</a>
+          <a href="#tourResults" class="btn btn-primary">Browse tours</a>
+          <a href="custom-tour.html" class="btn btn-light">Custom itinerary</a>
+          <a href="#" class="btn btn-ghost js-whatsapp-help">WhatsApp quote</a>
         </div>
       </div>
     </section>
@@ -888,16 +883,17 @@
 
     <!-- ================= CUSTOM TOUR CTA ================= -->
     <section class="custom-cta">
+      <div class="cta-overlay"></div>
       <div class="container cta-content">
-        <span>Need something special?</span>
-        <h2>Plan a private Sri Lanka tour around your travel style.</h2>
+        <span>Custom trips</span>
+        <h2>Want a fully private route?</h2>
         <p>
-          Share your travel dates, group size, hotel location, and preferred destinations.
-          ExploringLanka will help you create a custom route.
+          Share dates, group size, and must-see places — we’ll design your island itinerary
+          and send a quote on WhatsApp.
         </p>
 
         <div class="cta-buttons">
-          <a href="custom-tour.html" class="btn btn-primary">Plan Custom Tour</a>
+          <a href="custom-tour.html" class="btn btn-primary">Plan custom tour</a>
           <a href="#" class="btn btn-whatsapp js-whatsapp-help">Chat on WhatsApp</a>
         </div>
       </div>
@@ -907,47 +903,47 @@
 
 
   <!-- ================= BOOKING MODAL ================= -->
-  <div class="booking-modal" id="bookingModal">
+  <div class="booking-modal" id="toursBookingModal">
     <div class="booking-box">
 
-      <button class="modal-close" id="modalClose" aria-label="Close booking modal">
+      <button class="modal-close" id="toursModalClose" aria-label="Close booking modal">
         ×
       </button>
 
       <h2>Booking Request</h2>
       <p class="modal-subtitle">Send your booking details through WhatsApp or email.</p>
 
-      <form id="bookingForm">
+      <form id="toursBookingForm">
 
         <div class="form-group">
           <label for="modalTourName">Tour Name</label>
-          <input type="text" id="modalTourName" readonly />
+          <input type="text" id="toursModalTourName" readonly />
         </div>
 
         <div class="form-group">
           <label for="customerName">Your Name</label>
-          <input type="text" id="customerName" placeholder="Enter your name" />
+          <input type="text" id="toursCustomerName" placeholder="Enter your name" />
         </div>
 
         <div class="form-group">
           <label for="customerEmail">Email</label>
-          <input type="email" id="customerEmail" placeholder="Enter your email" />
+          <input type="email" id="toursCustomerEmail" placeholder="Enter your email" />
         </div>
 
         <div class="form-group">
           <label for="customerPhone">WhatsApp Number</label>
-          <input type="text" id="customerPhone" placeholder="+94 70 000 0000" />
+          <input type="text" id="toursCustomerPhone" placeholder="+94 70 000 0000" />
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="bookingDate">Travel Date</label>
-            <input type="date" id="bookingDate" />
+            <input type="date" id="toursBookingDate" />
           </div>
 
           <div class="form-group">
             <label for="bookingGuests">Travelers</label>
-            <select id="bookingGuests">
+            <select id="toursBookingGuests">
               <option>1 Traveler</option>
               <option>2 Travelers</option>
               <option>3 Travelers</option>
@@ -959,26 +955,26 @@
 
         <div class="form-group">
           <label for="pickupLocation">Pickup Location</label>
-          <input type="text" id="pickupLocation" placeholder="Hotel or pickup place" />
+          <input type="text" id="toursPickupLocation" placeholder="Hotel or pickup place" />
         </div>
 
         <div class="form-group">
           <label for="specialMessage">Special Message</label>
           <textarea
-            id="specialMessage"
+            id="toursSpecialMessage"
             rows="4"
             placeholder="Any special request?"
           ></textarea>
         </div>
 
-        <p class="form-error" id="bookingError"></p>
+        <p class="form-error" id="toursBookingError"></p>
 
         <div class="modal-actions">
-          <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">
+          <button type="button" class="btn btn-whatsapp" id="toursSendWhatsApp">
             Send via WhatsApp
           </button>
 
-          <button type="button" class="btn btn-primary" id="sendEmail">
+          <button type="button" class="btn btn-primary" id="toursSendEmail">
             Send via Email
           </button>
         </div>
