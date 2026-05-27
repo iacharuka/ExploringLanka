@@ -1,0 +1,155 @@
+/* ============================================================
+   ExploringLanka — Design Tokens
+   Single source of truth for all design decisions
+   ============================================================ */
+
+:root {
+  /* ─── Brand Colors ─────────────────────────────── */
+  --gold:         #C9963A;
+  --gold-light:   #E8B85C;
+  --gold-dark:    #9E7228;
+  --gold-10:      rgba(201, 150, 58, 0.10);
+  --gold-20:      rgba(201, 150, 58, 0.20);
+  --gold-40:      rgba(201, 150, 58, 0.40);
+
+  --deep:         #0D1B2A;
+  --deep-2:       #0A1520;
+  --deep-3:       #162434;
+  --deep-light:   #1E2F41;
+
+  --cream:        #F5EDD6;
+  --cream-dark:   #E8DABC;
+  --cream-10:     rgba(245, 237, 214, 0.10);
+  --cream-20:     rgba(245, 237, 214, 0.20);
+
+  --jungle:       #2D5A3D;
+  --jungle-light: #3D7A54;
+  --jungle-dark:  #1E3D29;
+
+  --terracotta:   #C45E35;
+  --terracotta-light: #D9764E;
+  --terracotta-dark:  #9A4526;
+
+  --white:        #FAFAF7;
+  --white-pure:   #FFFFFF;
+
+  /* ─── Semantic Aliases ─────────────────────────── */
+  --color-bg:         var(--deep);
+  --color-bg-surface: var(--deep-3);
+  --color-text:       var(--cream);
+  --color-text-muted: rgba(245, 237, 214, 0.65);
+  --color-text-faint: rgba(245, 237, 214, 0.35);
+  --color-accent:     var(--gold);
+  --color-cta:        var(--gold);
+  --color-cta-hover:  var(--gold-light);
+  --color-link:       var(--gold);
+  --color-border:     rgba(201, 150, 58, 0.18);
+  --color-divider:    rgba(201, 150, 58, 0.25);
+
+  /* ─── Typography ───────────────────────────────── */
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-accent:   'Cormorant Garamond', Georgia, serif;
+
+  --text-xs:    0.75rem;   /* 12px */
+  --text-sm:    0.875rem;  /* 14px */
+  --text-base:  1rem;      /* 16px */
+  --text-md:    1.125rem;  /* 18px */
+  --text-lg:    1.25rem;   /* 20px */
+  --text-xl:    1.5rem;    /* 24px */
+  --text-2xl:   1.875rem;  /* 30px */
+  --text-3xl:   2.25rem;   /* 36px */
+  --text-4xl:   3rem;      /* 48px */
+  --text-5xl:   3.75rem;   /* 60px */
+  --text-6xl:   4.5rem;    /* 72px */
+
+  --leading-tight:  1.15;
+  --leading-snug:   1.35;
+  --leading-normal: 1.55;
+  --leading-loose:  1.75;
+
+  --tracking-tight:  -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.06em;
+  --tracking-wider:  0.12em;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+  /* ─── Spacing ──────────────────────────────────── */
+  --space-1:  0.25rem;   /* 4px  */
+  --space-2:  0.5rem;    /* 8px  */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-14: 3.5rem;    /* 56px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  --space-32: 8rem;      /* 128px */
+
+  /* ─── Border Radius ────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ──────────────────────────────────── */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md:  0 4px 24px rgba(0,0,0,0.35);
+  --shadow-lg:  0 8px 48px rgba(0,0,0,0.45);
+  --shadow-xl:  0 16px 64px rgba(0,0,0,0.55);
+  --shadow-gold:0 4px 32px rgba(201, 150, 58, 0.25);
+  --shadow-glow:0 0 40px rgba(201, 150, 58, 0.35);
+
+  /* ─── Transitions ──────────────────────────────── */
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Z-Index Layers ───────────────────────────── */
+  --z-below:   -1;
+  --z-base:     0;
+  --z-above:    10;
+  --z-nav:      100;
+  --z-modal:    200;
+  --z-toast:    300;
+  --z-overlay:  400;
+
+  /* ─── Layout ───────────────────────────────────── */
+  --container-max:    1280px;
+  --container-narrow: 900px;
+  --nav-height:       72px;
+  --bottom-nav-height:72px;
+
+  /* ─── Safe Areas ───────────────────────────────── */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+}
+
+/* Light mode overrides — not used by default (dark-first brand) */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Keep dark — brand identity is dark luxury */
+  }
+}
+
+/* High-contrast accessibility */
+@media (forced-colors: active) {
+  :root {
+    --gold:         ButtonText;
+    --color-text:   CanvasText;
+    --color-bg:     Canvas;
+  }
+}

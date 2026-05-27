@@ -1,0 +1,52 @@
+image_path,alt_text,source_file,exists
+assets/images/vehicle5.png,Budget car for Sri Lanka taxi service,fleet.html,True
+assets/images/vehicle6.jpg,Mini car for airport transfer in Sri Lanka,fleet.html,True
+assets/images/vehicle1.jpg,Sedan car for private driver service Sri Lanka,fleet.html,True
+assets/images/vehicle7.jpg,Mini van for family taxi Sri Lanka,fleet.html,True
+assets/images/vehicle8.png,Standard van KDH flat roof for Sri Lanka tour,fleet.html,True
+assets/images/vehicle4.jpg,Luxury big van high roof Sri Lanka private tour,fleet.html,True
+assets/images/hero-1.png,Sigiriya,index.html,True
+assets/images/hero-2.png,Ella,index.html,True
+assets/images/hero-3.png,Galle,index.html,True
+assets/images/hero-4.png,Yala Safari,index.html,True
+assets/images/hero-5.png,Traveler in Sri Lanka,index.html,True
+assets/images/vehicle1.jpg,Beautiful destination in Sri Lanka,index.html,True
+assets/images/vehicle2.jpg,Beautiful destination in Sri Lanka,index.html,True
+assets/images/vehicle3.jpg,Beautiful destination in Sri Lanka,index.html,True
+https://images.unsplash.com/photo-1500648767791-00dcc994a43e,Beautiful destination in Sri Lanka,index.html,False
+https://images.unsplash.com/photo-1546708973-b339540b5162,Beautiful destination in Sri Lanka,index.html,False
+https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9,Beautiful destination in Sri Lanka,index.html,False
+https://images.unsplash.com/photo-1546708973-b339540b5162,Scenic Sri Lanka railway and mountains,about.html,False
+https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2,Sigiriya Sri Lanka,about.html,False
+https://images.unsplash.com/photo-1547471080-7cc2caa01a7e,Sri Lanka wildlife safari,about.html,False
+https://images.unsplash.com/photo-1507525428034-b723cf961d3e,Sri Lanka beach,about.html,False
+https://images.unsplash.com/photo-1500534314209-a25ddb2bd429,Sri Lanka hill country,about.html,False
+https://images.unsplash.com/photo-1500648767791-00dcc994a43e,Travel planner profile,about.html,False
+https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d,Driver coordinator profile,about.html,False
+https://images.unsplash.com/photo-1494790108377-be9c29b29330,Experience specialist profile,about.html,False
+https://images.unsplash.com/photo-1546708973-b339540b5162,7 day Sri Lanka classic itinerary,custom-tour.html,False
+https://images.unsplash.com/photo-1547471080-7cc2caa01a7e,Sri Lanka wildlife and nature itinerary,custom-tour.html,False
+https://images.unsplash.com/photo-1507525428034-b723cf961d3e,Sri Lanka beach holiday itinerary,custom-tour.html,False
+https://images.unsplash.com/photo-1588598198321-9735fd52455b,Sigiriya Rock Fortress,tour-details.html,False
+assets/images/vehicle5.png,Budget car for Sri Lanka taxi service,feet.html,True
+assets/images/vehicle6.jpg,Mini car for airport transfer in Sri Lanka,feet.html,True
+assets/images/vehicle1.jpg,Sedan car for private driver service Sri Lanka,feet.html,True
+assets/images/vehicle7.jpg,Mini van for family taxi Sri Lanka,feet.html,True
+assets/images/vehicle8.png,Standard van KDH flat roof for Sri Lanka tour,feet.html,True
+assets/images/vehicle4.jpg,Luxury big van high roof Sri Lanka private tour,feet.html,True
+https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2,Sigiriya Rock Fortress Guided Morning Tour,tours.html,False
+https://images.unsplash.com/photo-1605649461784-9d0a5a3f5b73,Kandy Temple of the Tooth and city highlights tour,tours.html,False
+https://images.unsplash.com/photo-1546708973-b339540b5162,Ella Nine Arch Bridge and Little Adam’s Peak Adventure,tours.html,False
+https://images.unsplash.com/photo-1547471080-7cc2caa01a7e,Yala National Park Private Jeep Safari,tours.html,False
+https://images.unsplash.com/photo-1519003722824-194d4455a60c,Colombo Airport to Kandy Private Transfer,tours.html,False
+https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9,Galle Fort Bentota River Safari and South Coast Tour,tours.html,False
+https://images.unsplash.com/photo-1500534314209-a25ddb2bd429,Nuwara Eliya Tea Plantation and Waterfall Tour,tours.html,False
+https://images.unsplash.com/photo-1507525428034-b723cf961d3e,Mirissa Whale Watching and Beach Day Experience,tours.html,False
+https://images.unsplash.com/photo-1578662996442-48f60103fc96,Anuradhapura Ancient City Private Day Tour,tours.html,False
+https://images.unsplash.com/photo-1557050543-4d5f4e07ef46,Udawalawe Elephant Safari Experience,tours.html,False
+https://images.unsplash.com/photo-1504674900247-0877df9cc836,Colombo City Highlights and Street Food Tour,tours.html,False
+https://images.unsplash.com/photo-1540541338287-41700207dee6,Trincomalee Beach Snorkeling and Temple Tour,tours.html,False
+assets/images/exploringlanka-logo-cropped.png,ExploringLanka,components/navbar.html,True
+assets/images/.DS_Store,,assets/images (unreferenced),True
+assets/images/destinations,,assets/images (unreferenced),True
+assets/images/exploringlanka-logo.png,,assets/images (unreferenced),True

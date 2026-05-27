@@ -1,0 +1,50 @@
+---
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ExploringLanka — Home</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <h1>Explore Sri Lanka</h1>
+          <p>Private tours, transfers, and safaris with trusted local guides.</p>
+        </div>
+      </section>
+
+      <section class="destinations">
+        <div class="container">
+          <h2>Popular Destinations</h2>
+          <div class="grid">
+            <article class="card">
+              <img src="/assets/images/hero-1.png" alt="Sigiriya" />
+              <h3>Sigiriya Rock Tour</h3>
+            </article>
+            <article class="card">
+              <img src="/assets/images/hero-2.png" alt="Ella" />
+              <h3>Ella Hill Country</h3>
+            </article>
+            <article class="card">
+              <img src="/assets/images/hero-3.png" alt="Galle" />
+              <h3>Galle Fort &amp; Beaches</h3>
+            </article>
+            <article class="card">
+              <img src="/assets/images/hero-4.png" alt="Yala" />
+              <h3>Yala Safari</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </body>
+</html>

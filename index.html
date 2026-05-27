@@ -1,394 +1,1196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExploringLanka | Sri Lanka Tours, Transfers & Travel</title>
-  <meta name="description" content="Book private Sri Lanka tours, airport transfers, safaris, and custom trips with local experts." />
-  <link rel="icon" href="assets/images/exploringlanka-logo-cropped.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/app.css?v=4" />
-  <link rel="stylesheet" href="css/home-travel.css?v=2" />
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <meta name="description" content="ExploringLanka — Sri Lanka's premier private tour, safari, and transfer specialist. Discover Sigiriya, Yala, Ella and beyond with our expert guides. Book your dream Sri Lanka adventure today.">
+ <meta name="keywords" content="Sri Lanka tours, private tours, safari, Yala, Sigiriya, Ella, Kandy, travel agency, airport transfers">
+ <meta name="author" content="ExploringLanka">
+
+ <!-- Open Graph -->
+ <meta property="og:title" content="ExploringLanka — Sri Lanka. Yours. Unfiltered.">
+ <meta property="og:description" content="Premium private tours, safaris, and transfers across Sri Lanka. Crafted for the curious traveler.">
+ <meta property="og:image" content="assets/images/hero-1.png">
+ <meta property="og:url" content="https://exploringlanka.com">
+ <meta property="og:type" content="website">
+ <meta property="og:locale" content="en_US">
+
+ <!-- Twitter Card -->
+ <meta name="twitter:card" content="summary_large_image">
+ <meta name="twitter:title" content="ExploringLanka — Sri Lanka. Yours. Unfiltered.">
+ <meta name="twitter:description" content="Premium private tours, safaris, and transfers across Sri Lanka.">
+ <meta name="twitter:image" content="assets/images/hero-1.png">
+
+ <title>ExploringLanka — Sri Lanka. Yours. Unfiltered.</title>
+
+ <!-- Preconnect for Google Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+ <!-- Critical CSS (inlined for first paint) -->
+ <style>
+ :root {
+ --gold: #C9963A; --deep: #0D1B2A; --cream: #F5EDD6;
+ --font-display: 'Playfair Display', Georgia, serif;
+ --font-body: 'DM Sans', system-ui, sans-serif;
+ }
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { overflow-x: hidden; scroll-behavior: smooth; }
+ body { background: var(--deep); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; }
+ .hero { position: relative; height: 100dvh; min-height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+ .hero__slides { position: absolute; inset: 0; }
+ .hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+ .hero__slide.is-active { opacity: 1; }
+ .hero__slide img { width: 100%; height: 100%; object-fit: cover; }
+ </style>
+
+ <!-- Google Fonts (non-render-blocking) -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" media="print" onload="this.media='all'">
+ <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap"></noscript>
+
+ <!-- CSS -->
+ <link rel="stylesheet" href="css/tokens.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/animations.css">
+ <link rel="stylesheet" href="css/components.css">
+
+ <!-- Page-specific styles -->
+ <style>
+ /* Featured Tours Section */
+ .tours-shelf {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: var(--space-4);
+ }
+
+ @media (min-width: 768px) {
+ .tours-shelf {
+ grid-template-columns: repeat(3, 1fr);
+ }
+ }
+
+ @media (min-width: 1200px) {
+ .tours-shelf {
+ grid-template-columns: repeat(4, 1fr);
+ }
+ }
+
+ /* On mobile: horizontal scroll shelf */
+ @media (max-width: 639px) {
+ .tours-shelf {
+ display: flex;
+ overflow-x: auto;
+ scroll-snap-type: x mandatory;
+ gap: var(--space-4);
+ padding-bottom: var(--space-2);
+ scrollbar-width: none;
+ -webkit-overflow-scrolling: touch;
+ }
+ .tours-shelf::-webkit-scrollbar { display: none; }
+ .tours-shelf .tour-card {
+ flex: 0 0 280px;
+ scroll-snap-align: start;
+ }
+ }
+
+ /* Why Us Section */
+ .why-us { background: var(--deep-3); }
+ .why-us-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: var(--space-4);
+ }
+ @media (min-width: 768px) {
+ .why-us-grid { grid-template-columns: repeat(4, 1fr); }
+ }
+
+ /* Destinations Masonry */
+ .dest-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: var(--space-3);
+ }
+
+ @media (min-width: 768px) {
+ .dest-grid {
+ grid-template-columns: repeat(3, 1fr);
+ grid-template-rows: repeat(2, 280px);
+ }
+ .dest-grid .dest-card--tall {
+ grid-row: span 2;
+ }
+ }
+
+ @media (min-width: 1024px) {
+ .dest-grid {
+ grid-template-columns: repeat(4, 1fr);
+ grid-template-rows: repeat(2, 300px);
+ gap: var(--space-4);
+ }
+ }
+
+ .dest-card {
+ position: relative;
+ border-radius: var(--radius-lg);
+ overflow: hidden;
+ cursor: pointer;
+ aspect-ratio: 3/4;
+ }
+
+ @media (min-width: 768px) {
+ .dest-card { aspect-ratio: unset; }
+ .dest-card--tall { aspect-ratio: unset; }
+ }
+
+ @media (max-width: 767px) {
+ .dest-card--tall { aspect-ratio: 1/1; }
+ }
+
+ /* CTA Banner Section */
+ .cta-banner {
+ position: relative;
+ overflow: hidden;
+ border-radius: var(--radius-xl);
+ background: linear-gradient(135deg, var(--jungle-dark) 0%, var(--deep-2) 60%, rgba(201,150,58,0.15) 100%);
+ border: 1px solid var(--gold-20);
+ padding: var(--space-12) var(--space-8);
+ text-align: center;
+ }
+
+ .cta-banner::before {
+ content: '';
+ position: absolute;
+ top: -50%;
+ right: -20%;
+ width: 60%;
+ height: 200%;
+ background: radial-gradient(ellipse, rgba(201,150,58,0.08) 0%, transparent 70%);
+ pointer-events: none;
+ }
+
+ /* Trust Section */
+ .trust-logos {
+ display: flex;
+ flex-wrap: wrap;
+ gap: var(--space-4) var(--space-8);
+ align-items: center;
+ justify-content: center;
+ }
+
+ .trust-logo {
+ display: flex;
+ align-items: center;
+ gap: var(--space-2);
+ font-size: var(--text-sm);
+ color: var(--color-text-muted);
+ font-weight: var(--weight-medium);
+ }
+
+ .trust-logo span:first-child { font-size: 1.5rem; }
+
+ /* Booking Modal */
+ .booking-step { display: none; }
+
+ .date-picker-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: var(--space-4);
+ }
+
+ .guest-counter {
+ display: flex;
+ align-items: center;
+ gap: var(--space-4);
+ }
+
+ .guest-counter__btn {
+ width: 44px;
+ height: 44px;
+ border-radius: var(--radius-full);
+ background: var(--deep-3);
+ border: 1px solid var(--color-border);
+ color: var(--cream);
+ font-size: var(--text-xl);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ transition: background var(--transition-fast), border-color var(--transition-fast);
+ -webkit-tap-highlight-color: transparent;
+ }
+
+ .guest-counter__btn:hover { background: var(--gold-10); border-color: var(--gold); }
+ .guest-counter__num {
+ font-family: var(--font-display);
+ font-size: var(--text-2xl);
+ color: var(--cream);
+ min-width: 40px;
+ text-align: center;
+ }
+
+ /* Gold decorative number */
+ .big-number {
+ font-family: var(--font-display);
+ font-size: clamp(3rem, 6vw, 5rem);
+ font-weight: 800;
+ color: var(--gold);
+ opacity: 0.12;
+ position: absolute;
+ top: var(--space-4);
+ right: var(--space-6);
+ line-height: 1;
+ pointer-events: none;
+ user-select: none;
+ }
+ </style>
 </head>
-<body class="home-page">
 
-  <div id="navbar"></div>
+<body data-page="home">
+ <!-- Component Placeholders -->
+ <div id="navbar-placeholder"></div>
 
-  <main>
-    <!-- Hero -->
-    <section class="it-hero" id="home">
-      <div class="it-hero__carousel" aria-hidden="true">
-        <div
-          class="it-hero__bg hero-slide active"
-          style="background-image:url('assets/images/hero-1.png')"
-        ></div>
-        <div
-          class="it-hero__bg hero-slide"
-          style="background-image:url('assets/images/hero-2.png')"
-        ></div>
-        <div
-          class="it-hero__bg hero-slide"
-          style="background-image:url('assets/images/hero-3.png')"
-        ></div>
-        <div
-          class="it-hero__bg hero-slide"
-          style="background-image:url('assets/images/hero-4.png')"
-        ></div>
-        <div
-          class="it-hero__bg hero-slide"
-          style="background-image:url('assets/images/hero-5.png')"
-        ></div>
-      </div>
-      <div class="it-hero__overlay"></div>
-      <div class="container">
-        <p class="it-hero__brand-text">EXPLORINGLANKA</p>
+ <main id="main-content">
 
-        <div class="it-hero__cta">
-          <a href="#" class="btn-it-whatsapp js-whatsapp-help">
-            <span class="btn-it-whatsapp__icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </span>
-            Chat on WhatsApp
-          </a>
-          <a href="tours.html" class="btn-it-outline">Browse tours</a>
-        </div>
+ <!-- 
+ HERO SECTION
+ -->
+ <section class="hero" aria-label="Hero — ExploringLanka">
 
-        <form class="it-search" id="heroSearchForm">
-          <div class="it-search__field">
-            <label for="travelDate">Date</label>
-            <input type="date" id="travelDate" />
-          </div>
-          <div class="it-search__field">
-            <label for="experienceType">Budget</label>
-            <select id="experienceType">
-              <option value="">Any budget</option>
-              <option>Under $50</option>
-              <option>$50 – $100</option>
-              <option>$100 – $200</option>
-              <option>$200+</option>
-            </select>
-          </div>
-          <div class="it-search__field">
-            <label for="guests">Guest</label>
-            <select id="guests">
-              <option>1 Guest</option>
-              <option>2 Guests</option>
-              <option>3 Guests</option>
-              <option>4 Guests</option>
-              <option>5+ Guests</option>
-            </select>
-          </div>
-          <input type="hidden" id="location" value="Sri Lanka" />
-          <button type="submit" class="it-search__btn">Search</button>
-        </form>
-      </div>
+ <!-- Image Slides -->
+ <div class="hero__slides" aria-hidden="true">
+ <div class="hero__slide is-active">
+ <img src="assets/images/hero-1.png"
+ alt="Sri Lanka — Sigiriya Rock Fortress at golden hour"
+ width="1920" height="1080"
+ fetchpriority="high">
+ </div>
+ <div class="hero__slide">
+ <img src="assets/images/hero-2.png"
+ alt="Sri Lanka — Yala National Park leopard safari"
+ width="1920" height="1080"
+ loading="lazy">
+ </div>
+ <div class="hero__slide">
+ <img src="assets/images/hero-3.png"
+ alt="Sri Lanka — Ella Nine Arch Bridge in the mist"
+ width="1920" height="1080"
+ loading="lazy">
+ </div>
+ <div class="hero__slide">
+ <img src="assets/images/hero-4.png"
+ alt="Sri Lanka — Mirissa whale watching at sunrise"
+ width="1920" height="1080"
+ loading="lazy">
+ </div>
+ <div class="hero__slide">
+ <img src="assets/images/hero-5.png"
+ alt="Sri Lanka — Kandy Temple of the Tooth Relic"
+ width="1920" height="1080"
+ loading="lazy">
+ </div>
+ </div>
 
-      <div class="it-hero-dots" id="heroCarouselDots" aria-label="Hero slideshow">
-        <button type="button" class="active" data-hero-slide="0" aria-label="Slide 1"></button>
-        <button type="button" data-hero-slide="1" aria-label="Slide 2"></button>
-        <button type="button" data-hero-slide="2" aria-label="Slide 3"></button>
-        <button type="button" data-hero-slide="3" aria-label="Slide 4"></button>
-        <button type="button" data-hero-slide="4" aria-label="Slide 5"></button>
-      </div>
-      <span class="it-hero__slide-label" id="heroCarouselLabel" aria-live="polite">Temple lights at night</span>
-    </section>
+ <!-- Dark Overlay -->
+ <div class="hero__overlay" aria-hidden="true"></div>
 
-    <!-- Stats -->
-    <section class="it-stats">
-      <div class="container it-stats__grid">
-        <div class="it-stat-card"><strong>10M+</strong><span>Total Customers</span></div>
-        <div class="it-stat-card"><strong>09+</strong><span>Years of Experience</span></div>
-        <div class="it-stat-card"><strong>12K</strong><span>Total Destinations</span></div>
-        <div class="it-stat-card"><strong>5.0</strong><span>Average Rating</span></div>
-      </div>
-    </section>
+ <!-- Grain Texture -->
+ <div class="hero__grain" aria-hidden="true"></div>
 
-    <!-- Destinations masonry -->
-    <section class="it-section" id="destinations">
-      <div class="container">
-        <div class="it-section-head">
-          <h2 class="it-section-title">Sri Lankan tourism &amp; unforgettable experiences.</h2>
-          <p class="it-section-desc">
-            From ancient Sigiriya to golden beaches and misty Ella — discover handpicked destinations
-            with private guides and trusted local transport.
-          </p>
-        </div>
-        <div class="it-masonry">
-          <a href="tours.html" class="it-masonry__card it-masonry__card--tall" data-destination="Sigiriya">
-            <img src="https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2?auto=format&fit=crop&w=900&q=80" alt="Sigiriya" loading="lazy" />
-            <div class="it-masonry__label"><small>Central Province</small><strong>Sigiriya Rock Tour</strong></div>
-          </a>
-          <a href="tours.html" class="it-masonry__card">
-            <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80" alt="Ella" loading="lazy" />
-            <div class="it-masonry__label"><small>Uva Province</small><strong>Ella Hill Country</strong></div>
-          </a>
-          <a href="tours.html" class="it-masonry__card">
-            <img src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&w=800&q=80" alt="Galle" loading="lazy" />
-            <div class="it-masonry__label"><small>Southern Coast</small><strong>Galle Fort &amp; Beaches</strong></div>
-          </a>
-          <a href="tours.html" class="it-masonry__card it-masonry__card--wide">
-            <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=900&q=80" alt="Yala Safari" loading="lazy" />
-            <div class="it-masonry__label"><small>Wildlife</small><strong>Yala Safari Experience</strong></div>
-          </a>
-        </div>
-      </div>
-    </section>
+ <!-- Content -->
+ <div class="hero__content">
+ <p class="hero__eyebrow" aria-label="Explore Sri Lanka">
+ <span class="hero__eyebrow-line" aria-hidden="true"></span>
+ Discover the Pearl of the Indian Ocean
+ <span class="hero__eyebrow-line" aria-hidden="true"></span>
+ </p>
 
-    <!-- How it works -->
-    <section class="it-section it-section--light">
-      <div class="container it-steps">
-        <div class="it-steps__image">
-          <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80" alt="Traveler in Sri Lanka" loading="lazy" />
-        </div>
-        <div class="it-steps__content">
-          <h2>One click for you</h2>
-          <ul class="it-step-list">
-            <li class="it-step">
-              <span class="it-step__icon">🔍</span>
-              <div>
-                <h3>Find your destination</h3>
-                <p>Browse tours, transfers, and custom routes across the island.</p>
-              </div>
-            </li>
-            <li class="it-step">
-              <span class="it-step__icon">🎫</span>
-              <div>
-                <h3>Book a ticket</h3>
-                <p>Send your details via WhatsApp or email — no complicated checkout.</p>
-              </div>
-            </li>
-            <li class="it-step">
-              <span class="it-step__icon">💳</span>
-              <div>
-                <h3>Make payment</h3>
-                <p>Agree on price with our team and pay securely as arranged.</p>
-              </div>
-            </li>
-            <li class="it-step">
-              <span class="it-step__icon">🧭</span>
-              <div>
-                <h3>Explore destination</h3>
-                <p>Enjoy your trip with private pickup and local expert support.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+ <h1 class="hero__title">
+ <span class="hero__title-word">Sri&nbsp;</span><span class="hero__title-word hero__title-accent">Lanka.</span>
+ <br>
+ <span class="hero__title-word">Yours.</span>
+ <span class="hero__title-word hero__title-accent">Unfiltered.</span>
+ </h1>
 
-    <!-- Tour packages -->
-    <section class="it-section">
-      <div class="container">
-        <div class="it-section-head">
-          <h2 class="it-section-title">Our tourist destination</h2>
-          <p class="it-section-desc">Popular private packages — flexible dates, hotel pickup, and clear pricing.</p>
-        </div>
-        <div class="it-packages__grid">
-          <article class="it-package tour-card">
-            <div class="it-package__img tour-image">
-              <img src="https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
-              <span class="it-package__tag">New</span>
-            </div>
-            <div class="it-package__body tour-body">
-              <p class="it-package__meta">Sigiriya · 1 Day</p>
-              <h3 class="it-package__title">Sigiriya Rock Fortress Tour</h3>
-              <p class="it-package__price"><small>From </small>$45</p>
-              <button class="btn btn-card book-now-btn" data-tour="Sigiriya Rock Fortress Tour" style="margin-top:14px;width:100%">Book Now</button>
-            </div>
-          </article>
-          <article class="it-package tour-card">
-            <div class="it-package__img tour-image">
-              <img src="https://images.unsplash.com/photo-1605649461784-9d0a5a3f5b73?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
-              <span class="it-package__tag it-package__tag--hot">Hot</span>
-            </div>
-            <div class="it-package__body tour-body">
-              <p class="it-package__meta">Kandy · 1 Day</p>
-              <h3 class="it-package__title">Kandy Cultural Tour Package</h3>
-              <p class="it-package__price"><small>From </small>$55</p>
-              <button class="btn btn-card book-now-btn" data-tour="Kandy Cultural Tour Package" style="margin-top:14px;width:100%">Book Now</button>
-            </div>
-          </article>
-          <article class="it-package tour-card">
-            <div class="it-package__img tour-image">
-              <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
-              <span class="it-package__tag">Popular</span>
-            </div>
-            <div class="it-package__body tour-body">
-              <p class="it-package__meta">Yala · 1 Day</p>
-              <h3 class="it-package__title">Yala Safari Tour Package</h3>
-              <p class="it-package__price"><small>From </small>$70</p>
-              <button class="btn btn-card book-now-btn" data-tour="Yala Safari Tour Package" style="margin-top:14px;width:100%">Book Now</button>
-            </div>
-          </article>
-        </div>
-        <div class="it-center-btn">
-          <a href="tours.html" class="btn-travel-dark">View more</a>
-        </div>
-      </div>
-    </section>
+ <p class="hero__subtitle">
+ Private tours, wildlife safaris &amp; seamless transfers — crafted for the way you travel.
+ </p>
 
-    <!-- Testimonial -->
-    <section class="it-testimonial">
-      <div class="container it-testimonial__inner">
-        <div class="it-testimonial__author">
-          <img id="testimonialAvatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt="Beautiful destination in Sri Lanka" width="72" height="72" />
-          <h3 id="testimonialName">James Wilson</h3>
-          <span id="testimonialRole">Australia · Traveler</span>
-          <div class="it-testimonial__nav">
-            <button type="button" id="testimonialPrev" aria-label="Previous">←</button>
-            <button type="button" id="testimonialNext" aria-label="Next">→</button>
-          </div>
-        </div>
-        <blockquote class="it-testimonial__quote" id="testimonialQuote">
-          “The Yala safari was the highlight of our family trip. ExploringLanka made booking effortless — we saw elephants and even a leopard.”
-        </blockquote>
-      </div>
-    </section>
+ <div class="hero__actions">
+ <button class="btn btn--primary btn--lg btn--pill"
+ onclick="openBookingModal()"
+ aria-label="Book your Sri Lanka tour now">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+ </svg>
+ Book Your Adventure
+ </button>
+ <a href="tours.html" class="btn btn--ghost btn--lg btn--pill" aria-label="Explore all tours">
+ Explore Tours
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+ </svg>
+ </a>
+ </div>
 
-    <!-- Blog / memories -->
-    <section class="it-section it-section--light">
-      <div class="container">
-        <div class="it-section-head">
-          <h2 class="it-section-title">Our travel memories</h2>
-          <p class="it-section-desc">Tips and stories from Sri Lanka — culture, routes, and seasonal travel.</p>
-        </div>
-        <div class="it-blog__grid">
-          <article class="it-blog-card">
-            <div class="it-blog-card__img">
-              <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
-            </div>
-            <div class="it-blog-card__body">
-              <time class="it-blog-card__date">Nov 15, 2025</time>
-              <h3 class="it-blog-card__title">2025 Travel Trends in Sri Lanka</h3>
-              <p class="it-blog-card__excerpt">Private drivers, eco safaris, and hill-country trains are topping traveler wish lists this year.</p>
-            </div>
-          </article>
-          <article class="it-blog-card">
-            <div class="it-blog-card__img">
-              <img src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
-            </div>
-            <div class="it-blog-card__body">
-              <time class="it-blog-card__date">Oct 02, 2025</time>
-              <h3 class="it-blog-card__title">Best South Coast Beaches</h3>
-              <p class="it-blog-card__excerpt">From Galle Fort to Mirissa — how to plan a relaxed beach loop with private transport.</p>
-            </div>
-          </article>
-        </div>
-        <div class="it-center-btn">
-          <a href="about.html" class="btn-travel-dark">View more</a>
-        </div>
-      </div>
-    </section>
-  </main>
+ <!-- Search Bar -->
+ <div class="hero__search">
+ <form class="search-bar" id="hero-search-form" role="search" aria-label="Search Sri Lanka destinations">
+ <svg class="search-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+ <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+ </svg>
+ <input type="search"
+ class="search-bar__input"
+ id="search-input"
+ placeholder="Where in Sri Lanka?"
+ autocomplete="off"
+ aria-label="Search destination"
+ aria-autocomplete="list"
+ aria-controls="search-dropdown">
+ <button type="submit" class="search-bar__btn" aria-label="Search">Explore</button>
 
-  <div class="booking-modal" id="bookingModal" aria-hidden="true">
-    <div class="booking-box">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
-      <h2>Booking Request</h2>
-      <p class="modal-subtitle">Send your details through WhatsApp or email.</p>
-      <form id="bookingForm">
-        <div class="form-group">
-          <label for="modalTourName">Tour Name</label>
-          <input type="text" id="modalTourName" readonly />
-        </div>
-        <div class="form-group">
-          <label for="customerName">Your Name</label>
-          <input type="text" id="customerName" placeholder="Enter your name" />
-        </div>
-        <div class="form-group">
-          <label for="customerEmail">Email</label>
-          <input type="email" id="customerEmail" placeholder="Enter your email" />
-        </div>
-        <div class="form-group">
-          <label for="customerPhone">WhatsApp Number</label>
-          <input type="text" id="customerPhone" placeholder="+94 70 000 0000" />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="bookingDate">Travel Date</label>
-            <input type="date" id="bookingDate" />
-          </div>
-          <div class="form-group">
-            <label for="bookingGuests">Travelers</label>
-            <select id="bookingGuests">
-              <option>1 Traveler</option>
-              <option>2 Travelers</option>
-              <option>3 Travelers</option>
-              <option>4 Travelers</option>
-              <option>5+ Travelers</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="pickupLocation">Pickup Location</label>
-          <input type="text" id="pickupLocation" placeholder="Hotel or pickup place" />
-        </div>
-        <div class="form-group">
-          <label for="specialMessage">Special Message</label>
-          <textarea id="specialMessage" rows="4" placeholder="Any special request?"></textarea>
-        </div>
-        <p class="form-error" id="bookingError"></p>
-        <div class="modal-actions">
-          <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">Send via WhatsApp</button>
-          <button type="button" class="btn btn-primary" id="sendEmail">Send via Email</button>
-        </div>
-      </form>
-    </div>
-  </div>
+ <!-- Autocomplete -->
+ <div class="search-dropdown" id="search-dropdown" role="listbox" aria-label="Destination suggestions"></div>
+ </form>
+ </div>
+ </div>
 
-  <div id="footer"></div>
+ <!-- Slide Dots -->
+ <div class="hero__dots" role="tablist" aria-label="Hero slides">
+ <button class="hero__dot is-active" role="tab" aria-label="Slide 1" aria-selected="true"></button>
+ <button class="hero__dot" role="tab" aria-label="Slide 2" aria-selected="false"></button>
+ <button class="hero__dot" role="tab" aria-label="Slide 3" aria-selected="false"></button>
+ <button class="hero__dot" role="tab" aria-label="Slide 4" aria-selected="false"></button>
+ <button class="hero__dot" role="tab" aria-label="Slide 5" aria-selected="false"></button>
+ </div>
 
-  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    <span class="floating-whatsapp__text">WhatsApp</span>
-  </a>
-  <button class="back-to-top" id="backToTop" type="button" aria-label="Top">↑</button>
+ <!-- Scroll Indicator -->
+ <div class="hero__scroll" aria-hidden="true">
+ <span class="hero__scroll-text">Scroll</span>
+ <span class="hero__scroll-icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+ <polyline points="6 9 12 15 18 9"/>
+ </svg>
+ </span>
+ </div>
+ </section>
 
-  <script src="js/components.js" defer></script>
-  <script src="js/script.js" defer></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const reviews = [
-        {
-          quote: "“The Yala safari was the highlight of our family trip. ExploringLanka made booking effortless — we saw elephants and even a leopard.”",
-          name: "James Wilson",
-          role: "Australia · Traveler",
-          avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
-        },
-        {
-          quote: "“Our Kandy tour was smooth and beautiful. The driver was friendly, professional, and knew every scenic stop.”",
-          name: "Anna Müller",
-          role: "Germany · Traveler",
-          avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
-        },
-        {
-          quote: "“Airport transfer to Ella was comfortable and safe. Everything felt easy from the first WhatsApp message.”",
-          name: "Sophie Turner",
-          role: "United Kingdom · Traveler",
-          avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80"
-        }
-      ];
-      let index = 0;
-      const quote = document.getElementById("testimonialQuote");
-      const name = document.getElementById("testimonialName");
-      const role = document.getElementById("testimonialRole");
-      const avatar = document.getElementById("testimonialAvatar");
-      const prev = document.getElementById("testimonialPrev");
-      const next = document.getElementById("testimonialNext");
-      if (!quote) return;
-      function show(i) {
-        index = (i + reviews.length) % reviews.length;
-        const r = reviews[index];
-        quote.textContent = r.quote;
-        name.textContent = r.name;
-        role.textContent = r.role;
-        avatar.src = r.avatar;
-      }
-      prev?.addEventListener("click", () => show(index - 1));
-      next?.addEventListener("click", () => show(index + 1));
-    });
-  </script>
+ <!-- 
+ TRUST STRIP
+ -->
+ <section class="section section--sm" style="border-bottom: 1px solid var(--color-border); padding-block: var(--space-6);">
+ <div class="container">
+ <div class="trust-logos">
+ <div class="trust-logo reveal"><span></span><span>TripAdvisor Excellence</span></div>
+ <div class="trust-logo reveal reveal-delay-1"><span></span><span>4.9 / 5 Rating</span></div>
+ <div class="trust-logo reveal reveal-delay-2"><span></span><span>2,400+ Happy Travelers</span></div>
+ <div class="trust-logo reveal reveal-delay-3"><span></span><span>Secure Booking</span></div>
+ <div class="trust-logo reveal reveal-delay-4"><span></span><span>24/7 WhatsApp Support</span></div>
+ <div class="trust-logo reveal reveal-delay-5"><span></span><span>SLTDA Registered</span></div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 
+ DESTINATIONS SECTION
+ -->
+ <section class="section" id="destinations" aria-labelledby="dest-heading">
+ <div class="container">
+ <div class="section-header">
+ <p class="section-label reveal">Top Destinations</p>
+ <h2 class="section-title reveal reveal-delay-1" id="dest-heading">
+ Where Will Sri Lanka<br>
+ <em style="color:var(--gold); font-style:italic;">Take You?</em>
+ </h2>
+ <p class="section-subtitle reveal reveal-delay-2">
+ From ancient rock fortresses to pristine beaches, dense jungles teeming with wildlife 
+ to misty highland tea estates — every corner tells a story.
+ </p>
+ </div>
+
+ <div class="dest-grid">
+ <!-- Sigiriya — tall card -->
+ <div class="dest-card dest-card--tall destination-card reveal"
+ aria-label="Explore Sigiriya"
+ style="min-height:200px">
+ <img class="destination-card__image"
+ src="assets/images/destinations/sigiriya.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1626016001-5e6c0ed2b8e3?w=800&q=80'"
+ alt="Sigiriya Rock Fortress, Sri Lanka"
+ width="400" height="600"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Sigiriya</div>
+ <p class="destination-card__desc">
+ The 8th wonder of the ancient world — a 5th-century rock citadel rising 200m above the jungle floor.
+ </p>
+ <a href="tours.html?dest=sigiriya" class="destination-card__cta" aria-label="Explore Sigiriya tours">
+ Explore →
+ </a>
+ </div>
+ </div>
+
+ <!-- Yala Safari -->
+ <div class="dest-card destination-card reveal reveal-delay-1" aria-label="Explore Yala National Park">
+ <img class="destination-card__image"
+ src="assets/images/destinations/yala.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1574481729581-3d3c84e5c5df?w=800&q=80'"
+ alt="Yala National Park leopard, Sri Lanka"
+ width="400" height="400"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Yala Safari</div>
+ <p class="destination-card__desc">Home to the world's highest density of wild leopards.</p>
+ <a href="tours.html?dest=yala" class="destination-card__cta">Explore →</a>
+ </div>
+ </div>
+
+ <!-- Ella -->
+ <div class="dest-card destination-card reveal reveal-delay-2" aria-label="Explore Ella">
+ <img class="destination-card__image"
+ src="assets/images/destinations/ella.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1614107151491-6876eecbff89?w=800&q=80'"
+ alt="Nine Arch Bridge Ella, Sri Lanka"
+ width="400" height="400"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Ella</div>
+ <p class="destination-card__desc">Mist-shrouded hills, Nine Arch Bridge &amp; world-famous train rides.</p>
+ <a href="tours.html?dest=ella" class="destination-card__cta">Explore →</a>
+ </div>
+ </div>
+
+ <!-- Mirissa -->
+ <div class="dest-card destination-card reveal reveal-delay-3" aria-label="Explore Mirissa Beach">
+ <img class="destination-card__image"
+ src="assets/images/destinations/mirissa.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1552057426-c4a4a5db08c5?w=800&q=80'"
+ alt="Mirissa beach, Sri Lanka"
+ width="400" height="400"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Mirissa</div>
+ <p class="destination-card__desc">Blue whale watching &amp; perfect crescent beach sunsets.</p>
+ <a href="tours.html?dest=mirissa" class="destination-card__cta">Explore →</a>
+ </div>
+ </div>
+
+ <!-- Kandy -->
+ <div class="dest-card destination-card reveal reveal-delay-4" aria-label="Explore Kandy">
+ <img class="destination-card__image"
+ src="assets/images/destinations/kandy.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1588428988355-7b3c4c8b3e08?w=800&q=80'"
+ alt="Temple of the Tooth, Kandy, Sri Lanka"
+ width="400" height="400"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Kandy</div>
+ <p class="destination-card__desc">Sri Lanka's cultural capital — sacred temples &amp; highland scenery.</p>
+ <a href="tours.html?dest=kandy" class="destination-card__cta">Explore →</a>
+ </div>
+ </div>
+
+ <!-- Galle -->
+ <div class="dest-card destination-card reveal reveal-delay-5" aria-label="Explore Galle Fort">
+ <img class="destination-card__image"
+ src="assets/images/destinations/galle.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1620590292157-e79d09ae0291?w=800&q=80'"
+ alt="Galle Fort lighthouse, Sri Lanka"
+ width="400" height="400"
+ loading="lazy">
+ <div class="destination-card__overlay" aria-hidden="true"></div>
+ <div class="destination-card__content">
+ <div class="destination-card__flag"></div>
+ <div class="destination-card__name">Galle Fort</div>
+ <p class="destination-card__desc">Dutch colonial fort by the sea — UNESCO World Heritage Site.</p>
+ <a href="tours.html?dest=galle" class="destination-card__cta">Explore →</a>
+ </div>
+ </div>
+ </div>
+
+ <div style="text-align:center; margin-top:var(--space-10)">
+ <a href="tours.html" class="btn btn--secondary btn--pill btn--lg reveal">
+ View All Destinations
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+ </svg>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- 
+ FEATURED TOURS
+ -->
+ <section class="section" id="featured-tours" aria-labelledby="tours-heading" style="background: var(--deep-2);">
+ <div class="container">
+ <div class="section-header">
+ <p class="section-label reveal">Featured Tours</p>
+ <h2 class="section-title reveal reveal-delay-1" id="tours-heading">
+ Our Most Loved<br>
+ <em style="color:var(--gold); font-style:italic;">Experiences</em>
+ </h2>
+ <p class="section-subtitle reveal reveal-delay-2">
+ Hand-picked by our travel experts. Every tour is private, flexible, 
+ and designed around your pace.
+ </p>
+ </div>
+
+ <!-- Tours Grid / Swipe Shelf -->
+ <div class="tours-shelf reveal">
+ <!-- Tour Card 1 -->
+ <article class="tour-card hover-lift" data-tour-id="sigiriya-yala-3d" data-category="safari,cultural">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-1.png"
+ onerror="this.src='https://images.unsplash.com/photo-1626016001-5e6c0ed2b8e3?w=600&q=80'"
+ alt="Sigiriya & Yala 3-Day Tour"
+ width="400" height="300"
+ loading="lazy">
+ <span class="tour-card__badge">Bestseller</span>
+ <span class="tour-card__price">From $189/person</span>
+ <button class="tour-card__wishlist" aria-label="Add Sigiriya & Yala tour to wishlist">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+ <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+ </svg>
+ </button>
+ </div>
+ <div class="tour-card__body">
+ <h3 class="tour-card__title">Sigiriya &amp; Yala Safari Escape</h3>
+ <div class="tour-card__chips">
+ <span class="chip"> 3 Days</span>
+ <span class="chip"> 2–8</span>
+ <span class="chip chip--jungle">Safari</span>
+ </div>
+ <p class="tour-card__desc">
+ Climb the ancient Lion Rock, then track leopards through Yala's golden savannah.
+ </p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm btn--icon"
+ data-open-booking="Sigiriya & Yala Safari Escape"
+ aria-label="Quick book this tour">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </article>
+
+ <!-- Tour Card 2 -->
+ <article class="tour-card hover-lift" data-tour-id="cultural-triangle" data-category="cultural">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-5.png"
+ onerror="this.src='https://images.unsplash.com/photo-1588428988355-7b3c4c8b3e08?w=600&q=80'"
+ alt="Cultural Triangle Tour"
+ width="400" height="300"
+ loading="lazy">
+ <span class="tour-card__badge badge--jungle">Cultural</span>
+ <span class="tour-card__price">From $245/person</span>
+ <button class="tour-card__wishlist" aria-label="Add Cultural Triangle to wishlist">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+ <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+ </svg>
+ </button>
+ </div>
+ <div class="tour-card__body">
+ <h3 class="tour-card__title">Cultural Triangle Discovery</h3>
+ <div class="tour-card__chips">
+ <span class="chip"> 5 Days</span>
+ <span class="chip"> 2–6</span>
+ <span class="chip chip--gold">Historical</span>
+ </div>
+ <p class="tour-card__desc">
+ Sigiriya, Dambulla Cave Temple, Polonnaruwa — walk through 2,500 years of civilization.
+ </p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm btn--icon"
+ data-open-booking="Cultural Triangle Discovery"
+ aria-label="Quick book this tour">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </article>
+
+ <!-- Tour Card 3 -->
+ <article class="tour-card hover-lift" data-tour-id="ella-train-tea" data-category="adventure,scenic">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-3.png"
+ onerror="this.src='https://images.unsplash.com/photo-1614107151491-6876eecbff89?w=600&q=80'"
+ alt="Ella Highlands Train Journey"
+ width="400" height="300"
+ loading="lazy">
+ <span class="tour-card__badge" style="background:var(--terracotta); color:white;">Adventure</span>
+ <span class="tour-card__price">From $165/person</span>
+ <button class="tour-card__wishlist" aria-label="Add Ella Highlands to wishlist">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+ <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+ </svg>
+ </button>
+ </div>
+ <div class="tour-card__body">
+ <h3 class="tour-card__title">Ella Highlands &amp; Train Journey</h3>
+ <div class="tour-card__chips">
+ <span class="chip"> 4 Days</span>
+ <span class="chip"> 2–4</span>
+ <span class="chip chip--jungle">Scenic</span>
+ </div>
+ <p class="tour-card__desc">
+ The world's most scenic train ride through emerald tea estates and waterfalls.
+ </p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm btn--icon"
+ data-open-booking="Ella Highlands & Train Journey"
+ aria-label="Quick book this tour">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </article>
+
+ <!-- Tour Card 4 -->
+ <article class="tour-card hover-lift" data-tour-id="south-coast-beach" data-category="beach">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-4.png"
+ onerror="this.src='https://images.unsplash.com/photo-1552057426-c4a4a5db08c5?w=600&q=80'"
+ alt="South Coast Beach Tour"
+ width="400" height="300"
+ loading="lazy">
+ <span class="tour-card__badge" style="background:var(--jungle); color:white;">Beach</span>
+ <span class="tour-card__price">From $135/person</span>
+ <button class="tour-card__wishlist" aria-label="Add South Coast Beach to wishlist">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+ <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+ </svg>
+ </button>
+ </div>
+ <div class="tour-card__body">
+ <h3 class="tour-card__title">South Coast Beach Bliss</h3>
+ <div class="tour-card__chips">
+ <span class="chip"> 3 Days</span>
+ <span class="chip"> 2–10</span>
+ <span class="chip"> Whale Watch</span>
+ </div>
+ <p class="tour-card__desc">
+ Galle Fort, Unawatuna, Mirissa whale watching — the ultimate southern escape.
+ </p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm btn--icon"
+ data-open-booking="South Coast Beach Bliss"
+ aria-label="Quick book this tour">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </article>
+ </div>
+
+ <div style="text-align:center; margin-top:var(--space-10)">
+ <a href="tours.html" class="btn btn--secondary btn--pill reveal">
+ Browse All Tours (25+)
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+ </svg>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- 
+ WHY CHOOSE US
+ -->
+ <section class="section why-us" id="why-us" aria-labelledby="why-heading">
+ <div class="container">
+ <div class="section-header text-center">
+ <p class="section-label reveal" style="justify-content:center;">Why ExploringLanka</p>
+ <h2 class="section-title reveal reveal-delay-1" id="why-heading">
+ 12 Years of Crafting<br>
+ <em style="color:var(--gold); font-style:italic;">Unforgettable Journeys</em>
+ </h2>
+ </div>
+
+ <div class="why-us-grid">
+ <!-- Stat 1 -->
+ <div class="stat-card reveal">
+ <span class="big-number">01</span>
+ <div class="stat-card__icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+ <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+ <circle cx="9" cy="7" r="4"/>
+ <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+ <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+ </svg>
+ </div>
+ <div class="stat-card__number">
+ <span data-target="2400" data-suffix="+">0</span>
+ </div>
+ <div class="stat-card__label">Happy Travelers</div>
+ <div class="stat-card__desc">From 65+ countries. Our reviews speak louder than words.</div>
+ </div>
+
+ <!-- Stat 2 -->
+ <div class="stat-card reveal reveal-delay-1">
+ <span class="big-number">02</span>
+ <div class="stat-card__icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+ <circle cx="12" cy="12" r="10"/>
+ <polyline points="12 6 12 12 16 14"/>
+ </svg>
+ </div>
+ <div class="stat-card__number">
+ <span data-target="12" data-suffix=" Yrs">0</span>
+ </div>
+ <div class="stat-card__label">Years of Experience</div>
+ <div class="stat-card__desc">Expert local knowledge built over a decade of exploration.</div>
+ </div>
+
+ <!-- Stat 3 -->
+ <div class="stat-card reveal reveal-delay-2">
+ <span class="big-number">03</span>
+ <div class="stat-card__icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+ <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.72 6.72l.84-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+ </svg>
+ </div>
+ <div class="stat-card__number">48<span style="font-size:0.5em">hr</span></div>
+ <div class="stat-card__label">Response Guarantee</div>
+ <div class="stat-card__desc">Every inquiry answered within 48 hours. Usually much faster.</div>
+ </div>
+
+ <!-- Stat 4 -->
+ <div class="stat-card reveal reveal-delay-3">
+ <span class="big-number">04</span>
+ <div class="stat-card__icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+ <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+ </svg>
+ </div>
+ <div class="stat-card__number">
+ <span data-target="98" data-suffix="%">0</span>
+ </div>
+ <div class="stat-card__label">5-Star Reviews</div>
+ <div class="stat-card__desc">Consistently rated excellent across TripAdvisor &amp; Google.</div>
+ </div>
+ </div>
+
+ <!-- Features Row -->
+ <div style="margin-top:var(--space-12)">
+ <div class="grid-3" style="gap:var(--space-6)">
+ <div class="reveal" style="display:flex;flex-direction:column;gap:var(--space-3)">
+  <div style="color:var(--gold)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+ <h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">100% Private Tours</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">
+ No shared vans. No waiting for others. Your itinerary, your pace, your guide — completely private.
+ </p>
+ </div>
+ <div class="reveal reveal-delay-1" style="display:flex;flex-direction:column;gap:var(--space-3)">
+  <div style="color:var(--gold)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+ <h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">Expert Local Guides</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">
+ Our guides are not just drivers — they're storytellers, naturalists, and passionate Sri Lankans.
+ </p>
+ </div>
+ <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;gap:var(--space-3)">
+  <div style="color:var(--gold)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+ <h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">Fully Customizable</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">
+ Every tour can be customized to your interests, budget, and travel dates. Start from scratch or modify ours.
+ </p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 
+ TESTIMONIALS
+ -->
+ <section class="section" id="testimonials" aria-labelledby="testimonials-heading">
+ <div class="container">
+ <div class="section-header">
+ <p class="section-label reveal">Traveler Stories</p>
+ <h2 class="section-title reveal reveal-delay-1" id="testimonials-heading">
+ What Our Guests<br>
+ <em style="color:var(--gold); font-style:italic;">Say About Us</em>
+ </h2>
+ </div>
+
+ <div class="testimonials-carousel" id="testimonials-carousel">
+ <div class="testimonials-track">
+
+ <article class="testimonial-card" aria-label="Testimonial from Sarah, USA">
+ <span class="testimonial-card__quote-icon" aria-hidden="true">"</span>
+ <p class="testimonial-card__text">
+ "ExploringLanka turned our trip into something we still talk about every single day.
+ Our guide Ruwan knew secret spots no guidebook mentions — ancient temples 
+ at sunrise with just us and the monks. Pure magic."
+ </p>
+ <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+
+ </div>
+ <div class="testimonial-card__author">
+ <img class="testimonial-card__avatar"
+ src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+ alt="Sarah M."
+ width="52" height="52"
+ loading="lazy">
+ <div>
+ <div class="testimonial-card__name">Sarah M.</div>
+ <div class="testimonial-card__origin">
+ <span></span> <span>Austin, Texas</span>
+ </div>
+ </div>
+ </div>
+ </article>
+
+ <article class="testimonial-card" aria-label="Testimonial from James, UK">
+ <span class="testimonial-card__quote-icon" aria-hidden="true">"</span>
+ <p class="testimonial-card__text">
+ "Spotted a leopard on the first game drive in Yala. FIRST. DRIVE. 
+ Our naturalist guide positioned us perfectly. Honestly the best safari 
+ experience outside Africa. Absolutely world-class."
+ </p>
+ <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+
+ </div>
+ <div class="testimonial-card__author">
+ <img class="testimonial-card__avatar"
+ src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80"
+ alt="James R."
+ width="52" height="52"
+ loading="lazy">
+ <div>
+ <div class="testimonial-card__name">James R.</div>
+ <div class="testimonial-card__origin">
+ <span></span> <span>London, UK</span>
+ </div>
+ </div>
+ </div>
+ </article>
+
+ <article class="testimonial-card" aria-label="Testimonial from Yuki, Japan">
+ <span class="testimonial-card__quote-icon" aria-hidden="true">"</span>
+ <p class="testimonial-card__text">
+ "The train from Kandy to Ella is worth the entire trip alone. 
+ But having our driver waiting at Ella station with local food recommendations 
+ made everything seamless. This team thinks of everything."
+ </p>
+ <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+
+ </div>
+ <div class="testimonial-card__author">
+ <img class="testimonial-card__avatar"
+ src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80"
+ alt="Yuki T."
+ width="52" height="52"
+ loading="lazy">
+ <div>
+ <div class="testimonial-card__name">Yuki T.</div>
+ <div class="testimonial-card__origin">
+ <span></span> <span>Tokyo, Japan</span>
+ </div>
+ </div>
+ </div>
+ </article>
+
+ <article class="testimonial-card" aria-label="Testimonial from Priya, Australia">
+ <span class="testimonial-card__quote-icon" aria-hidden="true">"</span>
+ <p class="testimonial-card__text">
+ "We customized a 10-day tour and it was flawless from Colombo airport 
+ to the last goodbye. The accommodation choices were stellar — boutique 
+ eco-lodges we'd never have found ourselves. Cannot recommend enough."
+ </p>
+ <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+
+ </div>
+ <div class="testimonial-card__author">
+ <img class="testimonial-card__avatar"
+ src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80"
+ alt="Priya N."
+ width="52" height="52"
+ loading="lazy">
+ <div>
+ <div class="testimonial-card__name">Priya N.</div>
+ <div class="testimonial-card__origin">
+ <span></span> <span>Melbourne, Australia</span>
+ </div>
+ </div>
+ </div>
+ </article>
+
+ </div><!-- /.testimonials-track -->
+
+ <div class="carousel-controls">
+ <button class="carousel-btn" id="testimonials-prev" aria-label="Previous testimonial">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <polyline points="15 18 9 12 15 6"/>
+ </svg>
+ </button>
+ <div class="carousel-dots" role="tablist" aria-label="Testimonial navigation">
+ <button class="carousel-dot is-active" role="tab" aria-label="Testimonial 1" aria-selected="true"></button>
+ <button class="carousel-dot" role="tab" aria-label="Testimonial 2" aria-selected="false"></button>
+ <button class="carousel-dot" role="tab" aria-label="Testimonial 3" aria-selected="false"></button>
+ <button class="carousel-dot" role="tab" aria-label="Testimonial 4" aria-selected="false"></button>
+ </div>
+ <button class="carousel-btn" id="testimonials-next" aria-label="Next testimonial">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <polyline points="9 18 15 12 9 6"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 
+ CTA BANNER
+ -->
+ <section class="section section--sm" aria-label="Book your custom Sri Lanka tour">
+ <div class="container">
+ <div class="cta-banner reveal">
+ <div style="position:relative;z-index:1">
+ <p class="section-label" style="justify-content:center;margin-bottom:var(--space-4)">Ready to Explore?</p>
+ <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.5rem);color:var(--cream);line-height:1.15;margin-bottom:var(--space-4)">
+ Your Dream Sri Lanka Trip<br>
+ <em style="color:var(--gold)">Starts With One Message</em>
+ </h2>
+ <p style="font-size:var(--text-md);color:var(--color-text-muted);margin-bottom:var(--space-8);max-width:52ch;margin-inline:auto;line-height:var(--leading-loose)">
+ Tell us your dates, your dream, your budget. We'll craft a personalized 
+ itinerary within 24 hours. No obligation. No hard sell. Just good travel.
+ </p>
+ <div style="display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:center;align-items:center">
+ <a href="custom-tour.html" class="btn btn--primary btn--lg btn--pill">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+ </svg>
+ Build My Custom Tour
+ </a>
+ <a href="https://wa.me/94779892268?text=Hi%20ExploringLanka!%20I'd%20like%20to%20plan%20a%20trip%20to%20Sri%20Lanka."
+ class="btn btn--whatsapp btn--lg btn--pill"
+ target="_blank" rel="noopener noreferrer"
+ aria-label="Chat with us on WhatsApp">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+ <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+ </svg>
+ WhatsApp Us Now
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ </main><!-- /#main-content -->
+
+ <!-- Footer -->
+ <div id="footer-placeholder"></div>
+
+ <!-- 
+ BOOKING MODAL
+ -->
+ <div class="modal-backdrop" id="booking-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-hidden="true">
+ <div class="modal" tabindex="-1">
+ <div class="modal__handle" aria-hidden="true"></div>
+
+ <div class="modal__header">
+ <h2 class="modal__title" id="booking-modal-title">
+ Book Your Tour
+ <span id="booking-tour-name" style="display:block;font-size:var(--text-sm);color:var(--gold);font-family:var(--font-body);font-weight:400;margin-top:2px;"></span>
+ </h2>
+ <button class="modal__close" id="booking-modal-close" aria-label="Close booking modal">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+ </svg>
+ </button>
+ </div>
+
+ <!-- Progress -->
+ <div class="modal__progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-label="Booking step 1 of 4">
+ <div class="modal__progress-dot is-active"></div>
+ <div class="modal__progress-dot"></div>
+ <div class="modal__progress-dot"></div>
+ <div class="modal__progress-dot"></div>
+ </div>
+
+ <div class="modal__body">
+ <!-- Step 1: Dates -->
+ <div class="booking-step" id="step-1">
+ <h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)">
+ Select Your Dates
+ </h3>
+ <div class="date-picker-grid">
+ <div class="form-group">
+ <label class="form-label" for="booking-arrival">Arrival Date</label>
+ <input type="date" class="form-input" id="booking-arrival" aria-required="true">
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-departure">Departure Date</label>
+ <input type="date" class="form-input" id="booking-departure" aria-required="true">
+ </div>
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-tour-select">Tour Package</label>
+ <select class="form-select" id="booking-tour-select" aria-required="true">
+ <option value="">Choose a tour...</option>
+ <option>Sigiriya &amp; Yala Safari Escape (3 Days)</option>
+ <option>Cultural Triangle Discovery (5 Days)</option>
+ <option>Ella Highlands &amp; Train Journey (4 Days)</option>
+ <option>South Coast Beach Bliss (3 Days)</option>
+ <option>Custom Itinerary (tell us your dream)</option>
+ </select>
+ </div>
+ </div>
+
+ <!-- Step 2: Guests -->
+ <div class="booking-step" id="step-2">
+ <h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)">
+ How Many Guests?
+ </h3>
+ <div class="form-group">
+ <label class="form-label">Adults</label>
+ <div class="guest-counter" role="group" aria-label="Number of adults">
+ <button class="guest-counter__btn" onclick="adjustGuests('adults',-1)" aria-label="Remove adult">−</button>
+ <span class="guest-counter__num" id="adults-count" aria-live="polite">2</span>
+ <button class="guest-counter__btn" onclick="adjustGuests('adults',1)" aria-label="Add adult">+</button>
+ </div>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Children (under 12)</label>
+ <div class="guest-counter" role="group" aria-label="Number of children">
+ <button class="guest-counter__btn" onclick="adjustGuests('children',-1)" aria-label="Remove child">−</button>
+ <span class="guest-counter__num" id="children-count" aria-live="polite">0</span>
+ <button class="guest-counter__btn" onclick="adjustGuests('children',1)" aria-label="Add child">+</button>
+ </div>
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-accommodation">Accommodation Preference</label>
+ <select class="form-select" id="booking-accommodation" aria-required="false">
+ <option>Budget (Guesthouses)</option>
+ <option selected>Mid-range (3 Hotels)</option>
+ <option>Comfort (4 Hotels)</option>
+ <option>Luxury (5 Boutique)</option>
+ </select>
+ </div>
+ </div>
+
+ <!-- Step 3: Contact -->
+ <div class="booking-step" id="step-3">
+ <h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)">
+ Your Details
+ </h3>
+ <div class="date-picker-grid">
+ <div class="form-group">
+ <label class="form-label" for="booking-firstname">First Name</label>
+ <input type="text" class="form-input" id="booking-firstname" placeholder="Sarah" autocomplete="given-name">
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-lastname">Last Name</label>
+ <input type="text" class="form-input" id="booking-lastname" placeholder="Morrison" autocomplete="family-name">
+ </div>
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-email">Email Address</label>
+ <input type="email" class="form-input" id="booking-email" placeholder="sarah@email.com" autocomplete="email">
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-phone">WhatsApp / Phone</label>
+ <input type="tel" class="form-input" id="booking-phone" placeholder="+1 234 567 8900" autocomplete="tel">
+ </div>
+ <div class="form-group">
+ <label class="form-label" for="booking-notes">Special Requests</label>
+ <textarea class="form-textarea" id="booking-notes" placeholder="Dietary requirements, accessibility needs, dream experiences..." rows="3"></textarea>
+ </div>
+ </div>
+
+ <!-- Step 4: Confirm -->
+ <div class="booking-step" id="step-4">
+ <h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)">
+ Confirm &amp; Send
+ </h3>
+ <div style="background:var(--deep-3);border-radius:var(--radius-lg);padding:var(--space-5);border:1px solid var(--color-border);margin-bottom:var(--space-5)">
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)">Summary</p>
+ <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+ <div style="display:flex;justify-content:space-between;font-size:var(--text-sm)">
+ <span style="color:var(--color-text-muted)">Tour</span>
+ <span style="color:var(--cream)">Selected package</span>
+ </div>
+ <div style="display:flex;justify-content:space-between;font-size:var(--text-sm)">
+ <span style="color:var(--color-text-muted)">Guests</span>
+ <span style="color:var(--cream)" id="confirm-guests">2 adults</span>
+ </div>
+ <div style="display:flex;justify-content:space-between;font-size:var(--text-sm)">
+ <span style="color:var(--color-text-muted)">Response time</span>
+ <span style="color:var(--jungle-light)">Within 24 hours</span>
+ </div>
+ </div>
+ </div>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose);margin-bottom:var(--space-4)">
+ By submitting, you'll receive a personalized quote within 24 hours. No payment required at this stage. 
+ We'll confirm availability and provide a detailed itinerary.
+ </p>
+ </div>
+ </div>
+
+ <!-- Footer actions -->
+ <div class="modal__footer">
+ <div style="display:flex;gap:var(--space-3);align-items:center">
+ <button class="btn btn--ghost btn--sm" id="booking-prev" style="display:none;min-width:80px">
+ ← Back
+ </button>
+ <button class="btn btn--primary btn--full" id="booking-next" style="display:flex">
+ Continue →
+ </button>
+ <button class="btn btn--primary btn--full" id="booking-submit" style="display:none">
+ Send My Request
+ </button>
+ </div>
+ <a href="https://wa.me/94779892268?text=Hi!%20I%20want%20to%20book%20a%20tour."
+ class="btn btn--whatsapp btn--full btn--sm"
+ target="_blank" rel="noopener noreferrer"
+ aria-label="Book via WhatsApp instead">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+ <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+ </svg>
+ Or book via WhatsApp instead
+ </a>
+ </div>
+ </div>
+ </div>
+
+ <!-- Scripts -->
+ <script>
+ // Guest counter (inline for immediate interactivity)
+ const guestCounts = { adults: 2, children: 0 };
+ function adjustGuests(type, delta) {
+ guestCounts[type] = Math.max(type === 'adults' ? 1 : 0, guestCounts[type] + delta);
+ document.getElementById(type + '-count').textContent = guestCounts[type];
+ const confirm = document.getElementById('confirm-guests');
+ if (confirm) {
+ confirm.textContent = guestCounts.adults + ' adult' + (guestCounts.adults !== 1 ? 's' : '') +
+ (guestCounts.children > 0 ? ', ' + guestCounts.children + ' child' + (guestCounts.children !== 1 ? 'ren' : '') : '');
+ }
+ }
+ </script>
+ <script src="js/components.js"></script>
+ <script src="js/script.js"></script>
 </body>
 </html>

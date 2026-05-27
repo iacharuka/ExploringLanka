@@ -1,176 +1,120 @@
-/* ExploringLanka — Navbar & Footer loader */
+/**
+ * ExploringLanka — Component Loader
+ * Injects shared HTML components (navbar, footer) into all pages.
+ */
 
-const FALLBACK_NAVBAR = `
-  <header class="site-header site-header--travel">
-    <div class="container header-wrapper">
-      <a href="index.html" class="logo logo-text" aria-label="ExploringLanka home">
-        <img src="assets/images/exploringlanka-logo-cropped.png" alt="ExploringLanka" class="site-logo site-logo--img" width="200" height="48" decoding="async" />
-        <span class="logo-wordmark">EXPLORINGLANKA</span>
-      </a>
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <a href="about.html">About</a>
-        <a href="index.html#destinations">Destination</a>
-        <a href="tours.html">Tour</a>
-        <a href="fleet.html">Fleet</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <span class="lang-pill" aria-hidden="true">EN</span>
-        <a href="#" class="btn btn-login js-whatsapp-help">WhatsApp</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">☰</button>
-      </div>
-    </div>
-  </header>
-`;
+(function () {
+ 'use strict';
 
-const FALLBACK_FOOTER = `
-  <footer class="site-footer site-footer--travel">
-    <div class="container footer-grid footer-grid--travel">
-      <div class="footer-column">
-        <h3>About</h3>
-        <a href="about.html">About Us</a>
-        <a href="tours.html">Our Tours</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-column">
-        <h3>Support</h3>
-        <a href="contact.html">Contact Us</a>
-        <a href="contact.html">Help Center</a>
-        <a href="transfers.html">Airport Transfers</a>
-      </div>
-      <div class="footer-column">
-        <h3>FAQ</h3>
-        <a href="contact.html">Booking</a>
-        <a href="contact.html">Payments</a>
-        <a href="custom-tour.html">Custom Tours</a>
-      </div>
-      <div class="footer-newsletter">
-        <h3>Newsletter</h3>
-        <p>Get Sri Lanka travel updates by email.</p>
-        <form id="newsletterForm" class="newsletter-form newsletter-form--travel">
-          <input type="email" id="newsletterEmail" placeholder="Enter your email" name="email" />
-          <button type="submit" class="btn btn-submit">Submit</button>
-        </form>
-      </div>
-    </div>
-    <div class="container footer-bottom footer-bottom--travel">
-      <span>© 2026 ExploringLanka. All rights reserved.</span>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/94779892268" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </footer>
-`;
+ const COMPONENTS = [
+ { selector: '#navbar-placeholder', src: 'components/navbar.html' },
+ { selector: '#footer-placeholder', src: 'components/footer.html' },
+ ];
 
-const FALLBACK_COMPONENTS = {
-  navbar: FALLBACK_NAVBAR,
-  footer: FALLBACK_FOOTER
-};
+ /**
+ * Resolve the correct path to a component file, handling
+ * pages that live in subdirectories.
+ */
+ function resolvePath(src) {
+ const depth = window.location.pathname.split('/').filter(Boolean).length;
+ // If we're not at root level, go up
+ // For our flat structure all pages are at root so no adjustment needed
+ return src;
+ }
 
-async function loadComponent(id, file) {
-  const element = document.getElementById(id);
-  if (!element) return;
+ /**
+ * Fetch a component HTML file and inject its content.
+ */
+ async function loadComponent({ selector, src }) {
+ const placeholder = document.querySelector(selector);
+ if (!placeholder) return;
 
-  try {
-    const response = await fetch(file);
-    if (!response.ok) throw new Error(`Failed to load ${file}`);
-    const htmlContent = await response.text();
-    const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
-    if (doc.body.children.length > 0) {
-      element.replaceChildren(...Array.from(doc.body.children));
-    }
-  } catch (error) {
-    const fallback = FALLBACK_COMPONENTS[id];
-    if (fallback) {
-      const doc = new DOMParser().parseFromString(fallback, 'text/html');
-      if (doc.body.children.length > 0) {
-        element.replaceChildren(...Array.from(doc.body.children));
-      }
-    }
-  }
-}
+ try {
+ const path = resolvePath(src);
+ const response = await fetch(path);
+ if (!response.ok) throw new Error(`Failed to load ${path}`);
+ const html = await response.text();
 
-function initMobileMenu() {
-  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-  const mainNav = document.getElementById("mainNav");
-  const header = document.querySelector(".site-header");
+ const parser = new DOMParser();
+ const doc = parser.parseFromString(html, 'text/html');
 
-  if (!mobileMenuBtn || !mainNav) return;
-  if (mobileMenuBtn.dataset.menuBound === "true") return;
-  mobileMenuBtn.dataset.menuBound = "true";
+ // Inject all child nodes from the body of the fetched document
+ const fragment = document.createDocumentFragment();
+ Array.from(doc.body.childNodes).forEach(node => {
+ fragment.appendChild(document.importNode(node, true));
+ });
 
-  function closeMenu() {
-    mainNav.classList.remove("active");
-    mobileMenuBtn.textContent = "☰";
-    mobileMenuBtn.setAttribute("aria-expanded", "false");
-  }
+ placeholder.replaceWith(fragment);
 
-  mobileMenuBtn.addEventListener("click", () => {
-    mainNav.classList.toggle("active");
-    const isOpen = mainNav.classList.contains("active");
-    mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
-    mobileMenuBtn.textContent = isOpen ? "×" : "☰";
-  });
+ // Re-run component init after injection
+ if (typeof window.initNavbar === 'function') window.initNavbar();
+ if (typeof window.initFooter === 'function') window.initFooter();
 
-  mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+ } catch (err) {
+ console.error(`[ComponentLoader] ${err.message}`);
+ placeholder.remove();
+ }
+ }
 
-  document.addEventListener("click", (event) => {
-    if (!mainNav.classList.contains("active")) return;
-    if (header?.contains(event.target)) return;
-    closeMenu();
-  });
+ /**
+ * Load all components in parallel, then initialize page scripts.
+ */
+ async function loadAll() {
+ await Promise.all(COMPONENTS.map(loadComponent));
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
-  });
-}
+ // Set active nav state based on current page
+ setActiveNavState();
 
-function initNavbarScrollStyle() {
-  const header = document.querySelector(".site-header");
-  if (!header || document.documentElement.dataset.navbarScrollBound === "true") return;
-  document.documentElement.dataset.navbarScrollBound = "true";
+ // Update footer year
+ const yearEl = document.getElementById('footer-year');
+ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const updateNavbar = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
-  updateNavbar();
-  window.addEventListener("scroll", updateNavbar, { passive: true });
-}
+ // Dispatch event so page scripts know components are ready
+ document.dispatchEvent(new CustomEvent('components:ready'));
+ }
 
-function setActiveNavLink() {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".main-nav a").forEach((link) => {
-    const href = link.getAttribute("href") || "";
-    const linkPage = href.split("#")[0];
-    if (linkPage === currentPage || (currentPage === "index.html" && href.includes("#destinations") && window.location.hash === "#destinations")) {
-      link.classList.add("active");
-    }
-  });
-}
+ /**
+ * Mark the current page's nav link as active.
+ */
+ function setActiveNavState() {
+ const page = document.body.dataset.page || '';
+ const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-function initNewsletterForm() {
-  const newsletterForm = document.getElementById("newsletterForm");
-  const newsletterEmail = document.getElementById("newsletterEmail");
-  if (!newsletterForm || !newsletterEmail) return;
+ // Desktop nav
+ document.querySelectorAll('.navbar__link[data-page]').forEach(link => {
+ const linkPage = link.dataset.page;
+ const linkHref = link.getAttribute('href') || '';
+ if (
+ linkPage === page ||
+ linkHref === currentPath ||
+ (currentPath === '' && linkHref === 'index.html') ||
+ (currentPath === 'index.html' && linkPage === 'home')
+ ) {
+ link.classList.add('is-active');
+ link.setAttribute('aria-current', 'page');
+ }
+ });
 
-  newsletterForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const email = newsletterEmail.value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-    const body = `Hello ExploringLanka,\n\nSubscribe me to travel updates.\n\nEmail: ${email}`;
-    window.location.href = `mailto:dhanushka8997@gmail.com?subject=${encodeURIComponent("Newsletter")}&body=${encodeURIComponent(body)}`;
-  });
-}
+ // Bottom nav
+ document.querySelectorAll('.bottom-nav__item[data-page]').forEach(item => {
+ const itemPage = item.dataset.page;
+ const itemHref = item.getAttribute('href') || '';
+ if (
+ itemPage === page ||
+ itemHref === currentPath ||
+ (currentPath === '' && itemHref === 'index.html') ||
+ (currentPath === 'index.html' && itemPage === 'home')
+ ) {
+ item.classList.add('is-active');
+ item.setAttribute('aria-current', 'page');
+ }
+ });
+ }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadComponent("navbar", "components/navbar.html");
-  await loadComponent("footer", "components/footer.html");
-  initMobileMenu();
-  initNavbarScrollStyle();
-  setActiveNavLink();
-  initNewsletterForm();
-  document.dispatchEvent(new Event("componentsLoaded"));
-});
+ // Start loading when DOM is ready
+ if (document.readyState === 'loading') {
+ document.addEventListener('DOMContentLoaded', loadAll);
+ } else {
+ loadAll();
+ }
+})();

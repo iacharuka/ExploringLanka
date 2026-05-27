@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExploringLanka | Sri Lanka Tours, Transfers & Travel</title>
+  <meta name="description" content="Book private Sri Lanka tours, airport transfers, safaris, and custom trips with local experts." />
+  <link rel="icon" href="assets/images/exploringlanka-logo-cropped.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css?v=6" />
+  <link rel="stylesheet" href="css/home-travel.css?v=4" />
+  <link rel="stylesheet" href="css/modern-theme.css" />
+</head>
+<body class="home-page">
+
+  <div id="navbar"></div>
+
+  <main>
+    <!-- Hero -->
+    <section class="it-hero" id="home">
+      <div class="it-hero__carousel" aria-hidden="true">
+        <div
+          class="it-hero__bg hero-slide active"
+          style="background-image:url('assets/images/hero-1.png')"
+        ></div>
+        <div
+          class="it-hero__bg hero-slide"
+          style="background-image:url('assets/images/hero-2.png')"
+        ></div>
+        <div
+          class="it-hero__bg hero-slide"
+          style="background-image:url('assets/images/hero-3.png')"
+        ></div>
+        <div
+          class="it-hero__bg hero-slide"
+          style="background-image:url('assets/images/hero-4.png')"
+        ></div>
+        <div
+          class="it-hero__bg hero-slide"
+          style="background-image:url('assets/images/hero-5.png')"
+        ></div>
+      </div>
+      <div class="it-hero__overlay"></div>
+      <div class="container">
+        <p class="it-hero__brand-text">EXPLORINGLANKA</p>
+
+        <div class="it-hero__cta">
+          <a href="#" class="btn-it-whatsapp js-whatsapp-help">
+            <span class="btn-it-whatsapp__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </span>
+            Chat on WhatsApp
+          </a>
+          <a href="tours.html" class="btn-it-outline">Browse tours</a>
+        </div>
+
+        <form class="it-search" id="heroSearchForm">
+          <div class="it-search__field">
+            <label for="travelDate">Date</label>
+            <input type="date" id="travelDate" />
+          </div>
+          <div class="it-search__field">
+            <label for="experienceType">Budget</label>
+            <select id="experienceType">
+              <option value="">Any budget</option>
+              <option>Under $50</option>
+              <option>$50 – $100</option>
+              <option>$100 – $200</option>
+              <option>$200+</option>
+            </select>
+          </div>
+          <div class="it-search__field">
+            <label for="guests">Guest</label>
+            <select id="guests">
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+              <option>5+ Guests</option>
+            </select>
+          </div>
+          <input type="hidden" id="location" value="Sri Lanka" />
+          <button type="submit" class="it-search__btn">Search</button>
+        </form>
+      </div>
+
+      <div class="it-hero-dots" id="heroCarouselDots" aria-label="Hero slideshow">
+        <button type="button" class="active" data-hero-slide="0" aria-label="Slide 1"></button>
+        <button type="button" data-hero-slide="1" aria-label="Slide 2"></button>
+        <button type="button" data-hero-slide="2" aria-label="Slide 3"></button>
+        <button type="button" data-hero-slide="3" aria-label="Slide 4"></button>
+        <button type="button" data-hero-slide="4" aria-label="Slide 5"></button>
+      </div>
+      <span class="it-hero__slide-label" id="heroCarouselLabel" aria-live="polite">Temple lights at night</span>
+    </section>
+
+    <!-- Stats -->
+    <section class="it-stats">
+      <div class="container it-stats__grid">
+        <div class="it-stat-card"><strong>10M+</strong><span>Total Customers</span></div>
+        <div class="it-stat-card"><strong>09+</strong><span>Years of Experience</span></div>
+        <div class="it-stat-card"><strong>12K</strong><span>Total Destinations</span></div>
+        <div class="it-stat-card"><strong>5.0</strong><span>Average Rating</span></div>
+      </div>
+    </section>
+
+    <!-- Destinations masonry -->
+    <section class="it-section" id="destinations">
+      <div class="container">
+        <div class="it-section-head">
+          <h2 class="it-section-title">Sri Lankan tourism &amp; unforgettable experiences.</h2>
+          <p class="it-section-desc">
+            From ancient Sigiriya to golden beaches and misty Ella — discover handpicked destinations
+            with private guides and trusted local transport.
+          </p>
+        </div>
+        <div class="it-masonry">
+          <a href="tours.html" class="it-masonry__card it-masonry__card--tall" data-destination="Sigiriya">
+            <img src="assets/images/hero-1.png" alt="Sigiriya" loading="lazy" />
+            <div class="it-masonry__label"><small>Central Province</small><strong>Sigiriya Rock Tour</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card">
+            <img src="assets/images/hero-2.png" alt="Ella" loading="lazy" />
+            <div class="it-masonry__label"><small>Uva Province</small><strong>Ella Hill Country</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card">
+            <img src="assets/images/hero-3.png" alt="Galle" loading="lazy" />
+            <div class="it-masonry__label"><small>Southern Coast</small><strong>Galle Fort &amp; Beaches</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card it-masonry__card--wide">
+            <img src="assets/images/hero-4.png" alt="Yala Safari" loading="lazy" />
+            <div class="it-masonry__label"><small>Wildlife</small><strong>Yala Safari Experience</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card">
+            <img src="assets/images/hero-5.png" alt="Cultural Journey" loading="lazy" />
+            <div class="it-masonry__label"><small>Cultural</small><strong>Temple &amp; Heritage Trail</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card">
+            <img src="assets/images/vehicle4.jpg" alt="Coastal Escape" loading="lazy" />
+            <div class="it-masonry__label"><small>Coast</small><strong>South Coast Beaches</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card">
+            <img src="assets/images/vehicle5.png" alt="Hill Country" loading="lazy" />
+            <div class="it-masonry__label"><small>Hill Country</small><strong>Nuwara Eliya &amp; Tea Trails</strong></div>
+          </a>
+          <a href="tours.html" class="it-masonry__card it-masonry__card--tall">
+            <img src="assets/images/vehicle6.jpg" alt="Wildlife Route" loading="lazy" />
+            <div class="it-masonry__label"><small>Wildlife</small><strong>Yala &amp; Bundala Safari Loop</strong></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="it-section it-section--light">
+      <div class="container it-steps">
+        <div class="it-steps__image">
+          <img src="assets/images/hero-5.png" alt="Traveler in Sri Lanka" loading="lazy" />
+        </div>
+        <div class="it-steps__content">
+          <h2>One click for you</h2>
+          <ul class="it-step-list">
+            <li class="it-step">
+              <span class="it-step__icon">🔍</span>
+              <div>
+                <h3>Find your destination</h3>
+                <p>Browse tours, transfers, and custom routes across the island.</p>
+              </div>
+            </li>
+            <li class="it-step">
+              <span class="it-step__icon">🎫</span>
+              <div>
+                <h3>Book a ticket</h3>
+                <p>Send your details via WhatsApp or email — no complicated checkout.</p>
+              </div>
+            </li>
+            <li class="it-step">
+              <span class="it-step__icon">💳</span>
+              <div>
+                <h3>Make payment</h3>
+                <p>Agree on price with our team and pay securely as arranged.</p>
+              </div>
+            </li>
+            <li class="it-step">
+              <span class="it-step__icon">🧭</span>
+              <div>
+                <h3>Explore destination</h3>
+                <p>Enjoy your trip with private pickup and local expert support.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tour packages -->
+    <section class="it-section">
+      <div class="container">
+        <div class="it-section-head">
+          <h2 class="it-section-title">Our tourist destination</h2>
+          <p class="it-section-desc">Popular private packages — flexible dates, hotel pickup, and clear pricing.</p>
+        </div>
+        <div class="it-packages__grid">
+          <article class="it-package tour-card">
+            <div class="it-package__img tour-image">
+              <img src="assets/images/vehicle1.jpg" alt="Beautiful destination in Sri Lanka" loading="lazy" />
+              <span class="it-package__tag">New</span>
+            </div>
+            <div class="it-package__body tour-body">
+              <p class="it-package__meta">Sigiriya · 1 Day</p>
+              <h3 class="it-package__title">Sigiriya Rock Fortress Tour</h3>
+              <p class="it-package__price"><small>From </small>$45</p>
+              <button class="btn btn-card book-now-btn" data-tour="Sigiriya Rock Fortress Tour" style="margin-top:14px;width:100%">Book Now</button>
+            </div>
+          </article>
+          <article class="it-package tour-card">
+            <div class="it-package__img tour-image">
+              <img src="assets/images/vehicle2.jpg" alt="Beautiful destination in Sri Lanka" loading="lazy" />
+              <span class="it-package__tag it-package__tag--hot">Hot</span>
+            </div>
+            <div class="it-package__body tour-body">
+              <p class="it-package__meta">Kandy · 1 Day</p>
+              <h3 class="it-package__title">Kandy Cultural Tour Package</h3>
+              <p class="it-package__price"><small>From </small>$55</p>
+              <button class="btn btn-card book-now-btn" data-tour="Kandy Cultural Tour Package" style="margin-top:14px;width:100%">Book Now</button>
+            </div>
+          </article>
+          <article class="it-package tour-card">
+            <div class="it-package__img tour-image">
+              <img src="assets/images/vehicle3.jpg" alt="Beautiful destination in Sri Lanka" loading="lazy" />
+              <span class="it-package__tag">Popular</span>
+            </div>
+            <div class="it-package__body tour-body">
+              <p class="it-package__meta">Yala · 1 Day</p>
+              <h3 class="it-package__title">Yala Safari Tour Package</h3>
+              <p class="it-package__price"><small>From </small>$70</p>
+              <button class="btn btn-card book-now-btn" data-tour="Yala Safari Tour Package" style="margin-top:14px;width:100%">Book Now</button>
+            </div>
+          </article>
+        </div>
+        <div class="it-center-btn">
+          <a href="tours.html" class="btn-travel-dark">View more</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="it-testimonial">
+      <div class="container it-testimonial__inner">
+        <div class="it-testimonial__author">
+          <img id="testimonialAvatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt="Beautiful destination in Sri Lanka" width="72" height="72" />
+          <h3 id="testimonialName">James Wilson</h3>
+          <span id="testimonialRole">Australia · Traveler</span>
+          <div class="it-testimonial__nav">
+            <button type="button" id="testimonialPrev" aria-label="Previous">←</button>
+            <button type="button" id="testimonialNext" aria-label="Next">→</button>
+          </div>
+        </div>
+        <blockquote class="it-testimonial__quote" id="testimonialQuote">
+          “The Yala safari was the highlight of our family trip. ExploringLanka made booking effortless — we saw elephants and even a leopard.”
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Blog / memories -->
+    <section class="it-section it-section--light">
+      <div class="container">
+        <div class="it-section-head">
+          <h2 class="it-section-title">Our travel memories</h2>
+          <p class="it-section-desc">Tips and stories from Sri Lanka — culture, routes, and seasonal travel.</p>
+        </div>
+        <div class="it-blog__grid">
+          <article class="it-blog-card">
+            <div class="it-blog-card__img">
+              <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
+            </div>
+            <div class="it-blog-card__body">
+              <time class="it-blog-card__date">Nov 15, 2025</time>
+              <h3 class="it-blog-card__title">2025 Travel Trends in Sri Lanka</h3>
+              <p class="it-blog-card__excerpt">Private drivers, eco safaris, and hill-country trains are topping traveler wish lists this year.</p>
+            </div>
+          </article>
+          <article class="it-blog-card">
+            <div class="it-blog-card__img">
+              <img src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&w=800&q=80" alt="Beautiful destination in Sri Lanka" loading="lazy" />
+            </div>
+            <div class="it-blog-card__body">
+              <time class="it-blog-card__date">Oct 02, 2025</time>
+              <h3 class="it-blog-card__title">Best South Coast Beaches</h3>
+              <p class="it-blog-card__excerpt">From Galle Fort to Mirissa — how to plan a relaxed beach loop with private transport.</p>
+            </div>
+          </article>
+        </div>
+        <div class="it-center-btn">
+          <a href="about.html" class="btn-travel-dark">View more</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="booking-modal" id="bookingModal" aria-hidden="true">
+    <div class="booking-box">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+      <h2>Booking Request</h2>
+      <p class="modal-subtitle">Send your details through WhatsApp or email.</p>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="modalTourName">Tour Name</label>
+          <input type="text" id="modalTourName" readonly />
+        </div>
+        <div class="form-group">
+          <label for="customerName">Your Name</label>
+          <input type="text" id="customerName" placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+          <label for="customerEmail">Email</label>
+          <input type="email" id="customerEmail" placeholder="Enter your email" />
+        </div>
+        <div class="form-group">
+          <label for="customerPhone">WhatsApp Number</label>
+          <input type="text" id="customerPhone" placeholder="+94 70 000 0000" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bookingDate">Travel Date</label>
+            <input type="date" id="bookingDate" />
+          </div>
+          <div class="form-group">
+            <label for="bookingGuests">Travelers</label>
+            <select id="bookingGuests">
+              <option>1 Traveler</option>
+              <option>2 Travelers</option>
+              <option>3 Travelers</option>
+              <option>4 Travelers</option>
+              <option>5+ Travelers</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pickupLocation">Pickup Location</label>
+          <input type="text" id="pickupLocation" placeholder="Hotel or pickup place" />
+        </div>
+        <div class="form-group">
+          <label for="specialMessage">Special Message</label>
+          <textarea id="specialMessage" rows="4" placeholder="Any special request?"></textarea>
+        </div>
+        <p class="form-error" id="bookingError"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">Send via WhatsApp</button>
+          <button type="button" class="btn btn-primary" id="sendEmail">Send via Email</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="floating-whatsapp__text">WhatsApp</span>
+  </a>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Top">↑</button>
+
+  <script src="js/components.js?v=2" defer></script>
+  <script src="js/script.js?v=2" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const reviews = [
+        {
+          quote: "“The Yala safari was the highlight of our family trip. ExploringLanka made booking effortless — we saw elephants and even a leopard.”",
+          name: "James Wilson",
+          role: "Australia · Traveler",
+          avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
+        },
+        {
+          quote: "“Our Kandy tour was smooth and beautiful. The driver was friendly, professional, and knew every scenic stop.”",
+          name: "Anna Müller",
+          role: "Germany · Traveler",
+          avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+        },
+        {
+          quote: "“Airport transfer to Ella was comfortable and safe. Everything felt easy from the first WhatsApp message.”",
+          name: "Sophie Turner",
+          role: "United Kingdom · Traveler",
+          avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80"
+        }
+      ];
+      let index = 0;
+      const quote = document.getElementById("testimonialQuote");
+      const name = document.getElementById("testimonialName");
+      const role = document.getElementById("testimonialRole");
+      const avatar = document.getElementById("testimonialAvatar");
+      const prev = document.getElementById("testimonialPrev");
+      const next = document.getElementById("testimonialNext");
+      if (!quote) return;
+      function show(i) {
+        index = (i + reviews.length) % reviews.length;
+        const r = reviews[index];

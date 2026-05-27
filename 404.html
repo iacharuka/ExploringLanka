@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <meta name="description" content="Page not found — ExploringLanka Sri Lanka private tours.">
+ <title>404 — Page Not Found · ExploringLanka</title>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+ <link rel="stylesheet" href="css/tokens.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/animations.css">
+ <link rel="stylesheet" href="css/components.css">
+ <style>
+ body { background: var(--deep); color: var(--cream); font-family: var(--font-body); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100dvh; }
+ .not-found { flex: 1; display: flex; align-items: center; justify-content: center; padding: var(--space-20) var(--space-5); text-align: center; position: relative; overflow: hidden; }
+ .not-found::before { content: '404'; position: absolute; font-family: var(--font-display); font-size: clamp(8rem, 30vw, 20rem); font-weight: 800; color: rgba(201,150,58,0.04); line-height: 1; pointer-events: none; user-select: none; top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; }
+ </style>
+</head>
+<body>
+ <div id="navbar-placeholder"></div>
+ <main id="main-content" class="not-found">
+ <div style="position:relative;z-index:1;max-width:600px">
+ <p class="section-label" style="justify-content:center">Lost in the Jungle</p>
+ <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,8vw,5rem);color:var(--cream);line-height:1.1;margin-bottom:var(--space-4)">
+ This Page<br><em style="color:var(--gold);font-style:italic">Wandered Off</em>
+ </h1>
+ <p style="color:var(--color-text-muted);font-size:var(--text-lg);line-height:var(--leading-loose);margin-bottom:var(--space-10)">
+ Even the best explorers sometimes take a wrong turn. Let us guide you back to somewhere beautiful.
+ </p>
+ <div class="flex gap-4 justify-center flex-wrap">
+ <a href="index.html" class="btn btn--primary btn--lg btn--pill">← Back to Home</a>
+ <a href="tours.html" class="btn btn--secondary btn--lg btn--pill">Explore Tours</a>
+ </div>
+ </div>
+ </main>
+ <div id="footer-placeholder"></div>
+ <script src="js/components.js"></script>
+ <script src="js/script.js"></script>
+</body>
+</html>

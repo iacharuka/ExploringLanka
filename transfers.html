@@ -1,322 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Airport Transfers in Sri Lanka | ExploringLanka</title>
-
-  <meta
-    name="description"
-    content="Book private airport transfers, hotel pickups, and long-distance transport across Sri Lanka with ExploringLanka through WhatsApp or email."
-  />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/app.css" />
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <meta name="description" content="Airport transfers and private vehicle hire across Sri Lanka. Luxury fleet from Toyota Hiace to Mercedes Sprinter. Colombo, Kandy, Ella, Galle and beyond.">
+ <meta property="og:title" content="Private Transfers Sri Lanka — ExploringLanka">
+ <meta property="og:image" content="assets/images/vehicle1.jpg">
+ <title>Transfers &amp; Fleet — ExploringLanka</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <style>:root{--gold:#C9963A;--deep:#0D1B2A;--cream:#F5EDD6;}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{overflow-x:hidden;}body{background:var(--deep);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;}</style>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+ <link rel="stylesheet" href="css/tokens.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/animations.css">
+ <link rel="stylesheet" href="css/components.css">
+ <style>
+ .page-header{padding-top:calc(var(--nav-height) + var(--space-16));padding-bottom:var(--space-16);background:var(--deep-2);position:relative;overflow:hidden;}
+ .page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--color-divider);}
+ .page-header__bg{position:absolute;inset:0;} .page-header__bg img{width:100%;height:100%;object-fit:cover;opacity:0.12;}
+ .fleet-grid{display:grid;grid-template-columns:1fr;gap:var(--space-5);}
+ @media(min-width:640px){.fleet-grid{grid-template-columns:1fr 1fr;}}
+ @media(min-width:1024px){.fleet-grid{grid-template-columns:repeat(3,1fr);}}
+ .route-card{background:var(--deep-3);border-radius:var(--radius-lg);padding:var(--space-5);border:1px solid var(--color-border);display:flex;flex-direction:column;gap:var(--space-3);transition:border-color var(--transition-normal),transform var(--transition-normal);}
+ .route-card:hover{border-color:var(--gold-40);transform:translateY(-2px);}
+ .route-card__route{display:flex;align-items:center;gap:var(--space-3);}
+ .route-card__city{font-weight:600;color:var(--cream);}
+ .route-card__arrow{color:var(--gold);}
+ .route-card__details{display:flex;flex-wrap:wrap;gap:var(--space-2);}
+ .route-card__price{font-family:var(--font-display);font-size:var(--text-2xl);color:var(--gold);font-weight:700;}
+ .routes-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);}
+ @media(min-width:640px){.routes-grid{grid-template-columns:1fr 1fr;}}
+ @media(min-width:1024px){.routes-grid{grid-template-columns:repeat(3,1fr);}}
+ .step-row{display:flex;flex-direction:column;gap:var(--space-8);}
+ @media(min-width:768px){.step-row{flex-direction:row;}}
+ .how-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-3);}
+ .how-step__num{width:60px;height:60px;border-radius:50%;background:var(--gold-10);border:2px solid var(--gold-40);color:var(--gold);font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;display:flex;align-items:center;justify-content:center;}
+ </style>
 </head>
+<body data-page="transfers">
+ <div id="navbar-placeholder"></div>
+ <main id="main-content">
 
-<body>
+ <!-- Header -->
+ <header class="page-header" aria-labelledby="transfers-heading">
+ <div class="page-header__bg" aria-hidden="true">
+ <img src="assets/images/car.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-149317661-bd32c8ce0db2?w=1200&q=70'"
+ alt="" width="1200" height="400">
+ </div>
+ <div class="container" style="position:relative;z-index:1">
+ <nav class="breadcrumb"><span class="breadcrumb__item"><a href="index.html">Home</a></span><span class="breadcrumb__separator">/</span><span class="breadcrumb__item" aria-current="page">Transfers</span></nav>
+ <p class="section-label">Private Fleet</p>
+ <h1 class="section-title" id="transfers-heading" style="font-size:clamp(2rem,5vw,3.5rem)">
+ Luxury Transfers<br>
+ <em style="color:var(--gold);font-style:italic;">Across Sri Lanka</em>
+ </h1>
+ <p class="section-subtitle">
+ From airport pickup to inter-city transfers — our air-conditioned fleet and expert drivers ensure every journey is comfortable, safe, and on time.
+ </p>
+ </div>
+ </header>
 
-  <!-- Navbar component -->
-  <div id="navbar"></div>
+ <!-- Fleet -->
+ <section class="section" aria-labelledby="fleet-heading">
+ <div class="container">
+ <div class="section-header">
+ <p class="section-label reveal">Our Fleet</p>
+ <h2 class="section-title reveal reveal-delay-1" id="fleet-heading">
+ Choose Your<br><em style="color:var(--gold);font-style:italic;">Perfect Ride</em>
+ </h2>
+ <p class="section-subtitle reveal reveal-delay-2">All vehicles are air-conditioned, GPS-tracked, and insured. Drivers are English-speaking, licensed, and locally certified.</p>
+ </div>
 
-  <main>
+ <div class="fleet-grid">
 
-    <!-- ================= PAGE HERO ================= -->
-    <section class="page-hero transfers-page-hero">
-      <div class="page-hero-overlay" aria-hidden="true"></div>
-      <div class="container page-hero-content">
+ <article class="vehicle-card hover-lift reveal">
+ <div class="vehicle-card__image">
+ <img src="assets/images/vehicle1.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80'"
+ alt="Toyota Prius — private sedan" width="600" height="380" loading="lazy">
+ </div>
+ <div class="vehicle-card__body">
+ <h3 class="vehicle-card__name">Toyota Prius / Sedan</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3)">Perfect for couples and solo travelers seeking comfort.</p>
+ <div class="vehicle-card__specs">
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>1–3 Pax</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>2 Bags</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>A/C</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>WiFi</span>
+ </div>
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--color-border)">
+ <span style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--gold)">From $25</span>
+ <button class="btn btn--primary btn--sm" data-open-booking="Toyota Prius Transfer" aria-label="Book sedan transfer">Book Now</button>
+ </div>
+ </div>
+ </article>
 
-        <span class="page-badge">✈️ Private Transport in Sri Lanka</span>
+ <article class="vehicle-card hover-lift reveal reveal-delay-1">
+ <div class="vehicle-card__image">
+ <img src="assets/images/vehicle2.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=600&q=80'"
+ alt="Toyota KDH Van" width="600" height="380" loading="lazy">
+ </div>
+ <div class="vehicle-card__body">
+ <h3 class="vehicle-card__name">Toyota KDH Van</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3)">Most popular for families and small groups. Spacious &amp; comfortable.</p>
+ <div class="vehicle-card__specs">
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>4–8 Pax</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>6 Bags</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Dual A/C</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>WiFi</span>
+ </div>
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--color-border)">
+ <span style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--gold)">From $45</span>
+ <button class="btn btn--primary btn--sm" data-open-booking="Toyota KDH Van Transfer" aria-label="Book KDH van">Book Now</button>
+ </div>
+ </div>
+ </article>
 
-        <h1>Private Airport Transfers in Sri Lanka</h1>
+ <article class="vehicle-card hover-lift reveal reveal-delay-2">
+ <div class="vehicle-card__image">
+ <img src="assets/images/vehicle3.jpg"
+ onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&q=80'"
+ alt="Coaster Bus" width="600" height="380" loading="lazy">
+ </div>
+ <div class="vehicle-card__body">
+ <h3 class="vehicle-card__name">Toyota Coaster / Bus</h3>
+ <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3)">For larger groups and corporate events. Maximum comfort for long journeys.</p>
+ <div class="vehicle-card__specs">
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>9–28 Pax</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Large Cargo</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Full A/C</span>
+ <span class="vehicle-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>PA System</span>
+ </div>
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--color-border)">
+ <span style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--gold)">From $85</span>
+ <button class="btn btn--primary btn--sm" data-open-booking="Coaster Bus Transfer" aria-label="Book coaster bus">Book Now</button>
+ </div>
+ </div>
+ </article>
 
-        <p>
-          Book reliable airport pickups, hotel transfers, city-to-city transport,
-          and private vehicles with trusted local drivers.
-        </p>
+ </div>
+ </div>
+ </section>
 
-        <div class="page-hero-actions">
-          <a href="#transferQuote" class="btn btn-primary">Request Transfer Quote</a>
-          <a href="#" class="btn btn-light js-whatsapp-help">Chat on WhatsApp</a>
-        </div>
+ <!-- Popular Routes -->
+ <section class="section" style="background:var(--deep-2)" aria-labelledby="routes-heading">
+ <div class="container">
+ <div class="section-header">
+ <p class="section-label reveal">Quick Transfers</p>
+ <h2 class="section-title reveal reveal-delay-1" id="routes-heading">
+ Popular<br><em style="color:var(--gold);font-style:italic;">Routes &amp; Rates</em>
+ </h2>
+ </div>
+ <div class="routes-grid">
+ <div class="route-card reveal"><div class="route-card__route"><span class="route-card__city"> CMB Airport</span><span class="route-card__arrow">→</span><span class="route-card__city">Colombo</span></div><div class="route-card__details"><span class="chip">~45 min</span><span class="chip">Sedan/Van</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$20</span><button class="btn btn--ghost btn--sm" data-open-booking="CMB Airport to Colombo Transfer">Book</button></div></div>
+ <div class="route-card reveal reveal-delay-1"><div class="route-card__route"><span class="route-card__city">Colombo</span><span class="route-card__arrow">→</span><span class="route-card__city">Kandy</span></div><div class="route-card__details"><span class="chip">~2.5 hrs</span><span class="chip">Scenic Route</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$45</span><button class="btn btn--ghost btn--sm" data-open-booking="Colombo to Kandy Transfer">Book</button></div></div>
+ <div class="route-card reveal reveal-delay-2"><div class="route-card__route"><span class="route-card__city">Kandy</span><span class="route-card__arrow">→</span><span class="route-card__city">Ella</span></div><div class="route-card__details"><span class="chip">~3 hrs</span><span class="chip">Tea Country</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$55</span><button class="btn btn--ghost btn--sm" data-open-booking="Kandy to Ella Transfer">Book</button></div></div>
+ <div class="route-card reveal"><div class="route-card__route"><span class="route-card__city"> CMB Airport</span><span class="route-card__arrow">→</span><span class="route-card__city">Galle</span></div><div class="route-card__details"><span class="chip">~2 hrs</span><span class="chip">Highway</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$50</span><button class="btn btn--ghost btn--sm" data-open-booking="CMB Airport to Galle Transfer">Book</button></div></div>
+ <div class="route-card reveal reveal-delay-1"><div class="route-card__route"><span class="route-card__city">Ella</span><span class="route-card__arrow">→</span><span class="route-card__city">Yala NP</span></div><div class="route-card__details"><span class="chip">~2.5 hrs</span><span class="chip">Safari Entry</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$50</span><button class="btn btn--ghost btn--sm" data-open-booking="Ella to Yala Transfer">Book</button></div></div>
+ <div class="route-card reveal reveal-delay-2"><div class="route-card__route"><span class="route-card__city">Colombo</span><span class="route-card__arrow">→</span><span class="route-card__city">Sigiriya</span></div><div class="route-card__details"><span class="chip">~3.5 hrs</span><span class="chip">Cultural Zone</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span class="route-card__price">$60</span><button class="btn btn--ghost btn--sm" data-open-booking="Colombo to Sigiriya Transfer">Book</button></div></div>
+ </div>
+ </div>
+ </section>
 
-      </div>
-    </section>
+ <!-- How It Works -->
+ <section class="section" aria-labelledby="how-heading">
+ <div class="container">
+ <div class="section-header text-center">
+ <p class="section-label reveal" style="justify-content:center">Simple Process</p>
+ <h2 class="section-title reveal reveal-delay-1" id="how-heading">How It Works</h2>
+ </div>
+ <div class="step-row">
+ <div class="how-step reveal"><div class="how-step__num">1</div><div style="color:var(--gold);margin:var(--space-3) 0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">Tell Us Your Route</h3><p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">Submit your pickup/drop-off details, date, time, and number of travelers.</p></div>
+ <div class="how-step reveal reveal-delay-1"><div class="how-step__num">2</div><div style="color:var(--gold);margin:var(--space-3) 0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">Get Your Quote</h3><p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">Receive a fixed price quote within hours. No surprise charges. No surge pricing.</p></div>
+ <div class="how-step reveal reveal-delay-2"><div class="how-step__num">3</div><div style="color:var(--gold);margin:var(--space-3) 0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">We Pick You Up</h3><p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">Your driver meets you with a name board. On time, every time. WhatsApp number provided.</p></div>
+ </div>
+ </div>
+ </section>
 
+ <!-- CTA -->
+ <section class="section section--sm" style="background:var(--deep-2)">
+ <div class="container" style="text-align:center">
+ <h2 class="section-title reveal">Book Your Transfer</h2>
+ <p class="section-subtitle reveal reveal-delay-1" style="margin-inline:auto;margin-bottom:var(--space-8)">Fixed prices, professional drivers, no surprises.</p>
+ <div class="flex gap-4 justify-center flex-wrap reveal reveal-delay-2">
+ <button class="btn btn--primary btn--lg btn--pill" onclick="openBookingModal('Private Transfer')" aria-label="Book a transfer">Request Transfer Quote</button>
+ <a href="https://wa.me/94779892268?text=Hi!%20I%20need%20a%20transfer%20quote." class="btn btn--whatsapp btn--lg btn--pill" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp Us</a>
+ </div>
+ </div>
+ </section>
 
-    <!-- ================= TRANSFER QUOTE FORM ================= -->
-    <section class="section transfer-quote-section" id="transferQuote">
-      <div class="container">
-
-        <div class="transfer-quote-layout">
-
-          <div class="transfer-info">
-            <span class="mini-label">Fast Quote</span>
-            <h2>Get your private transfer price</h2>
-            <p>
-              Share your pickup and drop-off details. Since this website has no backend,
-              your request will be sent directly to ExploringLanka through WhatsApp or email.
-            </p>
-
-            <div class="transfer-benefits">
-              <div>
-                <strong>✓ Flight tracking</strong>
-                <span>We adjust pickup time for airport arrivals.</span>
-              </div>
-
-              <div>
-                <strong>✓ Clean vehicles</strong>
-                <span>Comfortable cars, vans, and luxury vehicles.</span>
-              </div>
-
-              <div>
-                <strong>✓ Islandwide routes</strong>
-                <span>Colombo, Kandy, Ella, Galle, Sigiriya, Mirissa, and more.</span>
-              </div>
-            </div>
-          </div>
-
-          <form class="transfer-form" id="transferQuoteForm">
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="transferName">Your Name</label>
-                <input
-                  type="text"
-                  id="transferName"
-                  placeholder="Enter your name"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="transferPhone">WhatsApp Number</label>
-                <input
-                  type="text"
-                  id="transferPhone"
-                  placeholder="+94 70 000 0000"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="pickupLocationTransfer">Pickup Location</label>
-                <input
-                  type="text"
-                  id="pickupLocationTransfer"
-                  placeholder="Example: Colombo Airport"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="dropLocationTransfer">Drop-off Location</label>
-                <input
-                  type="text"
-                  id="dropLocationTransfer"
-                  placeholder="Example: Kandy hotel"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="transferDate">Date</label>
-                <input type="date" id="transferDate" />
-              </div>
-
-              <div class="form-group">
-                <label for="transferTime">Time</label>
-                <input type="time" id="transferTime" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="vehicleType">Vehicle Type</label>
-                <select id="vehicleType">
-                  <option>Comfort Car</option>
-                  <option>Family Van</option>
-                  <option>Luxury Car</option>
-                  <option>Mini Bus</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="transferPassengers">Passengers</label>
-                <select id="transferPassengers">
-                  <option>1 Passenger</option>
-                  <option>2 Passengers</option>
-                  <option>3 Passengers</option>
-                  <option>4 Passengers</option>
-                  <option>5 Passengers</option>
-                  <option>6+ Passengers</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="transferLuggage">Luggage Details</label>
-              <input
-                type="text"
-                id="transferLuggage"
-                placeholder="Example: 2 large bags, 2 backpacks"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="transferMessage">Special Notes</label>
-              <textarea
-                id="transferMessage"
-                rows="4"
-                placeholder="Flight number, child seats, extra stops, etc."
-              ></textarea>
-            </div>
-
-            <p class="form-error" id="transferError"></p>
-
-            <div class="modal-actions">
-              <button type="submit" class="btn btn-whatsapp">
-                Request Quote via WhatsApp
-              </button>
-
-              <button type="button" class="btn btn-primary" id="transferEmailBtn">
-                Request Quote via Email
-              </button>
-            </div>
-
-          </form>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= POPULAR ROUTES ================= -->
-    <section class="section popular-routes-section">
-      <div class="container">
-
-        <div class="section-heading">
-          <span>Popular Routes</span>
-          <h2>Most requested Sri Lanka transfer routes</h2>
-          <p>
-            Choose a common route and send a quick WhatsApp quote request.
-          </p>
-        </div>
-
-        <div class="route-grid">
-
-          <article class="route-card">
-            <div class="route-icon">✈️</div>
-            <div>
-              <h3>Colombo Airport → Colombo</h3>
-              <p>Approx. 45 mins • From $25</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Colombo">
-              Quote
-            </button>
-          </article>
-
-          <article class="route-card">
-            <div class="route-icon">🚗</div>
-            <div>
-              <h3>Colombo Airport → Kandy</h3>
-              <p>Approx. 3.5 hours • From $60</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Kandy">
-              Quote
-            </button>
-          </article>
-
-          <article class="route-card">
-            <div class="route-icon">🚐</div>
-            <div>
-              <h3>Colombo Airport → Ella</h3>
-              <p>Approx. 6.5 hours • From $120</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Ella">
-              Quote
-            </button>
-          </article>
-
-          <article class="route-card">
-            <div class="route-icon">🌊</div>
-            <div>
-              <h3>Colombo Airport → Galle</h3>
-              <p>Approx. 2.5 hours • From $75</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Galle">
-              Quote
-            </button>
-          </article>
-
-          <article class="route-card">
-            <div class="route-icon">🪨</div>
-            <div>
-              <h3>Colombo Airport → Sigiriya</h3>
-              <p>Approx. 4 hours • From $90</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Sigiriya">
-              Quote
-            </button>
-          </article>
-
-          <article class="route-card">
-            <div class="route-icon">🏖️</div>
-            <div>
-              <h3>Colombo Airport → Mirissa</h3>
-              <p>Approx. 3 hours • From $95</p>
-            </div>
-            <button class="btn btn-card route-quote-btn" data-route="Colombo Airport to Mirissa">
-              Quote
-            </button>
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    
-
-    <!-- ================= TRANSFER CTA ================= -->
-    <section class="custom-cta transfer-cta">
-      <div class="container cta-content">
-        <span>Islandwide Private Transport</span>
-        <h2>Need a driver for multiple days?</h2>
-        <p>
-          ExploringLanka can arrange a private driver for your full Sri Lanka itinerary,
-          including airport pickup, hotel transfers, sightseeing stops, and drop-off.
-        </p>
-
-        <div class="cta-buttons">
-          <a href="custom-tour.html" class="btn btn-primary">Plan Full Trip</a>
-          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Ask on WhatsApp</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer component -->
-  <div id="footer"></div>
-
-  <!-- Floating Buttons -->
-  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
-    💬
-  </a>
-
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    ↑
-  </button>
-
-  <!-- JavaScript -->
-  <script src="js/components.js" defer></script>
-  <script src="js/script.js" defer></script>
-
+ </main>
+ <div id="footer-placeholder"></div>
+ <!-- Booking Modal (minimal) -->
+ <div class="modal-backdrop" id="booking-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+ <div class="modal" tabindex="-1">
+ <div class="modal__handle"></div>
+ <div class="modal__header"><h2 class="modal__title" id="booking-modal-title">Book Transfer<span id="booking-tour-name" style="display:block;font-size:var(--text-sm);color:var(--gold);font-family:var(--font-body);font-weight:400;margin-top:2px"></span></h2><button class="modal__close" id="booking-modal-close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+ <div class="modal__progress"><div class="modal__progress-dot is-active"></div><div class="modal__progress-dot"></div><div class="modal__progress-dot"></div><div class="modal__progress-dot"></div></div>
+ <div class="modal__body">
+ <div class="booking-step" id="step-1" style="display:block"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-5)"> Transfer Details</h3><div class="form-group"><label class="form-label" for="tr-from">Pickup Location</label><input type="text" class="form-input" id="tr-from" placeholder="e.g. CMB Airport"></div><div class="form-group"><label class="form-label" for="tr-to">Drop-off Location</label><input type="text" class="form-input" id="tr-to" placeholder="e.g. Galle Fort Hotel"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)"><div class="form-group"><label class="form-label" for="tr-date">Date</label><input type="date" class="form-input" id="tr-date"></div><div class="form-group"><label class="form-label" for="tr-time">Time</label><input type="time" class="form-input" id="tr-time"></div></div></div>
+ <div class="booking-step" id="step-2"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-5)"> Vehicle</h3><div class="form-group"><label class="form-label" for="tr-vehicle">Vehicle Type</label><select class="form-select" id="tr-vehicle"><option>Sedan (1–3 pax)</option><option selected>KDH Van (4–8 pax)</option><option>Coaster (9–28 pax)</option></select></div></div>
+ <div class="booking-step" id="step-3"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-5)"> Your Details</h3><div class="form-group"><label class="form-label" for="tr-name">Name</label><input type="text" class="form-input" id="tr-name" placeholder="Your name"></div><div class="form-group"><label class="form-label" for="tr-email">Email</label><input type="email" class="form-input" id="tr-email" placeholder="your@email.com"></div><div class="form-group"><label class="form-label" for="tr-wa">WhatsApp</label><input type="tel" class="form-input" id="tr-wa" placeholder="+1 234 567 8900"></div></div>
+ <div class="booking-step" id="step-4"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-4)"> Confirm</h3><p style="color:var(--color-text-muted);font-size:var(--text-sm);line-height:var(--leading-loose)">We'll send a fixed-price quote via email within a few hours. Driver details sent 24h before pickup.</p></div>
+ </div>
+ <div class="modal__footer"><div style="display:flex;gap:var(--space-3)"><button class="btn btn--ghost btn--sm" id="booking-prev" style="display:none">← Back</button><button class="btn btn--primary btn--full" id="booking-next">Continue →</button><button class="btn btn--primary btn--full" id="booking-submit" style="display:none"> Request Quote</button></div><a href="https://wa.me/94779892268" class="btn btn--whatsapp btn--full btn--sm" target="_blank" rel="noopener">Or WhatsApp us directly</a></div>
+ </div>
+ </div>
+ <script src="js/components.js"></script>
+ <script src="js/script.js"></script>
 </body>
 </html>

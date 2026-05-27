@@ -1,1007 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <meta name="description" content="Browse all ExploringLanka tours — safari, cultural, beach, adventure and custom Sri Lanka travel packages. Filter by interest, duration, and budget.">
+ <meta property="og:title" content="All Tours — ExploringLanka Sri Lanka">
+ <meta property="og:description" content="25+ curated private tours across Sri Lanka. Safari, cultural, beach and adventure experiences.">
+ <meta property="og:image" content="assets/images/hero-1.png">
+ <title>All Tours — ExploringLanka</title>
 
-  <title>Sri Lanka Tours & Experiences | ExploringLanka</title>
-
-  <meta
-    name="description"
-    content="Explore Sri Lanka tours, private trips, airport transfers, wildlife safaris, cultural experiences, beach tours, and hill country adventures with ExploringLanka."
-  />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/app.css" />
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <style>
+ :root { --gold:#C9963A;--deep:#0D1B2A;--cream:#F5EDD6; }
+ *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+ html{overflow-x:hidden;} body{background:var(--deep);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+ </style>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" media="print" onload="this.media='all'">
+ <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600;700&display=swap"></noscript>
+ <link rel="stylesheet" href="css/tokens.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/animations.css">
+ <link rel="stylesheet" href="css/components.css">
+ <style>
+ .page-header {
+ padding-top: calc(var(--nav-height) + var(--space-16));
+ padding-bottom: var(--space-16);
+ background: var(--deep-2);
+ position: relative;
+ overflow: hidden;
+ }
+ .page-header::before {
+ content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--color-divider);
+ }
+ .page-header__bg { position:absolute;inset:0; }
+ .page-header__bg img { width:100%;height:100%;object-fit:cover;opacity:0.15; }
+ .tours-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: var(--space-5);
+ }
+ @media (min-width: 768px) {
+ .tours-grid { grid-template-columns: repeat(3, 1fr); }
+ }
+ @media (min-width: 1200px) {
+ .tours-grid { grid-template-columns: repeat(4, 1fr); }
+ }
+ @media (max-width: 480px) {
+ .tours-grid { grid-template-columns: 1fr; }
+ }
+ </style>
 </head>
-
-<body class="tours-page">
-
-  <!-- Navbar component -->
-  <div id="navbar"></div>
-
-  <main>
-
-    <!-- ================= PAGE HERO ================= -->
-    <section class="page-hero tours-page-hero">
-      <div class="page-hero-overlay" aria-hidden="true"></div>
-
-      <div class="container page-hero-content">
-        <span class="page-badge">Private tours · Sri Lanka</span>
-
-        <h1>Private tours & experiences</h1>
-
-        <p>
-          Cultural routes, safaris, hill country, and beach days — filter by destination,
-          book in minutes via WhatsApp or email.
-        </p>
-
-        <div class="page-hero-actions">
-          <a href="#tourResults" class="btn btn-primary">Browse tours</a>
-          <a href="custom-tour.html" class="btn btn-light">Custom itinerary</a>
-          <a href="#" class="btn btn-ghost js-whatsapp-help">WhatsApp quote</a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= TOURS MARKETPLACE ================= -->
-    <section class="section marketplace-section" id="tourResults">
-      <div class="container">
-
-        <div class="section-heading">
-          <span>Marketplace</span>
-          <h2>Find your perfect Sri Lanka experience</h2>
-          <p>
-            Filter by destination, experience type, duration, and rating.
-            Booking works through WhatsApp or email.
-          </p>
-        </div>
-
-        <div class="marketplace-layout">
-
-          <!-- ================= FILTER SIDEBAR ================= -->
-          <aside class="filter-sidebar">
-
-            <div class="filter-header">
-              <h3>Filter Experiences</h3>
-              <p>Refine your search visually</p>
-            </div>
-
-            <div class="filter-group">
-              <label for="tourSearchInput">Search Tours</label>
-              <input
-                type="text"
-                id="tourSearchInput"
-                placeholder="Search by title or destination"
-              />
-            </div>
-
-            <div class="filter-group">
-              <h4>Destination</h4>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Sigiriya" class="tour-filter" />
-                <span>Sigiriya</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Kandy" class="tour-filter" />
-                <span>Kandy</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Ella" class="tour-filter" />
-                <span>Ella</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Yala" class="tour-filter" />
-                <span>Yala</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Galle" class="tour-filter" />
-                <span>Galle</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Mirissa" class="tour-filter" />
-                <span>Mirissa</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Nuwara Eliya" class="tour-filter" />
-                <span>Nuwara Eliya</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Anuradhapura" class="tour-filter" />
-                <span>Anuradhapura</span>
-              </label>
-            </div>
-
-            <div class="filter-group">
-              <h4>Experience Type</h4>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Private Tour" class="tour-filter" />
-                <span>Private Tour</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Cultural Tour" class="tour-filter" />
-                <span>Cultural Tour</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Wildlife Safari" class="tour-filter" />
-                <span>Wildlife Safari</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Airport Transfer" class="tour-filter" />
-                <span>Airport Transfer</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Beach Experience" class="tour-filter" />
-                <span>Beach Experience</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" value="Hill Country Tour" class="tour-filter" />
-                <span>Hill Country Tour</span>
-              </label>
-            </div>
-
-            <div class="filter-group">
-              <h4>Price Range</h4>
-
-              <div class="range-box">
-                <input type="range" min="10" max="250" value="120" />
-                <div class="range-values">
-                  <span>$10</span>
-                  <span>$250+</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <h4>Rating</h4>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>★★★★★ 5 Star</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>★★★★☆ 4 Star & Up</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>★★★☆☆ 3 Star & Up</span>
-              </label>
-            </div>
-
-            <div class="filter-group">
-              <h4>Languages</h4>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>English</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>French</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>German</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>Arabic</span>
-              </label>
-            </div>
-
-            <div class="filter-group">
-              <h4>Booking Options</h4>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>Free Cancellation</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>Hotel Pickup Available</span>
-              </label>
-            </div>
-
-          </aside>
-
-
-          <!-- ================= RESULTS AREA ================= -->
-          <div class="results-area">
-
-            <div class="results-topbar">
-              <div>
-                <h3>Showing top Sri Lanka experiences</h3>
-                <p id="resultsCount">12 experiences available</p>
-              </div>
-
-              <select id="sortSelect" aria-label="Sort tours">
-                <option>Recommended</option>
-                <option>Price Low to High</option>
-                <option>Top Rated</option>
-                <option>Duration</option>
-              </select>
-            </div>
-
-            <div class="tour-grid results-grid">
-
-              <!-- Tour 1 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Sigiriya Cultural Tour Private Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1586613835349-254e7e3d2fd2?auto=format&fit=crop&w=800&q=80"
-                    alt="Sigiriya Rock Fortress Guided Morning Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge">Best Seller</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Cultural Tour</span>
-                  <h3>Sigiriya Rock Fortress Guided Morning Tour</h3>
-
-                  <p class="tour-description">
-                    Climb the iconic Lion Rock with a local guide and enjoy sunrise views.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.9</strong>
-                    <small>(2,500 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 4 Hours</span>
-                    <span>🚘 Hotel pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$45</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Sigiriya Rock Fortress Guided Morning Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 2 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Kandy Cultural Tour Temple Private Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1605649461784-9d0a5a3f5b73?auto=format&fit=crop&w=800&q=80"
-                    alt="Kandy Temple of the Tooth and city highlights tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge green">Top Rated</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Cultural Experience</span>
-                  <h3>Kandy Temple of the Tooth & City Highlights Tour</h3>
-
-                  <p class="tour-description">
-                    Visit the sacred Temple of the Tooth, viewpoints, markets, and landmarks.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.8</strong>
-                    <small>(1,870 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 6 Hours</span>
-                    <span>🚘 Private pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$55</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Kandy Temple of the Tooth & City Highlights Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 3 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Ella Hill Country Tour Private Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80"
-                    alt="Ella Nine Arch Bridge and Little Adam’s Peak Adventure"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge blue">Private Tour</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Hill Country Tour</span>
-                  <h3>Ella Nine Arch Bridge and Little Adam’s Peak Adventure</h3>
-
-                  <p class="tour-description">
-                    Discover Ella’s scenic trails, mountain views, waterfalls, and railway bridge.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.9</strong>
-                    <small>(980 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 5 Hours</span>
-                    <span>🚘 Hotel pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$40</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Ella Nine Arch Bridge and Little Adam’s Peak Adventure"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 4 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Yala Wildlife Safari Private Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"
-                    alt="Yala National Park Private Jeep Safari"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge orange">Likely to Sell Out</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Wildlife Safari</span>
-                  <h3>Yala National Park Private Jeep Safari</h3>
-
-                  <p class="tour-description">
-                    Explore Sri Lanka’s famous national park with elephants, crocodiles, and leopards.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.9</strong>
-                    <small>(3,200 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 7 Hours</span>
-                    <span>🚙 Safari jeep</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$70</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Yala National Park Private Jeep Safari"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 5 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Colombo Airport Transfer Kandy Private Driver"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80"
-                    alt="Colombo Airport to Kandy Private Transfer"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge green">Easy Booking</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Airport Transfer</span>
-                  <h3>Colombo Airport to Kandy Private Transfer</h3>
-
-                  <p class="tour-description">
-                    Comfortable private vehicle transfer from Bandaranaike Airport to Kandy.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.7</strong>
-                    <small>(1,100 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 3.5 Hours</span>
-                    <span>✈️ Airport pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$60</strong>
-                      <span>per vehicle</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Colombo Airport to Kandy Private Transfer"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 6 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Galle Bentota South Coast Beach Experience"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&w=800&q=80"
-                    alt="Galle Fort Bentota River Safari and South Coast Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge">Best Seller</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">South Coast Tour</span>
-                  <h3>Galle Fort, Bentota River Safari & South Coast Tour</h3>
-
-                  <p class="tour-description">
-                    Explore Galle Fort, beaches, turtle stops, and Bentota river safari.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.8</strong>
-                    <small>(2,050 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 10 Hours</span>
-                    <span>🚘 Hotel pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$85</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Galle Fort, Bentota River Safari & South Coast Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 7 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Nuwara Eliya Tea Country Tour Waterfalls"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
-                    alt="Nuwara Eliya Tea Plantation and Waterfall Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge green">Top Rated</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Tea Country Tour</span>
-                  <h3>Nuwara Eliya Tea Plantation and Waterfall Tour</h3>
-
-                  <p class="tour-description">
-                    Visit tea estates, waterfalls, viewpoints, and cool hill country landscapes.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.8</strong>
-                    <small>(1,430 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 8 Hours</span>
-                    <span>🚘 Private pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$75</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Nuwara Eliya Tea Plantation and Waterfall Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 8 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Mirissa Whale Watching Beach Experience"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
-                    alt="Mirissa Whale Watching and Beach Day Experience"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge blue">Ocean Adventure</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Beach Experience</span>
-                  <h3>Mirissa Whale Watching and Beach Day Experience</h3>
-
-                  <p class="tour-description">
-                    Enjoy whale watching, beach time, seafood, and sunset views on the south coast.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.6</strong>
-                    <small>(890 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 6 Hours</span>
-                    <span>🚘 Optional pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$50</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Mirissa Whale Watching and Beach Day Experience"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 9 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Anuradhapura Ancient City Cultural Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80"
-                    alt="Anuradhapura Ancient City Private Day Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge">Heritage Pick</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Ancient City Tour</span>
-                  <h3>Anuradhapura Ancient City Private Day Tour</h3>
-
-                  <p class="tour-description">
-                    Discover sacred temples, ancient stupas, and Buddhist heritage sites.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.8</strong>
-                    <small>(1,240 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 9 Hours</span>
-                    <span>🚘 Hotel pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$80</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Anuradhapura Ancient City Private Day Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 10 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Udawalawe Wildlife Safari Elephant"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80"
-                    alt="Udawalawe Elephant Safari Experience"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge green">Family Friendly</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Wildlife Safari</span>
-                  <h3>Udawalawe Elephant Safari Experience</h3>
-
-                  <p class="tour-description">
-                    Enjoy an elephant-focused safari experience ideal for families and nature lovers.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.9</strong>
-                    <small>(1,760 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 5 Hours</span>
-                    <span>🚙 Safari jeep</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$65</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Udawalawe Elephant Safari Experience"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 11 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Colombo City Food Experience Cultural Tour"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80"
-                    alt="Colombo City Highlights and Street Food Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge blue">Local Favorite</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Food Experience</span>
-                  <h3>Colombo City Highlights and Street Food Tour</h3>
-
-                  <p class="tour-description">
-                    Taste local food, explore markets, visit landmarks, and enjoy Colombo life.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.7</strong>
-                    <small>(940 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 4 Hours</span>
-                    <span>📍 Meeting point</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$35</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Colombo City Highlights and Street Food Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-
-              <!-- Tour 12 -->
-              <article
-                class="tour-card tour-result-card"
-                data-search="Trincomalee Beach Holiday Snorkeling Temple"
-              >
-                <div class="tour-image">
-                  <img decoding="async"
-                    src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80"
-                    alt="Trincomalee Beach Snorkeling and Temple Tour"
-                    loading="lazy"
-                  />
-                  <span class="tour-badge orange">Seasonal Favorite</span>
-                  <button class="heart-btn" aria-label="Add to wishlist">♡</button>
-                </div>
-
-                <div class="tour-body">
-                  <span class="tour-category">Beach Holiday</span>
-                  <h3>Trincomalee Beach, Snorkeling and Temple Tour</h3>
-
-                  <p class="tour-description">
-                    Explore beaches, snorkeling spots, Koneswaram Temple, and east coast scenery.
-                  </p>
-
-                  <div class="rating">
-                    <span>★★★★★</span>
-                    <strong>4.8</strong>
-                    <small>(780 reviews)</small>
-                  </div>
-
-                  <div class="tour-meta">
-                    <span>⏱ 8 Hours</span>
-                    <span>🚘 Hotel pickup</span>
-                  </div>
-
-                  <div class="tour-footer">
-                    <div>
-                      <small>From</small>
-                      <strong>$75</strong>
-                      <span>per person</span>
-                    </div>
-
-                    <button
-                      class="btn btn-card book-now-btn"
-                      data-tour="Trincomalee Beach, Snorkeling and Temple Tour"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= CUSTOM TOUR CTA ================= -->
-    <section class="custom-cta">
-      <div class="cta-overlay"></div>
-      <div class="container cta-content">
-        <span>Custom trips</span>
-        <h2>Want a fully private route?</h2>
-        <p>
-          Share dates, group size, and must-see places — we’ll design your island itinerary
-          and send a quote on WhatsApp.
-        </p>
-
-        <div class="cta-buttons">
-          <a href="custom-tour.html" class="btn btn-primary">Plan custom tour</a>
-          <a href="#" class="btn btn-whatsapp js-whatsapp-help">Chat on WhatsApp</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- ================= BOOKING MODAL ================= -->
-  <div class="booking-modal" id="toursBookingModal">
-    <div class="booking-box">
-
-      <button class="modal-close" id="toursModalClose" aria-label="Close booking modal">
-        ×
-      </button>
-
-      <h2>Booking Request</h2>
-      <p class="modal-subtitle">Send your booking details through WhatsApp or email.</p>
-
-      <form id="toursBookingForm">
-
-        <div class="form-group">
-          <label for="modalTourName">Tour Name</label>
-          <input type="text" id="toursModalTourName" readonly />
-        </div>
-
-        <div class="form-group">
-          <label for="customerName">Your Name</label>
-          <input type="text" id="toursCustomerName" placeholder="Enter your name" />
-        </div>
-
-        <div class="form-group">
-          <label for="customerEmail">Email</label>
-          <input type="email" id="toursCustomerEmail" placeholder="Enter your email" />
-        </div>
-
-        <div class="form-group">
-          <label for="customerPhone">WhatsApp Number</label>
-          <input type="text" id="toursCustomerPhone" placeholder="+94 70 000 0000" />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="bookingDate">Travel Date</label>
-            <input type="date" id="toursBookingDate" />
-          </div>
-
-          <div class="form-group">
-            <label for="bookingGuests">Travelers</label>
-            <select id="toursBookingGuests">
-              <option>1 Traveler</option>
-              <option>2 Travelers</option>
-              <option>3 Travelers</option>
-              <option>4 Travelers</option>
-              <option>5+ Travelers</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="pickupLocation">Pickup Location</label>
-          <input type="text" id="toursPickupLocation" placeholder="Hotel or pickup place" />
-        </div>
-
-        <div class="form-group">
-          <label for="specialMessage">Special Message</label>
-          <textarea
-            id="toursSpecialMessage"
-            rows="4"
-            placeholder="Any special request?"
-          ></textarea>
-        </div>
-
-        <p class="form-error" id="toursBookingError"></p>
-
-        <div class="modal-actions">
-          <button type="button" class="btn btn-whatsapp" id="toursSendWhatsApp">
-            Send via WhatsApp
-          </button>
-
-          <button type="button" class="btn btn-primary" id="toursSendEmail">
-            Send via Email
-          </button>
-        </div>
-
-      </form>
-
-    </div>
-  </div>
-
-
-  <!-- Footer component -->
-  <div id="footer"></div>
-
-
-  <!-- Floating Buttons -->
-  <a href="#" class="floating-whatsapp js-whatsapp-help" aria-label="Chat on WhatsApp">
-    💬
-  </a>
-
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    ↑
-  </button>
-
-
-  <!-- JavaScript -->
-  <script src="js/components.js" defer></script>
-  <script src="js/script.js" defer></script>
-
+<body data-page="tours">
+ <div id="navbar-placeholder"></div>
+ <main id="main-content">
+
+ <!-- Page Header -->
+ <header class="page-header" aria-labelledby="tours-page-heading">
+ <div class="page-header__bg" aria-hidden="true">
+ <img src="assets/images/hero-2.png"
+ onerror="this.src='https://images.unsplash.com/photo-1574481729581-3d3c84e5c5df?w=1200&q=70'"
+ alt="" width="1200" height="400">
+ </div>
+ <div class="container" style="position:relative;z-index:1">
+ <nav class="breadcrumb" aria-label="Breadcrumb">
+ <span class="breadcrumb__item"><a href="index.html">Home</a></span>
+ <span class="breadcrumb__separator" aria-hidden="true">/</span>
+ <span class="breadcrumb__item" aria-current="page">All Tours</span>
+ </nav>
+ <p class="section-label">25+ Experiences</p>
+ <h1 class="section-title" id="tours-page-heading" style="font-size:clamp(2rem,5vw,3.5rem)">
+ Find Your Perfect<br>
+ <em style="color:var(--gold);font-style:italic;">Sri Lanka Tour</em>
+ </h1>
+ <p class="section-subtitle">
+ From 2-day escapes to 14-day grand odysseys — every tour is private, flexible, and crafted around you.
+ </p>
+ </div>
+ </header>
+
+ <!-- Filters + Tours -->
+ <section class="section" aria-label="Tour listings">
+ <div class="container">
+
+ <!-- Filter Tags -->
+ <div class="filter-tags" role="group" aria-label="Filter tours by category">
+ <button class="filter-tag is-active" data-filter="all" aria-pressed="true" id="filter-all">
+ All Tours
+ </button>
+ <button class="filter-tag" data-filter="safari" aria-pressed="false" id="filter-safari">
+ Safari
+ </button>
+ <button class="filter-tag" data-filter="cultural" aria-pressed="false" id="filter-cultural">
+ Cultural
+ </button>
+ <button class="filter-tag" data-filter="beach" aria-pressed="false" id="filter-beach">
+ Beach
+ </button>
+ <button class="filter-tag" data-filter="adventure" aria-pressed="false" id="filter-adventure">
+ Adventure
+ </button>
+ <button class="filter-tag" data-filter="scenic" aria-pressed="false" id="filter-scenic">
+ Scenic
+ </button>
+ <button class="filter-tag" data-filter="custom" aria-pressed="false" id="filter-custom">
+ Custom
+ </button>
+ </div>
+
+ <!-- Tours Grid -->
+ <div class="tours-grid">
+
+ <article class="tour-card hover-lift reveal" data-tour-id="sigiriya-yala-3d" data-category="safari,cultural">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-1.png"
+ onerror="this.src='https://images.unsplash.com/photo-1626016001-5e6c0ed2b8e3?w=600&q=80'"
+ alt="Sigiriya & Yala Safari Escape"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge">Bestseller</span>
+ <span class="tour-card__price">From $189/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+ </button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Sigiriya &amp; Yala Safari Escape</h2>
+ <div class="tour-card__chips">
+ <span class="chip"> 3 Days</span><span class="chip"> 2–8</span><span class="chip chip--jungle">Safari</span>
+ </div>
+ <p class="tour-card__desc">Climb the Lion Rock, then track leopards through Yala's golden savannah.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Sigiriya & Yala Safari Escape" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-1" data-tour-id="cultural-triangle" data-category="cultural">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-5.png"
+ onerror="this.src='https://images.unsplash.com/photo-1588428988355-7b3c4c8b3e08?w=600&q=80'"
+ alt="Cultural Triangle"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge" style="background:var(--jungle);color:white">Cultural</span>
+ <span class="tour-card__price">From $245/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Cultural Triangle Discovery</h2>
+ <div class="tour-card__chips"><span class="chip"> 5 Days</span><span class="chip"> 2–6</span><span class="chip chip--gold">Historical</span></div>
+ <p class="tour-card__desc">Sigiriya, Dambulla, Polonnaruwa — 2,500 years of history.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Cultural Triangle Discovery" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-2" data-tour-id="ella-train" data-category="adventure,scenic">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-3.png"
+ onerror="this.src='https://images.unsplash.com/photo-1614107151491-6876eecbff89?w=600&q=80'"
+ alt="Ella Highlands Train Journey"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge" style="background:var(--terracotta);color:white">Adventure</span>
+ <span class="tour-card__price">From $165/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Ella Highlands &amp; Train Journey</h2>
+ <div class="tour-card__chips"><span class="chip"> 4 Days</span><span class="chip"> 2–4</span><span class="chip chip--jungle">Scenic</span></div>
+ <p class="tour-card__desc">The world's most scenic train through emerald tea estates.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Ella Highlands & Train Journey" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-3" data-tour-id="south-coast" data-category="beach">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-4.png"
+ onerror="this.src='https://images.unsplash.com/photo-1552057426-c4a4a5db08c5?w=600&q=80'"
+ alt="South Coast Beach"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge" style="background:var(--jungle);color:white">Beach</span>
+ <span class="tour-card__price">From $135/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">South Coast Beach Bliss</h2>
+ <div class="tour-card__chips"><span class="chip"> 3 Days</span><span class="chip"> 2–10</span><span class="chip"> Whale Watch</span></div>
+ <p class="tour-card__desc">Galle Fort, Unawatuna, Mirissa whale watching. The ultimate south.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="South Coast Beach Bliss" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal" data-tour-id="grand-sri-lanka" data-category="cultural,safari,beach,scenic">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-2.png"
+ onerror="this.src='https://images.unsplash.com/photo-1574481729581-3d3c84e5c5df?w=600&q=80'"
+ alt="Grand Sri Lanka Tour"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge" style="background:var(--gold);color:var(--deep)">Premium</span>
+ <span class="tour-card__price">From $695/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Grand Sri Lanka Odyssey</h2>
+ <div class="tour-card__chips"><span class="chip"> 14 Days</span><span class="chip"> 2–6</span><span class="chip chip--gold">All-Inclusive</span></div>
+ <p class="tour-card__desc">The complete Sri Lanka experience — north to south, culture to coast.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Grand Sri Lanka Odyssey" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-1" data-tour-id="udawalawe-safari" data-category="safari">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-1.png"
+ onerror="this.src='https://images.unsplash.com/photo-1577995046218-3c39a2bb32d4?w=600&q=80'"
+ alt="Udawalawe Elephant Safari"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge">Safari</span>
+ <span class="tour-card__price">From $95/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Udawalawe Elephant Safari</h2>
+ <div class="tour-card__chips"><span class="chip"> 1 Day</span><span class="chip"> 2–12</span><span class="chip chip--jungle"> Elephants</span></div>
+ <p class="tour-card__desc">Watch hundreds of wild elephants roam freely across the savannah plains.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Udawalawe Elephant Safari" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-2" data-tour-id="nuwara-eliya-tea" data-category="scenic,cultural">
+ <div class="tour-card__image">
+ <img src="assets/images/hero-3.png"
+ onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80'"
+ alt="Nuwara Eliya Tea Country"
+ width="400" height="300" loading="lazy">
+ <span class="tour-card__badge" style="background:var(--jungle);color:white">Scenic</span>
+ <span class="tour-card__price">From $120/person</span>
+ <button class="tour-card__wishlist" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Nuwara Eliya Tea Country</h2>
+ <div class="tour-card__chips"><span class="chip"> 2 Days</span><span class="chip"> 2–8</span><span class="chip chip--gold"> Tea Tours</span></div>
+ <p class="tour-card__desc">Misty mountains, colonial tea estates, and scenic waterfall hikes.</p>
+ <div class="tour-card__footer">
+ <a href="tour-details.html" class="btn btn--primary btn--sm">View Tour</a>
+ <button class="btn btn--ghost btn--sm" data-open-booking="Nuwara Eliya Tea Country" aria-label="Book">Book</button>
+ </div>
+ </div>
+ </article>
+
+ <article class="tour-card hover-lift reveal reveal-delay-3" data-tour-id="custom" data-category="custom">
+ <div class="tour-card__image" style="background:linear-gradient(135deg,var(--jungle-dark),var(--deep-3));display:flex;align-items:center;justify-content:center;min-height:200px;">
+ <div style="text-align:center;padding:var(--space-6)">
+ <div style="color:var(--gold);margin-bottom:var(--space-3)"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+ <div style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--cream)">Your Idea</div>
+ </div>
+ <span class="tour-card__badge" style="background:var(--gold-dark)">Custom</span>
+ </div>
+ <div class="tour-card__body">
+ <h2 class="tour-card__title">Design Your Own Tour</h2>
+ <div class="tour-card__chips"><span class="chip"> Any Duration</span><span class="chip"> Any Size</span></div>
+ <p class="tour-card__desc">Tell us your dream. We'll build a completely bespoke itinerary just for you.</p>
+ <div class="tour-card__footer">
+ <a href="custom-tour.html" class="btn btn--primary btn--sm">Start Planning</a>
+ </div>
+ </div>
+ </article>
+
+ </div><!-- /.tours-grid -->
+
+ <!-- Load More -->
+ <div style="text-align:center;margin-top:var(--space-12)">
+ <button class="btn btn--ghost btn--lg btn--pill reveal" id="load-more-btn">
+ Load More Tours
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+ <polyline points="6 9 12 15 18 9"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </section>
+
+ <!-- CTA -->
+ <section class="section section--sm" style="background:var(--deep-2)">
+ <div class="container" style="text-align:center">
+ <p class="section-label reveal" style="justify-content:center">Can't find what you need?</p>
+ <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:var(--space-4)">
+ We Build <em style="color:var(--gold);font-style:italic">Custom Tours</em>
+ </h2>
+ <p class="section-subtitle reveal reveal-delay-2" style="margin-inline:auto;margin-bottom:var(--space-8)">
+ Every traveler is different. Tell us your interests, budget and dates, and we'll craft 
+ a completely personalized itinerary.
+ </p>
+ <div class="flex gap-4 justify-center flex-wrap reveal reveal-delay-3">
+ <a href="custom-tour.html" class="btn btn--primary btn--lg btn--pill">Build Custom Tour</a>
+ <a href="https://wa.me/94779892268" class="btn btn--whatsapp btn--lg btn--pill" target="_blank" rel="noopener">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+ Chat on WhatsApp
+ </a>
+ </div>
+ </div>
+ </section>
+
+ </main>
+
+ <div id="footer-placeholder"></div>
+
+ <!-- Booking Modal (reused from index) -->
+ <div class="modal-backdrop" id="booking-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" aria-hidden="true">
+ <div class="modal" tabindex="-1">
+ <div class="modal__handle" aria-hidden="true"></div>
+ <div class="modal__header">
+ <h2 class="modal__title" id="booking-modal-title">Book Your Tour<span id="booking-tour-name" style="display:block;font-size:var(--text-sm);color:var(--gold);font-family:var(--font-body);font-weight:400;margin-top:2px;"></span></h2>
+ <button class="modal__close" id="booking-modal-close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+ </div>
+ <div class="modal__progress"><div class="modal__progress-dot is-active"></div><div class="modal__progress-dot"></div><div class="modal__progress-dot"></div><div class="modal__progress-dot"></div></div>
+ <div class="modal__body">
+ <div class="booking-step" id="step-1" style="display:block">
+ <h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)"> Select Dates</h3>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
+ <div class="form-group"><label class="form-label" for="booking-arrival2">Arrival</label><input type="date" class="form-input" id="booking-arrival2"></div>
+ <div class="form-group"><label class="form-label" for="booking-departure2">Departure</label><input type="date" class="form-input" id="booking-departure2"></div>
+ </div>
+ </div>
+ <div class="booking-step" id="step-2"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)"> Guests</h3><div class="form-group"><label class="form-label">Adults</label><div style="display:flex;align-items:center;gap:var(--space-4)"><button style="width:44px;height:44px;border-radius:50%;background:var(--deep-3);border:1px solid var(--color-border);color:var(--cream);font-size:1.3rem;cursor:pointer;" onclick="document.getElementById('ac2').textContent=Math.max(1,parseInt(document.getElementById('ac2').textContent)-1)">−</button><span id="ac2" style="font-family:var(--font-display);font-size:var(--text-2xl);color:var(--cream);min-width:40px;text-align:center">2</span><button style="width:44px;height:44px;border-radius:50%;background:var(--deep-3);border:1px solid var(--color-border);color:var(--cream);font-size:1.3rem;cursor:pointer;" onclick="document.getElementById('ac2').textContent=parseInt(document.getElementById('ac2').textContent)+1">+</button></div></div></div>
+ <div class="booking-step" id="step-3"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)"> Your Details</h3><div class="form-group"><label class="form-label" for="bn2">Full Name</label><input type="text" class="form-input" id="bn2" placeholder="Your name"></div><div class="form-group"><label class="form-label" for="be2">Email</label><input type="email" class="form-input" id="be2" placeholder="your@email.com"></div><div class="form-group"><label class="form-label" for="bw2">WhatsApp</label><input type="tel" class="form-input" id="bw2" placeholder="+1 234 567 8900"></div></div>
+ <div class="booking-step" id="step-4"><h3 style="font-family:var(--font-display);font-size:var(--text-xl);color:var(--cream);margin-bottom:var(--space-6)"> Confirm</h3><p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-loose)">We'll send you a personalized quote within 24 hours. No payment required.</p></div>
+ </div>
+ <div class="modal__footer">
+ <div style="display:flex;gap:var(--space-3)">
+ <button class="btn btn--ghost btn--sm" id="booking-prev" style="display:none">← Back</button>
+ <button class="btn btn--primary btn--full" id="booking-next">Continue →</button>
+ <button class="btn btn--primary btn--full" id="booking-submit" style="display:none"> Send Request</button>
+ </div>
+ <a href="https://wa.me/94779892268" class="btn btn--whatsapp btn--full btn--sm" target="_blank" rel="noopener">Or book via WhatsApp</a>
+ </div>
+ </div>
+ </div>
+
+ <script src="js/components.js"></script>
+ <script src="js/script.js"></script>
+ <script>
+ document.getElementById('load-more-btn')?.addEventListener('click', function() {
+ this.textContent = 'All tours shown';
+ this.disabled = true;
+ showToast('All available tours are now displayed.', 'info');
+ });
+ </script>
 </body>
 </html>

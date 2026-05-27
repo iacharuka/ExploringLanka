@@ -1,1351 +1,1010 @@
-/* =====================================================
-   ExploringLanka Main JavaScript
-   WhatsApp + Email Booking System
-===================================================== */
-
-const BUSINESS_WHATSAPP = "94779892268";
-const BUSINESS_EMAIL = "dhanushka8997@gmail.com";
-
-function openWhatsApp(message) {
-  const url = `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-}
-
-function openEmail(subject, body) {
-  const url = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = url;
-}
-
-function byId(id) {
-  return document.getElementById(id);
-}
-
-function getValue(id, fallback = "Not provided") {
-  const element = byId(id);
-  if (!element) return fallback;
-  const value = element.value.trim();
-  return value || fallback;
-}
-
-function getFirstValue(ids, fallback = "Not provided") {
-  for (const id of ids) {
-    const element = byId(id);
-    if (element && element.value.trim()) return element.value.trim();
-  }
-  return fallback;
-}
-
-function setFirstValue(ids, value) {
-  for (const id of ids) {
-    const element = byId(id);
-    if (element) {
-      element.value = value;
-      return;
-    }
-  }
-}
-
-function checkedValues(name) {
-  const values = [...document.querySelectorAll(`input[name="${name}"]:checked`)]
-    .map((input) => input.value);
-  return values.length ? values.join(", ") : "Not selected";
-}
-
-function bindOnce(element, key, handler, eventName = "click") {
-  if (!element || element.dataset[key] === "true") return;
-  element.dataset[key] = "true";
-  element.addEventListener(eventName, handler);
-}
-
-function initImagePerformance() {
-  document.querySelectorAll("img").forEach((image, index) => {
-    if (!image.hasAttribute("decoding")) {
-      image.setAttribute("decoding", "async");
-    }
-
-    const shouldLoadEagerly = image.closest(".site-header, .luxury-loader, .site-loader") || index < 2;
-
-    if (!shouldLoadEagerly && !image.hasAttribute("loading")) {
-      image.setAttribute("loading", "lazy");
-    }
-
-    if (!image.hasAttribute("width") || !image.hasAttribute("height")) {
-      image.style.aspectRatio = image.style.aspectRatio || "16 / 10";
-    }
-  });
-}
-
-function showToast(message, type = "success") {
-  let toast = document.querySelector(".toast");
-
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.className = "toast";
-    document.body.appendChild(toast);
-  }
-
-  toast.textContent = message;
-  toast.style.background = type === "error" ? "#ef4444" : "#111827";
-  toast.classList.add("show");
-
-  clearTimeout(window.__exploringLankaToastTimer);
-  window.__exploringLankaToastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2600);
-}
-
-function initHeroSearch() {
-  const form = byId("heroSearchForm") || byId("heroSearch");
-  if (!form) return;
-
-  bindOnce(form, "heroSearchBound", (event) => {
-    event.preventDefault();
-
-    const message = `
-Hello ExploringLanka,
-
-I would like to search for Sri Lanka travel experiences.
-
-Location: ${getFirstValue(["location", "heroLocation"], "Not selected")}
-Travel Date: ${getFirstValue(["travelDate", "heroDate"], "Not selected")}
-Experience Type: ${getFirstValue(["experienceType", "heroType"], "Not selected")}
-Guests: ${getFirstValue(["guests", "heroGuests"], "Not selected")}
-
-Please send me available options, prices, and details.
-`;
-
-    showToast("Opening WhatsApp search inquiry...");
-    openWhatsApp(message);
-  }, "submit");
-}
-
-function initCategoryCards() {
-  document.querySelectorAll(".category-card, .cat-card").forEach((card) => {
-    bindOnce(card, "categoryBound", (event) => {
-      event.preventDefault();
-      const category = card.dataset.category || card.textContent.trim();
-
-      const message = `
-Hello ExploringLanka,
-
-I am interested in this travel style:
-
-Category: ${category}
-
-Please send me available Sri Lanka packages, prices, and details.
-`;
-
-      showToast("Opening WhatsApp category inquiry...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function initDestinationLinks() {
-  document.querySelectorAll("[data-destination]").forEach((link) => {
-    bindOnce(link, "destinationBound", (event) => {
-      event.preventDefault();
-      const destination = link.dataset.destination;
-
-      const message = `
-Hello ExploringLanka,
-
-I want to explore tours in ${destination}.
-
-Please send me available experiences, prices, pickup options, and tour details.
-`;
-
-      showToast("Opening WhatsApp destination inquiry...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function bookingModal() {
-  return byId("bookingModal") || byId("toursBookingModal");
-}
-
-function openBookingModal(tourName) {
-  const modal = bookingModal();
-
-  if (!modal) {
-    openWhatsApp(`Hello ExploringLanka,\n\nI would like to book: ${tourName}.\n\nPlease send me availability and price details.`);
-    return;
-  }
-
-  setFirstValue(["modalTourName", "bookingTour"], tourName);
-
-  modal.classList.add("show");
-  modal.classList.add("active");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-  document.body.style.overflow = "hidden";
-
-  showToast("Booking form opened");
-}
-
-function closeBookingModal() {
-  const modal = bookingModal();
-  if (!modal) return;
-
-  modal.classList.remove("show");
-  modal.classList.remove("active");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-  document.body.style.overflow = "";
-}
-
-function initBookingModal() {
-  document.querySelectorAll(".book-now-btn, .book-btn").forEach((button) => {
-    bindOnce(button, "bookingOpenBound", () => {
-      const tourName = button.dataset.tour || "Selected Tour";
-      const message = `
-Hello ExploringLanka,
-
-I would like to book or inquire about this Sri Lanka travel experience.
-
-Tour: ${tourName}
-
-My travel details:
-Travel Date:
-Pickup Location:
-Number of Travelers:
-WhatsApp Number:
-Special Requests:
-
-Please send me availability, price, and booking details.
-`;
-
-      showToast("Opening WhatsApp booking inquiry...");
-      openWhatsApp(message);
-    });
-  });
-
-  document.querySelectorAll(".modal-close, .close-modal").forEach((button) => {
-    bindOnce(button, "bookingCloseBound", closeBookingModal);
-  });
-
-  const modal = bookingModal();
-  if (modal) {
-    bindOnce(modal, "bookingBackdropBound", (event) => {
-      if (event.target === modal) closeBookingModal();
-    });
-  }
-
-  if (!document.documentElement.dataset.bookingEscapeBound) {
-    document.documentElement.dataset.bookingEscapeBound = "true";
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeBookingModal();
-    });
-  }
-}
-
-function validateBookingForm() {
-  const name = getFirstValue(["customerName", "toursCustomerName", "bookingName"], "");
-  const phone = getFirstValue(["customerPhone", "toursCustomerPhone", "bookingPhone"], "");
-  const date = getValue("bookingDate") || getValue("toursBookingDate", "");
-  const errorBox = byId("bookingError") || byId("toursBookingError");
-
-  if (!name || !phone || !date) {
-    if (errorBox) {
-      errorBox.textContent = "Please fill your name, WhatsApp number, and travel date.";
-    }
-    showToast("Please fill required booking details", "error");
-    return false;
-  }
-
-  if (errorBox) errorBox.textContent = "";
-  return true;
-}
-
-function buildBookingMessage() {
-  return `
-Hello ExploringLanka,
-
-I would like to book this Sri Lanka travel experience.
-
-Tour: ${getFirstValue(["modalTourName", "toursModalTourName", "bookingTour"])}
-Name: ${getFirstValue(["customerName", "toursCustomerName", "bookingName"])}
-Email: ${getFirstValue(["customerEmail", "toursCustomerEmail", "bookingEmail"])}
-WhatsApp Number: ${getFirstValue(["customerPhone", "toursCustomerPhone", "bookingPhone"])}
-Travel Date: ${getValue("bookingDate")}
-Travelers: ${getFirstValue(["bookingGuests", "toursBookingGuests", "bookingTravelers"])}
-Pickup Location: ${getFirstValue(["pickupLocation", "toursPickupLocation", "bookingPickup"])}
-Special Message: ${getFirstValue(["specialMessage", "toursSpecialMessage", "bookingMessage"])}
-
-Please confirm availability, final price, pickup time, and payment details.
-`;
-}
-
-function initBookingActions() {
-  const whatsAppButton = byId("sendWhatsApp") || byId("sendBookingWhatsApp");
-  const emailButton = byId("sendEmail") || byId("sendBookingEmail");
-
-  bindOnce(whatsAppButton, "bookingWhatsAppBound", () => {
-    if (!validateBookingForm()) return;
-    showToast("Opening WhatsApp booking request...");
-    openWhatsApp(buildBookingMessage());
-    closeBookingModal();
-  });
-
-  bindOnce(emailButton, "bookingEmailBound", () => {
-    if (!validateBookingForm()) return;
-    const tourName = getFirstValue(["modalTourName", "toursModalTourName", "bookingTour"], "Selected Tour");
-    showToast("Opening email booking request...");
-    openEmail(`Booking Request - ${tourName}`, buildBookingMessage());
-    closeBookingModal();
-  });
-}
-
-function getWishlist() {
-  try {
-    return JSON.parse(localStorage.getItem("exploringLankaWishlist") || "[]");
-  } catch {
-    return [];
-  }
-}
-
-function saveWishlist(wishlist) {
-  localStorage.setItem("exploringLankaWishlist", JSON.stringify(wishlist));
-}
-
-function initWishlist() {
-  document.querySelectorAll(".heart-btn, .heart").forEach((button) => {
-    const tourCard = button.closest(".tour-card");
-    const title = button.dataset.wishlist || tourCard?.querySelector("h3")?.textContent.trim();
-    if (!title) return;
-
-    if (getWishlist().includes(title)) {
-      button.classList.add("active");
-      button.textContent = "♥";
+/**
+ * ExploringLanka — Main JavaScript
+ * All interactions: carousel, modal, form, toast, scroll reveal, counter, wishlist
+ */
+
+(function () {
+ 'use strict';
+
+  /* ═══════════════════════════════════════════════════════════
+     PAGE LOADER — inject immediately, dismiss on window.load
+  ═══════════════════════════════════════════════════════════ */
+
+  (function initLoader() {
+    // Build the loader HTML
+    const loader = document.createElement('div');
+    loader.id = 'el-loader';
+    loader.setAttribute('role', 'status');
+    loader.setAttribute('aria-label', 'Loading ExploringLanka');
+
+    loader.innerHTML = `
+      <!-- Floating gold particles -->
+      <div class="loader__particles" aria-hidden="true">
+        ${[
+          { x: 15, y: 70, dur: 3.2, delay: 0 },
+          { x: 30, y: 55, dur: 2.8, delay: 0.6 },
+          { x: 55, y: 80, dur: 3.6, delay: 0.2 },
+          { x: 70, y: 60, dur: 2.5, delay: 1.0 },
+          { x: 82, y: 75, dur: 3.0, delay: 0.4 },
+          { x: 45, y: 65, dur: 4.0, delay: 1.4 },
+        ].map(p => `<div class="loader__particle" style="left:${p.x}%;top:${p.y}%;--dur:${p.dur}s;--delay:${p.delay}s"></div>`).join('')}
+      </div>
+
+      <div class="loader__inner">
+        <!-- Animated Compass -->
+        <div class="loader__compass-wrap" aria-hidden="true">
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer decorative ring (spins) -->
+            <g class="loader__ring">
+              <circle cx="48" cy="48" r="44" stroke="rgba(201,150,58,0.25)" stroke-width="1"/>
+              <circle cx="48" cy="48" r="44" stroke="url(#loaderGrad)" stroke-width="1.5"
+                stroke-dasharray="60 220" stroke-linecap="round"/>
+              <!-- Cardinal tick marks -->
+              <line x1="48" y1="4"  x2="48" y2="12" stroke="#C9963A" stroke-width="2" stroke-linecap="round"/>
+              <line x1="48" y1="84" x2="48" y2="92" stroke="rgba(201,150,58,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="4"  y1="48" x2="12" y2="48" stroke="rgba(201,150,58,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="84" y1="48" x2="92" y2="48" stroke="rgba(201,150,58,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
+            <!-- Inner glow circle -->
+            <circle class="loader__glow" cx="48" cy="48" r="26"
+              stroke="rgba(201,150,58,0.15)" stroke-width="12" fill="none"/>
+            <!-- Middle ring -->
+            <circle cx="48" cy="48" r="20" stroke="rgba(201,150,58,0.3)" stroke-width="1" fill="none"/>
+            <!-- Center dot -->
+            <circle cx="48" cy="48" r="4" fill="#C9963A"/>
+            <!-- Compass needle (oscillates) -->
+            <g class="loader__needle">
+              <!-- North (gold) -->
+              <polygon points="48,16 52,48 48,44 44,48" fill="#C9963A"/>
+              <!-- South (muted) -->
+              <polygon points="48,80 44,48 48,52 52,48" fill="rgba(201,150,58,0.3)"/>
+            </g>
+            <!-- N label -->
+            <text x="44.5" y="10" font-family="'DM Sans',sans-serif" font-size="7"
+              font-weight="700" fill="#C9963A" letter-spacing="0.5">N</text>
+            <!-- Gradient def -->
+            <defs>
+              <linearGradient id="loaderGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#C9963A"/>
+                <stop offset="100%" stop-color="rgba(201,150,58,0)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Brand -->
+        <div class="loader__brand">Exploring<span>Lanka</span></div>
+
+        <!-- Tagline -->
+        <div class="loader__tagline">Sri Lanka &nbsp;·&nbsp; Yours &nbsp;·&nbsp; Unfiltered</div>
+
+        <!-- Progress bar -->
+        <div class="loader__bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="loader__bar-fill"></div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(loader);
+
+    // Dismiss — wait for both window.load AND a minimum display time
+    const MIN_TIME = 1400; // ms — enough for animation to play through
+    const startTime = Date.now();
+
+    function dismiss() {
+      const elapsed = Date.now() - startTime;
+      const delay = Math.max(0, MIN_TIME - elapsed);
+      setTimeout(() => {
+        loader.classList.add('is-hidden');
+        // Remove from DOM after transition completes
+        setTimeout(() => loader.remove(), 750);
+      }, delay);
     }
 
-    bindOnce(button, "wishlistBound", (event) => {
-      event.preventDefault();
-      let wishlist = getWishlist();
-
-      if (wishlist.includes(title)) {
-        wishlist = wishlist.filter((item) => item !== title);
-        button.classList.remove("active");
-        button.textContent = "♡";
-        showToast("Removed from wishlist");
-      } else {
-        wishlist.push(title);
-        button.classList.add("active");
-        button.textContent = "♥";
-        showToast("Added to wishlist");
-      }
-
-      saveWishlist(wishlist);
-    });
-  });
-}
-
-function initWhatsAppHelpButtons() {
-  document.querySelectorAll(".js-whatsapp-help").forEach((button) => {
-    bindOnce(button, "whatsAppHelpBound", (event) => {
-      event.preventDefault();
-
-      const message = `
-Hello ExploringLanka,
-
-I need help planning my Sri Lanka trip.
-
-Please send me details about your tours, airport transfers, and custom travel packages.
-`;
-
-      showToast("Opening WhatsApp...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function initBackToTop() {
-  const backToTop = byId("backToTop") || document.querySelector(".back-to-top");
-  if (!backToTop) return;
-
-    if (!document.documentElement.dataset.backToTopScrollBound) {
-    document.documentElement.dataset.backToTopScrollBound = "true";
-    window.addEventListener("scroll", () => {
-      const button = byId("backToTop") || document.querySelector(".back-to-top");
-      if (button) button.classList.toggle("show", window.scrollY > 500);
-    }, { passive: true });
-  }
-
-  bindOnce(backToTop, "backToTopBound", (event) => {
-    event.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-function initTourPageFilters() {
-  const searchInput = byId("tourSearchInput") || byId("tourSearch");
-  const filterCheckboxes = document.querySelectorAll(".tour-filter");
-  const tourCards = document.querySelectorAll(".tour-result-card, .tour-list .tour-card");
-  const resultsCount = byId("resultsCount");
-
-  if (!tourCards.length) return;
-
-  function filterTours() {
-    const searchText = searchInput ? searchInput.value.toLowerCase().trim() : "";
-    const activeFilters = [...filterCheckboxes]
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value.toLowerCase());
-    let visibleCount = 0;
-
-    tourCards.forEach((card) => {
-      const searchableText = `${card.dataset.search || ""} ${card.dataset.title || ""} ${card.dataset.category || ""} ${card.dataset.destination || ""} ${card.textContent}`.toLowerCase();
-      const matchesSearch = !searchText || searchableText.includes(searchText);
-      const matchesFilters = activeFilters.length === 0 || activeFilters.some((filter) => searchableText.includes(filter));
-
-      card.style.display = matchesSearch && matchesFilters ? "" : "none";
-      if (matchesSearch && matchesFilters) visibleCount++;
-    });
-
-    if (resultsCount) {
-      resultsCount.textContent = `${visibleCount} experiences available`;
+    if (document.readyState === 'complete') {
+      dismiss();
+    } else {
+      window.addEventListener('load', dismiss, { once: true });
     }
-  }
-
-  bindOnce(searchInput, "tourSearchBound", filterTours, "input");
-  filterCheckboxes.forEach((checkbox) => bindOnce(checkbox, "tourFilterBound", filterTours, "change"));
-  filterTours();
-}
-
-function buildTransferMessage() {
-  return `
-Hello ExploringLanka,
-
-I need a private transfer quote in Sri Lanka.
-
-Name: ${getValue("transferName")}
-WhatsApp Number: ${getValue("transferPhone")}
-Pickup Location: ${getValue("pickupLocationTransfer")}
-Drop-off Location: ${getValue("dropLocationTransfer")}
-Date: ${getValue("transferDate")}
-Time: ${getValue("transferTime")}
-Vehicle Type: ${getValue("vehicleType")}
-Passengers: ${getValue("transferPassengers")}
-Luggage: ${getValue("transferLuggage")}
-Special Notes: ${getValue("transferMessage")}
-
-Please send me the price, availability, pickup details, and vehicle options.
-`;
-}
-
-function validateTransferForm() {
-  const errorBox = byId("transferError");
-  const missing = !getValue("transferName", "") ||
-    !getValue("transferPhone", "") ||
-    !getValue("pickupLocationTransfer", "") ||
-    !getValue("dropLocationTransfer", "");
-
-  if (missing) {
-    if (errorBox) {
-      errorBox.textContent = "Please fill your name, WhatsApp number, pickup location, and drop-off location.";
-    }
-    showToast("Please fill required transfer details", "error");
-    return false;
-  }
-
-  if (errorBox) errorBox.textContent = "";
-  return true;
-}
-
-function initTransferForm() {
-  const form = byId("transferQuoteForm");
-  const emailButton = byId("transferEmailBtn");
-
-  bindOnce(form, "transferSubmitBound", (event) => {
-    event.preventDefault();
-    if (!validateTransferForm()) return;
-    showToast("Opening WhatsApp transfer quote...");
-    openWhatsApp(buildTransferMessage());
-  }, "submit");
-
-  bindOnce(emailButton, "transferEmailBound", () => {
-    if (!validateTransferForm()) return;
-    showToast("Opening email transfer quote...");
-    openEmail("Private Transfer Quote Request", buildTransferMessage());
-  });
-}
-
-function initRouteQuoteButtons() {
-  document.querySelectorAll(".route-quote-btn").forEach((button) => {
-    bindOnce(button, "routeQuoteBound", () => {
-      const route = button.dataset.route || "Private Transfer";
-
-      const message = `
-Hello ExploringLanka,
-
-I would like to request a transfer quote.
-
-Route / Vehicle: ${route}
-
-Please send me the price, available vehicle options, travel time, and booking details.
-`;
-
-      showToast("Opening WhatsApp route quote...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function buildCustomTourMessage() {
-  return `
-Hello ExploringLanka,
-
-I would like to plan a custom Sri Lanka tour.
-
-Name: ${getValue("customName")}
-Email: ${getValue("customEmail")}
-WhatsApp Number: ${getValue("customPhone")}
-Travelers: ${getValue("customTravelers")}
-Arrival Date: ${getValue("arrivalDate")}
-Departure Date: ${getValue("departureDate")}
-Starting Location: ${getValue("startLocation")}
-Ending Location: ${getValue("endLocation")}
-Preferred Destinations: ${checkedValues("destinations")}
-Travel Interests: ${checkedValues("interests")}
-Budget Range: ${getValue("budgetRange")}
-Accommodation Preference: ${getValue("accommodationPreference")}
-Transport Preference: ${getValue("transportPreference")}
-Special Requests: ${getValue("customMessage")}
-
-Please create a private itinerary and send me a quotation.
-`;
-}
-
-function validateCustomTourForm() {
-  const errorBox = byId("customTourError");
-  const missing = !getValue("customName", "") || !getValue("customPhone", "");
-
-  if (missing) {
-    if (errorBox) {
-      errorBox.textContent = "Please fill your name and WhatsApp number.";
-    }
-    showToast("Please fill required custom tour details", "error");
-    return false;
-  }
-
-  if (errorBox) errorBox.textContent = "";
-  return true;
-}
-
-function initCustomTourForm() {
-  const form = byId("customTourForm");
-  const emailButton = byId("customTourEmailBtn");
-
-  bindOnce(form, "customSubmitBound", (event) => {
-    event.preventDefault();
-    if (!validateCustomTourForm()) return;
-    showToast("Opening WhatsApp custom tour request...");
-    openWhatsApp(buildCustomTourMessage());
-  }, "submit");
-
-  bindOnce(emailButton, "customEmailBound", () => {
-    if (!validateCustomTourForm()) return;
-    showToast("Opening email custom tour request...");
-    openEmail("Custom Sri Lanka Tour Request", buildCustomTourMessage());
-  });
-}
-
-function initItineraryButtons() {
-  document.querySelectorAll(".itinerary-btn").forEach((button) => {
-    bindOnce(button, "itineraryBound", () => {
-      const itinerary = button.dataset.itinerary || "Custom Sri Lanka itinerary";
-
-      const message = `
-Hello ExploringLanka,
-
-I am interested in this sample itinerary:
-
-${itinerary}
-
-Please send me the itinerary, price range, hotel options, and available dates.
-`;
-
-      showToast("Opening WhatsApp itinerary request...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function buildContactMessage() {
-  return `
-Hello ExploringLanka,
-
-I would like to contact you.
-
-Name: ${getValue("contactName")}
-Email: ${getValue("contactEmail")}
-WhatsApp Number: ${getValue("contactPhone")}
-Subject: ${getValue("contactSubject")}
-
-Message:
-${getValue("contactMessage")}
-
-Please reply when possible.
-`;
-}
-
-function validateContactForm() {
-  const errorBox = byId("contactError");
-  const missing = !getValue("contactName", "") ||
-    !getValue("contactPhone", "") ||
-    !getValue("contactMessage", "");
-
-  if (missing) {
-    if (errorBox) {
-      errorBox.textContent = "Please fill your name, WhatsApp number, and message.";
-    }
-    showToast("Please fill required contact details", "error");
-    return false;
-  }
-
-  if (errorBox) errorBox.textContent = "";
-  return true;
-}
-
-function initContactForm() {
-  const form = byId("contactForm");
-  const emailButton = byId("contactEmailBtn");
-
-  bindOnce(form, "contactSubmitBound", (event) => {
-    event.preventDefault();
-    if (!validateContactForm()) return;
-    showToast("Opening WhatsApp contact message...");
-    openWhatsApp(buildContactMessage());
-  }, "submit");
-
-  bindOnce(emailButton, "contactEmailBound", () => {
-    if (!validateContactForm()) return;
-    showToast("Opening email contact message...");
-    openEmail(getValue("contactSubject", "Contact Inquiry"), buildContactMessage());
-  });
-}
-
-function initDetailsButtons() {
-  document.querySelectorAll(".details-btn").forEach((button) => {
-    bindOnce(button, "detailsBound", () => {
-      const tour = button.dataset.tour || "Selected Tour";
-      if (tour.toLowerCase().includes("sigiriya")) {
-        window.location.href = "tour-details.html?tour=sigiriya-rock-fortress";
-        return;
-      }
-      openWhatsApp(`Hello ExploringLanka,\n\nPlease send me full details for ${tour}.`);
-    });
-  });
-}
-
-function initNewsletterForms() {
-  document.querySelectorAll(".js-newsletter").forEach((form) => {
-    bindOnce(form, "newsletterBound", (event) => {
-      event.preventDefault();
-      const input = form.querySelector("input");
-      const email = input?.value.trim() || "Not provided";
-
-      openEmail(
-        "Newsletter Subscription Request",
-        `Hello ExploringLanka,\n\nI would like to subscribe to your Sri Lanka travel updates.\n\nEmail: ${email}`
-      );
-    }, "submit");
-  });
-}
-
-function initHeroCarousel() {
-  const hero = document.querySelector(".it-hero, .hero-section");
-  if (!hero) return;
-
-  const slides = [...hero.querySelectorAll(".hero-slide")];
-  const dots = [
-    ...hero.querySelectorAll(".it-hero-dots button, .hero-dots button"),
-    ...document.querySelectorAll("[data-hero-slide]")
-  ];
-  const label = byId("heroCarouselLabel");
-  const previousButton = document.querySelector("[data-hero-prev]");
-  const nextButton = document.querySelector("[data-hero-next]");
-  const slideLabels = [
-    "Temple lights at night",
-    "Sigiriya rock fortress",
-    "Ella railway views",
-    "Dambulla cave temple",
-    "Anuradhapura stupa"
-  ];
-
-  if (slides.length < 2) return;
-
-  let activeIndex = slides.findIndex((slide) => slide.classList.contains("active"));
-  let timer = null;
-  activeIndex = activeIndex >= 0 ? activeIndex : 0;
-
-  function showSlide(index) {
-    activeIndex = (index + slides.length) % slides.length;
-
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("active", slideIndex === activeIndex);
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("active", dotIndex === activeIndex);
-    });
-
-    if (label) {
-      label.textContent = slideLabels[activeIndex] || `Slide ${activeIndex + 1}`;
-    }
-  }
-
-  function startCarousel() {
-    if (timer) return;
-    timer = setInterval(() => showSlide(activeIndex + 1), 5200);
-  }
-
-  function stopCarousel() {
-    clearInterval(timer);
-    timer = null;
-  }
-
-  dots.forEach((dot, dotIndex) => {
-    bindOnce(dot, "heroCarouselDotBound", () => {
-      const slideIndex = dot.dataset.heroSlide !== undefined
-        ? Number(dot.dataset.heroSlide)
-        : dotIndex;
-      showSlide(slideIndex);
-      stopCarousel();
-      startCarousel();
-    });
-  });
-
-  bindOnce(previousButton, "heroCarouselPrevBound", () => {
-    showSlide(activeIndex - 1);
-    stopCarousel();
-    startCarousel();
-  });
-
-  bindOnce(nextButton, "heroCarouselNextBound", () => {
-    showSlide(activeIndex + 1);
-    stopCarousel();
-    startCarousel();
-  });
-
-  bindOnce(hero, "heroCarouselMouseEnterBound", stopCarousel, "mouseenter");
-  bindOnce(hero, "heroCarouselMouseLeaveBound", startCarousel, "mouseleave");
-
-  showSlide(activeIndex);
-  startCarousel();
-}
-
-/* ================= FLEET PAGE WHATSAPP QUOTE ================= */
-
-function initFleetQuoteButtons() {
-  const fleetButtons = document.querySelectorAll(".fleet-quote-btn");
-
-  fleetButtons.forEach((button) => {
-    bindOnce(button, "fleetQuoteBound", () => {
-      const vehicle = button.dataset.vehicle || "Selected Vehicle";
-
-      const message = `
-Hello ExploringLanka,
-
-I would like to request a vehicle quote.
-
-Vehicle: ${vehicle}
-
-Please send me the price and availability.
-
-My travel details:
-Pickup Location:
-Destination:
-Travel Date:
-Number of Passengers:
-Luggage:
-Special Requests:
-`;
-
-      showToast("Opening WhatsApp vehicle quote...");
-      openWhatsApp(message);
-    });
-  });
-}
-
-function initLuxuryLoader() {
-  const loader = byId("luxuryLoader");
-  const progress = byId("loaderProgress");
-  const percentEl = byId("loaderPercent");
-  const statusEl = byId("loaderStatus");
-  if (!loader || loader.dataset.loaderBound === "true") return;
-  loader.dataset.loaderBound = "true";
-
-  const statusLines = [
-    "Planning your itinerary…",
-    "Preparing private tours…",
-    "Connecting local experts…",
-    "Almost ready…"
-  ];
-
-  let progressValue = 0;
-  const progressTimer = setInterval(() => {
-    progressValue = Math.min(progressValue + Math.random() * 14, 94);
-    if (progress) progress.style.width = `${progressValue}%`;
-    if (percentEl) percentEl.textContent = `${Math.round(progressValue)}%`;
-
-    if (statusEl) {
-      const statusIndex = Math.min(
-        statusLines.length - 1,
-        Math.floor((progressValue / 100) * statusLines.length)
-      );
-      statusEl.textContent = statusLines[statusIndex];
-    }
-  }, 160);
-
-  function hideLoader() {
-    clearInterval(progressTimer);
-    if (progress) progress.style.width = "100%";
-    if (percentEl) percentEl.textContent = "100%";
-    if (statusEl) statusEl.textContent = "Your journey is ready!";
-
-    window.setTimeout(() => {
-      try {
-        loader.classList.add("is-hidden");
-        loader.style.display = "none";
-      } catch (e) {}
-      try { document.body.classList.remove("is-loading"); } catch (e) {}
-      document.dispatchEvent(new Event("luxuryLoaderHidden"));
-    }, 320);
-  }
-
-  document.body.classList.add("is-loading");
-
-  if (document.readyState === "complete") {
-      window.setTimeout(hideLoader, 700);
-      return;
-    }
-
-  window.addEventListener("load", () => {
-    window.setTimeout(hideLoader, 700);
-  }, { once: true });
-
-  window.setTimeout(hideLoader, 4500);
-
-  // Safety fallback: force-hide loader if still visible after 6s
-  window.setTimeout(() => {
-    try {
-      if (loader && !loader.classList.contains("is-hidden")) {
-        loader.classList.add("is-hidden");
-        loader.style.display = "none";
-        document.body.classList.remove("is-loading");
-        document.dispatchEvent(new Event("luxuryLoaderHidden"));
-      }
-    } catch (e) { /* ignore */ }
-  }, 6000);
-}
-
-function initScrollAnimatedCards() {
-  const cardSelectors = [
-    ".category-card",
-    ".destination-card",
-    ".tour-card",
-    ".why-card",
-    ".review-card",
-    ".stat-card",
-    ".route-card",
-    ".vehicle-card",
-    ".contact-card",
-    ".faq-card",
-    ".fleet-card",
-    ".feature-card",
-    ".team-card",
-    ".mission-card",
-    ".itinerary-card",
-    ".custom-feature-card"
-  ];
-
-  const cards = document.querySelectorAll(cardSelectors.join(","));
-  if (!cards.length) return;
-
-  cards.forEach((card, index) => {
-    if (card.dataset.scrollCardReady === "true") return;
-    card.dataset.scrollCardReady = "true";
-    card.classList.add("scroll-card", "depth-card");
-    card.style.setProperty("--reveal-delay", `${Math.min(index % 8, 7) * 70}ms`);
-  });
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    cards.forEach((card) => card.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.16,
-    rootMargin: "0px 0px -8% 0px"
-  });
-
-  cards.forEach((card) => observer.observe(card));
-}
-
-function initHeroTextReveal() {
-  const heroItems = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-buttons, .hero-search, .hero-professional-note");
-  if (!heroItems.length || document.documentElement.dataset.heroRevealBound === "true") return;
-  document.documentElement.dataset.heroRevealBound = "true";
-
-  heroItems.forEach((item, index) => {
-    item.classList.add("hero-reveal");
-    item.style.setProperty("--hero-delay", `${index * 120}ms`);
-  });
-
-  const revealHero = () => {
-    heroItems.forEach((item) => item.classList.add("is-visible"));
-  };
-
-  const loader = byId("luxuryLoader");
-  if (loader && !loader.classList.contains("is-hidden")) {
-    document.addEventListener("luxuryLoaderHidden", revealHero, { once: true });
-    return;
-  }
-
-  requestAnimationFrame(revealHero);
-}
-
-function initNavbarFadeDown() {
-  const header = document.querySelector(".site-header, .header");
-  if (!header || header.dataset.navbarFadeBound === "true") return;
-  header.dataset.navbarFadeBound = "true";
-  header.classList.add("navbar-fade-down");
-}
-
-function parseStatValue(text) {
-  const trimmed = text.trim();
-  const numberMatch = trimmed.match(/[\d,.]+/);
-  if (!numberMatch) return null;
-
-  const numericText = numberMatch[0].replace(/,/g, "");
-  const value = Number(numericText);
-  if (Number.isNaN(value)) return null;
-
-  return {
-    value,
-    prefix: trimmed.slice(0, numberMatch.index),
-    suffix: trimmed.slice(numberMatch.index + numberMatch[0].length)
-  };
-}
-
-function initCountUpStats() {
-  const statNumbers = document.querySelectorAll(".stat-card strong, .stat b, [data-count]");
-  if (!statNumbers.length) return;
-
-  statNumbers.forEach((stat) => {
-    if (stat.dataset.countReady === "true") return;
-    const parsed = stat.dataset.count
-      ? { value: Number(stat.dataset.count), prefix: "", suffix: stat.dataset.suffix || "" }
-      : parseStatValue(stat.textContent);
-
-    if (!parsed || Number.isNaN(parsed.value)) return;
-
-    stat.dataset.countReady = "true";
-    stat.dataset.targetValue = String(parsed.value);
-    stat.dataset.countPrefix = parsed.prefix;
-    stat.dataset.countSuffix = parsed.suffix;
-    stat.textContent = `${parsed.prefix}0${parsed.suffix}`;
-  });
-
-  const readyStats = [...statNumbers].filter((stat) => stat.dataset.countReady === "true" && stat.dataset.countDone !== "true");
-  if (!readyStats.length) return;
-
-  const animateStat = (stat) => {
-    if (stat.dataset.countDone === "true") return;
-    stat.dataset.countDone = "true";
-
-    const target = Number(stat.dataset.targetValue);
-    const prefix = stat.dataset.countPrefix || "";
-    const suffix = stat.dataset.countSuffix || "";
-    const duration = 1400;
-    const startTime = performance.now();
-
-    function tick(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(target * eased);
-      stat.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
-    }
-
-    requestAnimationFrame(tick);
-  };
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    readyStats.forEach((stat) => {
-      stat.textContent = `${stat.dataset.countPrefix || ""}${Number(stat.dataset.targetValue).toLocaleString()}${stat.dataset.countSuffix || ""}`;
-      stat.dataset.countDone = "true";
-    });
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      animateStat(entry.target);
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.35 });
-
-  readyStats.forEach((stat) => observer.observe(stat));
-}
-
-function initTimelineReveal() {
-  const timelineBlocks = document.querySelectorAll(".sample-itinerary-section, .itinerary-grid, .custom-cta, .transfer-cta, .fleet-cta");
-  if (!timelineBlocks.length) return;
-
-  timelineBlocks.forEach((block) => {
-    if (block.dataset.timelineReady === "true") return;
-    block.dataset.timelineReady = "true";
-    block.classList.add("timeline-reveal");
-  });
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    timelineBlocks.forEach((block) => block.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.18 });
-
-  timelineBlocks.forEach((block) => observer.observe(block));
-}
-
-function initTiltCards() {
-  const tiltCards = document.querySelectorAll(".depth-card");
-  if (!tiltCards.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  tiltCards.forEach((card) => {
-    if (card.dataset.tiltBound === "true") return;
-    card.dataset.tiltBound = "true";
-
-    card.addEventListener("mousemove", (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(1000px) translate3d(0, -10px, 24px) rotateX(${y * -6}deg) rotateY(${x * 7}deg) scale(1.012)`;
-    }, { passive: true });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-    });
-  });
-}
-
-function initMagneticButtons() {
-  const buttons = document.querySelectorAll(".btn");
-  if (!buttons.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  buttons.forEach((button) => {
-    if (button.dataset.magneticBound === "true") return;
-    button.dataset.magneticBound = "true";
-    button.classList.add("magnetic-btn");
-
-    button.addEventListener("mousemove", (event) => {
-      const rect = button.getBoundingClientRect();
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-      button.style.transform = `translate(${x * 0.12}px, ${y * 0.16}px)`;
-    }, { passive: true });
-
-    button.addEventListener("mouseleave", () => {
-      button.style.transform = "";
-    });
-  });
-}
-
-function createThreeScene(canvas, options = {}) {
-  if (!window.THREE || !canvas) return null;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
-
-  const isTablet = window.matchMedia("(max-width: 900px)").matches;
-  const isMobile = window.matchMedia("(max-width: 640px)").matches;
-  if (isMobile && options.hideOnMobile) {
-    canvas.hidden = true;
-    return null;
-  }
-
-  const particleCount = options.particleCount ?? (isTablet ? 60 : 160);
-  const pixelRatio = Math.min(window.devicePixelRatio || 1, isTablet ? 1.2 : 1.75);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 1000);
-  camera.position.z = options.cameraZ ?? 72;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: "low-power"
-  });
-  renderer.setPixelRatio(pixelRatio);
-
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particleCount * 3);
-  const speeds = new Float32Array(particleCount);
-  const spread = options.spread ?? 150;
-
-  for (let index = 0; index < particleCount; index++) {
-    positions[index * 3] = (Math.random() - 0.5) * spread;
-    positions[index * 3 + 1] = (Math.random() - 0.5) * (spread * 0.65);
-    positions[index * 3 + 2] = (Math.random() - 0.5) * (spread * 0.45);
-    speeds[index] = 0.01 + Math.random() * 0.03;
-  }
-
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-
-  const particles = new THREE.Points(
-    geometry,
-    new THREE.PointsMaterial({
-      color: options.particleColor ?? 0xf0c45a,
-      size: isTablet ? 1.1 : 1.5,
-      transparent: true,
-      opacity: isTablet ? 0.38 : 0.55,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    })
-  );
-  scene.add(particles);
-
-  let orb = null;
-  if (options.showOrb && !isTablet) {
-    const orbGeometry = new THREE.TorusKnotGeometry(10, 2.4, 96, 16);
-    const orbMaterial = new THREE.MeshStandardMaterial({
-      color: 0x14b8a6,
-      emissive: 0xff7a2f,
-      emissiveIntensity: 0.35,
-      metalness: 0.72,
-      roughness: 0.22,
-      transparent: true,
-      opacity: 0.88
-    });
-    orb = new THREE.Mesh(orbGeometry, orbMaterial);
-    orb.position.set(options.orbX ?? 42, options.orbY ?? 8, -12);
-    scene.add(orb);
-
-    const rimLight = new THREE.PointLight(0xf0c45a, 1.4, 120);
-    rimLight.position.set(-30, 20, 40);
-    scene.add(rimLight);
-
-    const fillLight = new THREE.PointLight(0x14b8a6, 0.9, 100);
-    fillLight.position.set(50, -10, 30);
-    scene.add(fillLight);
-  }
-
-  let animationFrame = null;
-  let isRunning = true;
-  const timeStart = performance.now();
-
-  function resizeRenderer() {
-    const rect = canvas.getBoundingClientRect();
-    const width = Math.max(1, Math.floor(rect.width));
-    const height = Math.max(1, Math.floor(rect.height));
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-
-  function animate(now) {
-    if (!isRunning) return;
-    const elapsed = (now - timeStart) * 0.001;
-
-    for (let index = 0; index < particleCount; index++) {
-      positions[index * 3 + 1] += speeds[index];
-      if (positions[index * 3 + 1] > spread * 0.4) {
-        positions[index * 3 + 1] = -spread * 0.4;
-      }
-    }
-
-    geometry.attributes.position.needsUpdate = true;
-    particles.rotation.y += isTablet ? 0.0004 : 0.0008;
-    particles.rotation.x = Math.sin(elapsed * 0.15) * 0.04;
-
-    if (orb) {
-      orb.rotation.x = elapsed * 0.35;
-      orb.rotation.y = elapsed * 0.55;
-      orb.position.y = (options.orbY ?? 8) + Math.sin(elapsed * 0.9) * 4;
-    }
-
-    renderer.render(scene, camera);
-    animationFrame = requestAnimationFrame(animate);
-  }
-
-  function pauseScene() {
-    isRunning = false;
-    if (animationFrame) {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = null;
-    }
-  }
-
-  function resumeScene() {
-    if (isRunning) return;
-    isRunning = true;
-    animationFrame = requestAnimationFrame(animate);
-  }
-
-  resizeRenderer();
-  animationFrame = requestAnimationFrame(animate);
-
-  const onResize = () => resizeRenderer();
-  window.addEventListener("resize", onResize, { passive: true });
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pauseScene();
-    else resumeScene();
-  });
-
-  return { pauseScene, resumeScene, destroy: () => {
-    pauseScene();
-    window.removeEventListener("resize", onResize);
-    renderer.dispose();
-    geometry.dispose();
-    particles.material.dispose();
-    if (orb) {
-      orb.geometry.dispose();
-      orb.material.dispose();
-    }
-  }};
-}
-
-function initHeroParticles() {
-  const canvas = byId("heroParticleCanvas");
-  if (!canvas || canvas.dataset.particlesBound === "true") return;
-  canvas.dataset.particlesBound = "true";
-
-  createThreeScene(canvas, {
-    hideOnMobile: true,
-    showOrb: true,
-    orbX: 48,
-    orbY: 6,
-    particleColor: 0x7ee8d8,
-    spread: 175,
-    cameraZ: 85
-  });
-}
-
-function initPageHeroScenes() {
-  const heroes = document.querySelectorAll(".page-hero");
-  if (!heroes.length || !window.THREE) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  heroes.forEach((hero) => {
-    if (hero.dataset.sceneBound === "true") return;
-
-    let canvas = hero.querySelector(".page-hero-canvas");
-    if (!canvas) {
-      canvas = document.createElement("canvas");
-      canvas.className = "page-hero-canvas";
-      canvas.setAttribute("aria-hidden", "true");
-      hero.insertBefore(canvas, hero.firstChild);
-    }
-
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      canvas.hidden = true;
-      return;
-    }
-
-    hero.dataset.sceneBound = "true";
-    createThreeScene(canvas, {
-      particleCount: 90,
-      particleColor: 0xffb88a,
-      spread: 120,
-      cameraZ: 70,
-      showOrb: false
-    });
-  });
-}
-
-async function initSplineScene() {
-  const shell = byId("heroSplineShell");
-  const canvas = byId("heroSplineCanvas");
-  const fallback = byId("heroSplineFallback");
-
-  if (!shell || !canvas || canvas.dataset.splineBound === "true") return;
-  canvas.dataset.splineBound = "true";
-
-  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
-  const splineUrl = "https://prod.spline.design/YOUR-SPLINE-SCENE/scene.splinecode";
-
-  if (!isDesktop) {
-    shell.hidden = true;
-    return;
-  }
-
-  if (splineUrl.includes("YOUR-SPLINE-SCENE")) {
-    if (fallback) fallback.hidden = false;
-    return;
-  }
-
-  try {
-    const { Application } = await import("https://unpkg.com/@splinetool/runtime@1.9.82/build/runtime.js");
-    const splineApp = new Application(canvas);
-    window.exploringLankaSplineApp = splineApp;
-
-    await splineApp.load(splineUrl);
-    if (fallback) fallback.hidden = true;
-
-    // Example for later Book Now/Spline interaction:
-    // window.exploringLankaSplineApp.emitEvent("mouseDown", "ObjectName");
-  } catch (error) {
-    console.warn("Spline scene failed to load. Using static fallback.", error);
-    if (fallback) fallback.hidden = false;
-  }
-  }
-
-function initPageScripts() {
-  /* Performance and loading */
-  initImagePerformance();
-  initLuxuryLoader();
-
-  /* Navigation */
-  initNavbarFadeDown();
-
-  /* Booking and contact */
-  initHeroTextReveal();
-  initHeroSearch();
-  initCategoryCards();
-  initDestinationLinks();
-  initBookingModal();
-  initBookingActions();
-  initWishlist();
-  initWhatsAppHelpButtons();
-  initBackToTop();
-  initTourPageFilters();
-  initTransferForm();
-  initRouteQuoteButtons();
-  initCustomTourForm();
-  initItineraryButtons();
-  initContactForm();
-  initDetailsButtons();
-  initNewsletterForms();
-
-  /* Visual systems */
-  initHeroCarousel();
-  initFleetQuoteButtons();
-  initScrollAnimatedCards();
-  initCountUpStats();
-  initTimelineReveal();
-  initTiltCards();
-  initMagneticButtons();
-  initHeroParticles();
-  initPageHeroScenes();
-  initSplineScene();
-}
-
-document.addEventListener("DOMContentLoaded", initPageScripts);
-document.addEventListener("componentsLoaded", initPageScripts);
+  })();
+
+
+
+ /* 
+ UTILITIES
+ */
+
+ const $ = (sel, ctx = document) => ctx.querySelector(sel);
+ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+ function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+
+ /* 
+ TOAST SYSTEM
+ */
+
+ window.showToast = function showToast(message, type = 'success', duration = 4000) {
+ const container = document.getElementById('toast-container');
+ if (!container) return;
+
+ const icons = {
+ success: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="#5EA876" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>`,
+ error: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="#E8536A" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+ info: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="#C9963A" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+ };
+
+ const toast = document.createElement('div');
+ toast.className = `toast toast--${type}`;
+ toast.setAttribute('role', 'alert');
+ toast.innerHTML = `${icons[type] || icons.info}<span class="toast__message">${message}</span>`;
+
+ container.appendChild(toast);
+
+ setTimeout(() => {
+ toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+ toast.style.opacity = '0';
+ toast.style.transform = 'translateX(110%)';
+ setTimeout(() => toast.remove(), 350);
+ }, duration);
+ };
+
+ /* 
+ NAVBAR — SCROLL EFFECT
+ */
+
+ window.initNavbar = function initNavbar() {
+ const navbar = document.getElementById('main-navbar');
+ if (!navbar) return;
+
+ let ticking = false;
+
+ function handleScroll() {
+ if (!ticking) {
+ requestAnimationFrame(() => {
+ navbar.classList.toggle('is-scrolled', window.scrollY > 50);
+ ticking = false;
+ });
+ ticking = true;
+ }
+ }
+
+ window.addEventListener('scroll', handleScroll, { passive: true });
+ handleScroll(); // Initial check
+
+ // Desktop book button
+ const desktopBookBtn = document.getElementById('desktop-book-btn');
+ if (desktopBookBtn) {
+ desktopBookBtn.addEventListener('click', () => openBookingModal());
+ }
+
+ // Mobile bottom nav book button
+ const mobileBookBtn = document.getElementById('mobile-book-btn');
+ if (mobileBookBtn) {
+ mobileBookBtn.addEventListener('click', () => openBookingModal());
+ }
+ };
+
+ /* 
+ FOOTER
+ */
+
+ window.initFooter = function initFooter() {
+ const form = document.getElementById('footer-newsletter-form');
+ if (!form) return;
+
+ form.addEventListener('submit', (e) => {
+ e.preventDefault();
+ const input = document.getElementById('footer-email-input');
+ if (input && input.value) {
+ showToast(' You\'re subscribed! Welcome to the ExploringLanka family.', 'success');
+ input.value = '';
+ }
+ });
+ };
+
+ /* 
+ HERO CAROUSEL
+ */
+
+ function initHeroCarousel() {
+ const slides = $$('.hero__slide');
+ const dots = $$('.hero__dot');
+ if (!slides.length) return;
+
+ let current = 0;
+ let timer = null;
+ let startX = 0;
+ let isDragging = false;
+
+ function goTo(index) {
+ slides[current].classList.remove('is-active');
+ dots[current]?.classList.remove('is-active');
+ current = (index + slides.length) % slides.length;
+ slides[current].classList.add('is-active');
+ dots[current]?.classList.add('is-active');
+ }
+
+ function next() { goTo(current + 1); }
+
+ function startTimer() {
+ clearInterval(timer);
+ timer = setInterval(next, 6000);
+ }
+
+ // Dot clicks
+ dots.forEach((dot, i) => {
+ dot.addEventListener('click', () => { goTo(i); startTimer(); });
+ });
+
+ // Touch/pointer swipe
+ const hero = document.querySelector('.hero');
+ if (hero) {
+ hero.addEventListener('pointerdown', (e) => {
+ startX = e.clientX;
+ isDragging = true;
+ }, { passive: true });
+
+ hero.addEventListener('pointermove', () => {}, { passive: true });
+
+ hero.addEventListener('pointerup', (e) => {
+ if (!isDragging) return;
+ isDragging = false;
+ const diff = e.clientX - startX;
+ if (Math.abs(diff) > 50) {
+ goTo(diff < 0 ? current + 1 : current - 1);
+ startTimer();
+ }
+ });
+ }
+
+ goTo(0);
+ startTimer();
+ }
+
+ /* 
+ DESTINATION CARDS — EXPAND ON TAP
+ */
+
+ function initDestinationCards() {
+ const cards = $$('.destination-card');
+ cards.forEach(card => {
+ card.addEventListener('click', () => {
+ // On mobile, toggle expanded state
+ if (window.innerWidth < 768) {
+ const isExpanded = card.classList.contains('is-expanded');
+ // Close all others
+ cards.forEach(c => c.classList.remove('is-expanded'));
+ if (!isExpanded) card.classList.add('is-expanded');
+ }
+ });
+
+ // Keyboard accessibility
+ card.setAttribute('tabindex', '0');
+ card.setAttribute('role', 'button');
+ card.addEventListener('keydown', (e) => {
+ if (e.key === 'Enter' || e.key === ' ') {
+ e.preventDefault();
+ card.click();
+ }
+ });
+ });
+ }
+
+ /* 
+ TESTIMONIALS CAROUSEL
+ */
+
+ function initTestimonialsCarousel() {
+ const carousel = document.getElementById('testimonials-carousel');
+ if (!carousel) return;
+
+ const track = carousel.querySelector('.testimonials-track');
+ const dots = $$('.carousel-dot', carousel);
+ const prevBtn = document.getElementById('testimonials-prev');
+ const nextBtn = document.getElementById('testimonials-next');
+
+ if (!track) return;
+
+ let current = 0;
+ let timer = null;
+ let startX = 0;
+ let isDragging = false;
+ const cards = $$('.testimonial-card', track);
+ const total = cards.length;
+
+ function getPerPage() {
+ return window.innerWidth >= 768 ? 2 : 1;
+ }
+
+ function maxIndex() {
+ return Math.max(0, total - getPerPage());
+ }
+
+ function update() {
+ const perPage = getPerPage();
+ const percent = current * (100 / perPage);
+ track.style.transform = `translateX(-${percent}%)`;
+
+ dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+ }
+
+ function goTo(index) {
+ current = clamp(index, 0, maxIndex());
+ update();
+ }
+
+ function startAutoPlay() {
+ clearInterval(timer);
+ timer = setInterval(() => {
+ goTo(current >= maxIndex() ? 0 : current + 1);
+ }, 5000);
+ }
+
+ prevBtn?.addEventListener('click', () => { goTo(current - 1); startAutoPlay(); });
+ nextBtn?.addEventListener('click', () => { goTo(current + 1); startAutoPlay(); });
+
+ dots.forEach((dot, i) => {
+ dot.addEventListener('click', () => { goTo(i); startAutoPlay(); });
+ });
+
+ // Touch swipe
+ track.addEventListener('pointerdown', (e) => {
+ startX = e.clientX;
+ isDragging = true;
+ clearInterval(timer);
+ }, { passive: true });
+
+ track.addEventListener('pointerup', (e) => {
+ if (!isDragging) return;
+ isDragging = false;
+ const diff = e.clientX - startX;
+ if (Math.abs(diff) > 50) goTo(diff < 0 ? current + 1 : current - 1);
+ startAutoPlay();
+ });
+
+ // Pause on hover
+ carousel.addEventListener('mouseenter', () => clearInterval(timer));
+ carousel.addEventListener('mouseleave', () => startAutoPlay());
+
+ goTo(0);
+ startAutoPlay();
+
+ window.addEventListener('resize', () => goTo(clamp(current, 0, maxIndex())));
+ }
+
+ /* 
+ SEARCH BAR — AUTOCOMPLETE
+ */
+
+ const DESTINATIONS = [
+ { name: 'Sigiriya Rock Fortress', type: 'Cultural', emoji: '' },
+ { name: 'Yala National Park', type: 'Safari', emoji: '' },
+ { name: 'Ella & Nine Arch Bridge', type: 'Adventure', emoji: '' },
+ { name: 'Mirissa Beach', type: 'Beach', emoji: '' },
+ { name: 'Galle Fort', type: 'Cultural', emoji: '' },
+ { name: 'Kandy Temple of the Tooth', type: 'Cultural', emoji: '' },
+ { name: 'Udawalawe Safari', type: 'Safari', emoji: '' },
+ { name: 'Nuwara Eliya Tea Country', type: 'Scenic', emoji: '' },
+ { name: 'Colombo City Tour', type: 'Urban', emoji: '' },
+ { name: 'Arugam Bay Surfing', type: 'Beach', emoji: '' },
+ { name: 'Horton Plains', type: 'Nature', emoji: '' },
+ { name: 'Trincomalee Beaches', type: 'Beach', emoji: '' },
+ ];
+
+ function initSearchBar() {
+ const input = document.getElementById('search-input');
+ const dropdown = document.getElementById('search-dropdown');
+ if (!input || !dropdown) return;
+
+ function renderDropdown(items) {
+ dropdown.innerHTML = items.map(d => `
+ <div class="search-dropdown__item" tabindex="0" role="option" data-dest="${d.name}">
+ <span class="search-dropdown__icon">${d.emoji}</span>
+ <span class="search-dropdown__label">${d.name}</span>
+ <span class="search-dropdown__type">${d.type}</span>
+ </div>
+ `).join('');
+
+ $$('.search-dropdown__item', dropdown).forEach(item => {
+ item.addEventListener('click', () => {
+ input.value = item.dataset.dest;
+ dropdown.classList.remove('is-open');
+ // Navigate to tours page with filter
+ window.location.href = `tours.html?q=${encodeURIComponent(item.dataset.dest)}`;
+ });
+
+ item.addEventListener('keydown', (e) => {
+ if (e.key === 'Enter') item.click();
+ });
+ });
+ }
+
+ input.addEventListener('input', () => {
+ const val = input.value.trim().toLowerCase();
+ if (!val) {
+ dropdown.classList.remove('is-open');
+ return;
+ }
+ const filtered = DESTINATIONS.filter(d =>
+ d.name.toLowerCase().includes(val) || d.type.toLowerCase().includes(val)
+ );
+ if (filtered.length) {
+ renderDropdown(filtered);
+ dropdown.classList.add('is-open');
+ } else {
+ dropdown.classList.remove('is-open');
+ }
+ });
+
+ input.addEventListener('focus', () => {
+ if (!input.value) {
+ renderDropdown(DESTINATIONS.slice(0, 6));
+ dropdown.classList.add('is-open');
+ }
+ });
+
+ document.addEventListener('click', (e) => {
+ if (!e.target.closest('.search-bar')) {
+ dropdown.classList.remove('is-open');
+ }
+ });
+
+ // Search form submit
+ const searchForm = document.getElementById('hero-search-form');
+ searchForm?.addEventListener('submit', (e) => {
+ e.preventDefault();
+ const val = input.value.trim();
+ window.location.href = `tours.html${val ? '?q=' + encodeURIComponent(val) : ''}`;
+ });
+ }
+
+ /* 
+ TOUR FILTERS
+ */
+
+ function initTourFilters() {
+ const tags = $$('.filter-tag');
+ const cards = $$('[data-category]');
+ if (!tags.length) return;
+
+ function filterCards(activeTag) {
+ cards.forEach(card => {
+ const cats = (card.dataset.category || '').split(',').map(s => s.trim());
+ const show = activeTag === 'all' || cats.includes(activeTag);
+ card.style.display = show ? '' : 'none';
+
+ if (show) {
+ card.style.animation = 'none';
+ requestAnimationFrame(() => {
+ card.style.animation = 'fadeInUp 0.4s ease both';
+ });
+ }
+ });
+ }
+
+ tags.forEach(tag => {
+ tag.addEventListener('click', () => {
+ tags.forEach(t => t.classList.remove('is-active'));
+ tag.classList.add('is-active');
+ filterCards(tag.dataset.filter || 'all');
+ });
+ });
+
+ // Check URL params
+ const urlParams = new URLSearchParams(window.location.search);
+ const filterParam = urlParams.get('filter');
+ if (filterParam) {
+ const matchTag = tags.find(t => t.dataset.filter === filterParam);
+ if (matchTag) matchTag.click();
+ }
+ }
+
+ /* 
+ WISHLIST — localStorage
+ */
+
+ function getWishlist() {
+ try { return JSON.parse(localStorage.getItem('el_wishlist') || '[]'); }
+ catch { return []; }
+ }
+
+ function saveWishlist(list) {
+ localStorage.setItem('el_wishlist', JSON.stringify(list));
+ }
+
+ function initWishlist() {
+ const btns = $$('.tour-card__wishlist');
+ const wishlist = getWishlist();
+
+ btns.forEach(btn => {
+ const tourId = btn.closest('[data-tour-id]')?.dataset.tourId;
+ if (!tourId) return;
+
+ if (wishlist.includes(tourId)) btn.classList.add('is-active');
+
+ btn.addEventListener('click', (e) => {
+ e.stopPropagation();
+ const list = getWishlist();
+ const idx = list.indexOf(tourId);
+ if (idx === -1) {
+ list.push(tourId);
+ btn.classList.add('is-active');
+ showToast(' Added to your wishlist!', 'success', 2500);
+ } else {
+ list.splice(idx, 1);
+ btn.classList.remove('is-active');
+ showToast('Removed from wishlist.', 'info', 2000);
+ }
+ saveWishlist(list);
+ });
+ });
+ }
+
+ /* 
+ ANIMATED COUNTERS
+ */
+
+ function animateCounter(el) {
+ const target = parseInt(el.dataset.target, 10);
+ const duration = 2000;
+ const start = performance.now();
+
+ function step(now) {
+ const elapsed = now - start;
+ const progress = Math.min(elapsed / duration, 1);
+ // Ease out cubic
+ const eased = 1 - Math.pow(1 - progress, 3);
+ const value = Math.round(eased * target);
+ el.textContent = value.toLocaleString() + (el.dataset.suffix || '');
+ if (progress < 1) requestAnimationFrame(step);
+ }
+
+ requestAnimationFrame(step);
+ }
+
+ function initCounters() {
+ const counters = $$('[data-target]');
+ if (!counters.length) return;
+
+ const observer = new IntersectionObserver((entries) => {
+ entries.forEach(entry => {
+ if (entry.isIntersecting && !entry.target.dataset.animated) {
+ entry.target.dataset.animated = 'true';
+ animateCounter(entry.target);
+ observer.unobserve(entry.target);
+ }
+ });
+ }, { threshold: 0.4 });
+
+ counters.forEach(counter => observer.observe(counter));
+ }
+
+ /* 
+ SCROLL REVEAL (IntersectionObserver)
+ */
+
+ function initScrollReveal() {
+ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+ const revealEls = $$('.reveal, .reveal--left, .reveal--right, .reveal--scale');
+ if (!revealEls.length) return;
+
+ const observer = new IntersectionObserver((entries) => {
+ entries.forEach(entry => {
+ if (entry.isIntersecting) {
+ entry.target.classList.add('is-visible');
+ observer.unobserve(entry.target);
+ }
+ });
+ }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+ revealEls.forEach(el => observer.observe(el));
+ }
+
+ /* 
+ BOOKING MODAL (Multi-step)
+ */
+
+ let bookingStep = 1;
+ const TOTAL_STEPS = 4;
+
+ /* ── Collect all booking form fields (works on every page's modal) ── */
+ function collectBookingData() {
+ const val = id => (document.getElementById(id)?.value || '').trim();
+ const txt = id => (document.getElementById(id)?.textContent || '').trim();
+
+ const tourName   = txt('booking-tour-name') || val('booking-tour-select') || 'Tour Inquiry';
+ const arrival    = val('booking-arrival')   || val('booking-arrival2')   || 'Not specified';
+ const departure  = val('booking-departure') || val('booking-departure2') || 'Not specified';
+ const adults     = txt('adults-count') || txt('ac2') || val('adults-count') || '2';
+ const children   = txt('children-count') || '0';
+ const accom      = val('booking-accommodation') || '';
+ const firstName  = val('booking-firstname') || val('bn2') || '';
+ const lastName   = val('booking-lastname')  || '';
+ const name       = [firstName, lastName].filter(Boolean).join(' ') || 'Guest';
+ const email      = val('booking-email') || val('be2') || '';
+ const phone      = val('booking-phone') || val('bw2') || '';
+ const notes      = val('booking-notes') || '';
+
+ return { tourName, arrival, departure, adults, children, accom, name, email, phone, notes };
+ }
+
+ /* ── Build WhatsApp URL with pre-filled booking message ── */
+ function buildBookingWaUrl(d) {
+ const lines = [
+ `Hi ExploringLanka! I'd like to book a tour.`,
+ ``,
+ `*Booking Details*`,
+ `Tour: ${d.tourName}`,
+ `Arrival: ${d.arrival}`,
+ `Departure: ${d.departure}`,
+ `Adults: ${d.adults}`,
+ `Children: ${d.children}`,
+ d.accom ? `Accommodation: ${d.accom}` : null,
+ ``,
+ `*My Details*`,
+ `Name: ${d.name}`,
+ d.email ? `Email: ${d.email}` : null,
+ d.phone ? `Phone/WhatsApp: ${d.phone}` : null,
+ d.notes ? `\nNotes: ${d.notes}` : null,
+ ].filter(l => l !== null).join('\n');
+ return `https://wa.me/94779892268?text=${encodeURIComponent(lines)}`;
+ }
+
+ /* ── Build mailto URL with pre-filled booking email ── */
+ function buildBookingEmailUrl(d) {
+ const subject = `Tour Booking Request — ${d.tourName}`;
+ const body = [
+ `Hi ExploringLanka,`,
+ ``,
+ `I would like to book the following tour:`,
+ ``,
+ `BOOKING DETAILS`,
+ `---------------`,
+ `Tour:        ${d.tourName}`,
+ `Arrival:     ${d.arrival}`,
+ `Departure:   ${d.departure}`,
+ `Adults:      ${d.adults}`,
+ `Children:    ${d.children}`,
+ d.accom ? `Accommodation: ${d.accom}` : null,
+ ``,
+ `MY DETAILS`,
+ `----------`,
+ `Name:  ${d.name}`,
+ d.email ? `Email: ${d.email}` : null,
+ d.phone ? `Phone: ${d.phone}` : null,
+ d.notes ? `\nSpecial Requests:\n${d.notes}` : null,
+ ``,
+ `Please send me a personalised quote and availability. Thank you!`,
+ ].filter(l => l !== null).join('\n');
+ return `mailto:dhanushka8997@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+ }
+
+ /* ── WhatsApp icon SVG (inline, reused in buttons) ── */
+ const WA_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+ const EMAIL_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
+
+ window.openBookingModal = function openBookingModal(tourName = '') {
+ const backdrop = document.getElementById('booking-modal-backdrop');
+ if (!backdrop) return;
+
+ const tourNameEl = document.getElementById('booking-tour-name');
+ if (tourNameEl && tourName) tourNameEl.textContent = tourName;
+
+ bookingStep = 1;
+ updateBookingStep();
+ backdrop.classList.add('is-open');
+ document.body.style.overflow = 'hidden';
+ backdrop.querySelector('.modal')?.focus();
+ };
+
+ window.closeBookingModal = function closeBookingModal() {
+ const backdrop = document.getElementById('booking-modal-backdrop');
+ if (!backdrop) return;
+ backdrop.classList.remove('is-open');
+ document.body.style.overflow = '';
+ };
+
+ function updateBookingStep() {
+ $$('.booking-step').forEach((step, i) => {
+ step.style.display = i + 1 === bookingStep ? 'block' : 'none';
+ });
+
+ $$('.modal__progress-dot').forEach((dot, i) => {
+ dot.classList.toggle('is-active', i + 1 === bookingStep);
+ dot.classList.toggle('is-done', i + 1 < bookingStep);
+ });
+
+ const nextBtn  = document.getElementById('booking-next');
+ const prevBtn  = document.getElementById('booking-prev');
+ const submitBtn = document.getElementById('booking-submit');
+
+ // Always hide the old single submit; we inject two buttons on last step
+ if (submitBtn) submitBtn.style.display = 'none';
+
+ // Remove previously injected action buttons before re-rendering
+ document.getElementById('booking-actions')?.remove();
+
+ if (bookingStep < TOTAL_STEPS) {
+ if (nextBtn) nextBtn.style.display = 'flex';
+ } else {
+ // Last step — inject WhatsApp + Email buttons
+ if (nextBtn) nextBtn.style.display = 'none';
+
+ const btnRow = document.querySelector('.modal__footer > div');
+ if (btnRow) {
+ const actions = document.createElement('div');
+ actions.id = 'booking-actions';
+ actions.style.cssText = 'display:flex;flex-direction:column;gap:var(--space-3);width:100%';
+ actions.innerHTML = `
+ <button class="btn btn--whatsapp btn--full" id="booking-send-wa">
+ ${WA_ICON} Send via WhatsApp
+ </button>
+ <button class="btn btn--ghost btn--full" id="booking-send-email">
+ ${EMAIL_ICON} Send via Email
+ </button>
+ `;
+ btnRow.appendChild(actions);
+
+ document.getElementById('booking-send-wa').addEventListener('click', () => {
+ const data = collectBookingData();
+ window.open(buildBookingWaUrl(data), '_blank', 'noopener');
+ closeBookingModal();
+ showToast('Opening WhatsApp with your booking details...', 'success', 4000);
+ });
+
+ document.getElementById('booking-send-email').addEventListener('click', () => {
+ const data = collectBookingData();
+ window.location.href = buildBookingEmailUrl(data);
+ closeBookingModal();
+ showToast('Opening your email with booking details pre-filled...', 'info', 4000);
+ });
+ }
+ }
+
+ if (prevBtn) prevBtn.style.display = bookingStep > 1 ? 'flex' : 'none';
+ }
+
+ function initBookingModal() {
+ const backdrop = document.getElementById('booking-modal-backdrop');
+ if (!backdrop) return;
+
+ backdrop.addEventListener('click', (e) => {
+ if (e.target === backdrop) closeBookingModal();
+ });
+
+ document.getElementById('booking-modal-close')?.addEventListener('click', closeBookingModal);
+
+ document.getElementById('booking-next')?.addEventListener('click', () => {
+ if (bookingStep < TOTAL_STEPS) { bookingStep++; updateBookingStep(); }
+ });
+
+ document.getElementById('booking-prev')?.addEventListener('click', () => {
+ if (bookingStep > 1) { bookingStep--; updateBookingStep(); }
+ });
+
+ document.addEventListener('keydown', (e) => {
+ if (e.key === 'Escape') closeBookingModal();
+ });
+ }
+
+ /* 
+ ACCORDION
+ */
+
+ function initAccordions() {
+ const items = $$('.accordion__item');
+ items.forEach(item => {
+ const trigger = item.querySelector('.accordion__trigger');
+ if (!trigger) return;
+
+ trigger.addEventListener('click', () => {
+ const isOpen = item.classList.contains('is-open');
+ // Close siblings in same accordion
+ const accordion = item.closest('.accordion');
+ if (accordion) {
+ $$('.accordion__item.is-open', accordion).forEach(open => {
+ if (open !== item) open.classList.remove('is-open');
+ });
+ }
+ item.classList.toggle('is-open', !isOpen);
+ trigger.setAttribute('aria-expanded', String(!isOpen));
+ });
+
+ trigger.setAttribute('aria-expanded', 'false');
+ });
+ }
+
+ /* 
+ TOUR CARDS — BOOK CTA
+ */
+
+ function initTourCardCTAs() {
+ $$('[data-open-booking]').forEach(el => {
+ el.addEventListener('click', (e) => {
+ e.stopPropagation();
+ const tourName = el.dataset.openBooking || '';
+ openBookingModal(tourName);
+ });
+ });
+ }
+
+ /* 
+ GALLERY LIGHTBOX (simple)
+ */
+
+ function initGallery() {
+ const items = $$('.gallery__item[data-src]');
+ if (!items.length) return;
+
+ items.forEach(item => {
+ item.addEventListener('click', () => {
+ const src = item.dataset.src;
+ const alt = item.dataset.alt || 'Gallery image';
+ openLightbox(src, alt);
+ });
+ });
+ }
+
+ function openLightbox(src, alt) {
+ const existing = document.getElementById('lightbox');
+ if (existing) existing.remove();
+
+ const lb = document.createElement('div');
+ lb.id = 'lightbox';
+ lb.setAttribute('role', 'dialog');
+ lb.setAttribute('aria-label', 'Image lightbox');
+ lb.style.cssText = `
+ position: fixed; inset: 0; z-index: 500;
+ background: rgba(0,0,0,0.95);
+ display: flex; align-items: center; justify-content: center;
+ cursor: zoom-out;
+ animation: fadeIn 0.2s ease;
+ `;
+
+ lb.innerHTML = `
+ <img src="${src}" alt="${alt}" style="max-width:94vw; max-height:90dvh; object-fit:contain; border-radius:8px;">
+ <button aria-label="Close" style="position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.1);border:none;color:white;width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;"></button>
+ `;
+
+ lb.addEventListener('click', () => lb.remove());
+ lb.querySelector('button')?.addEventListener('click', () => lb.remove());
+
+ document.body.appendChild(lb);
+
+ document.addEventListener('keydown', function handler(e) {
+ if (e.key === 'Escape') { lb.remove(); document.removeEventListener('keydown', handler); }
+ });
+ }
+
+ /* 
+ FORM VALIDATION
+ */
+
+ function initForms() {
+ $$('form[data-validate]').forEach(form => {
+ form.addEventListener('submit', (e) => {
+ e.preventDefault();
+ const inputs = $$('[required]', form);
+ let valid = true;
+
+ inputs.forEach(input => {
+ const err = input.parentNode.querySelector('.form-error');
+ if (!input.value.trim()) {
+ valid = false;
+ input.style.borderColor = '#E8536A';
+ if (err) err.textContent = 'This field is required.';
+ } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+ valid = false;
+ input.style.borderColor = '#E8536A';
+ if (err) err.textContent = 'Please enter a valid email.';
+ } else {
+ input.style.borderColor = '';
+ if (err) err.textContent = '';
+ }
+ });
+
+ if (valid) {
+ const successMsg = form.dataset.success || ' Thank you! We\'ll be in touch soon.';
+ showToast(successMsg, 'success', 5000);
+ form.reset();
+ }
+ });
+ });
+ }
+
+ /* 
+ HORIZONTAL SCROLL SHELF — keyboard navigation
+ */
+
+ function initScrollShelves() {
+ $$('.scroll-row').forEach(shelf => {
+ // Make it keyboard scrollable
+ shelf.setAttribute('tabindex', '0');
+ shelf.addEventListener('keydown', (e) => {
+ if (e.key === 'ArrowRight') shelf.scrollBy({ left: 320, behavior: 'smooth' });
+ if (e.key === 'ArrowLeft') shelf.scrollBy({ left: -320, behavior: 'smooth' });
+ });
+ });
+ }
+
+ /* 
+ MOBILE SWIPE CAROUSEL (generic)
+ */
+
+ function initSwipeCarousels() {
+ $$('[data-carousel]').forEach(carousel => {
+ const track = carousel.querySelector('[data-carousel-track]');
+ if (!track) return;
+
+ let startX = 0;
+ let scrollLeft = 0;
+ let isDown = false;
+
+ track.addEventListener('pointerdown', (e) => {
+ isDown = true;
+ startX = e.clientX - track.offsetLeft;
+ scrollLeft = track.scrollLeft;
+ track.setPointerCapture(e.pointerId);
+ });
+
+ track.addEventListener('pointermove', (e) => {
+ if (!isDown) return;
+ e.preventDefault();
+ const x = e.clientX - track.offsetLeft;
+ const walk = (x - startX) * 1.5;
+ track.scrollLeft = scrollLeft - walk;
+ });
+
+ track.addEventListener('pointerup', () => { isDown = false; });
+ track.addEventListener('pointerleave', () => { isDown = false; });
+ });
+ }
+
+ /* 
+ URL PARAMS — Pre-fill forms / filters
+ */
+
+ function handleUrlParams() {
+ const params = new URLSearchParams(window.location.search);
+ const searchInput = document.getElementById('search-input');
+ if (searchInput && params.get('q')) {
+ searchInput.value = params.get('q');
+ }
+ }
+
+ /* 
+ INIT — Run after DOM + components ready
+ */
+
+ function init() {
+ initHeroCarousel();
+ initDestinationCards();
+ initTestimonialsCarousel();
+ initSearchBar();
+ initTourFilters();
+ initWishlist();
+ initCounters();
+ initScrollReveal();
+ initBookingModal();
+ initAccordions();
+ initTourCardCTAs();
+ initGallery();
+ initForms();
+ initScrollShelves();
+ initSwipeCarousels();
+ handleUrlParams();
+ }
+
+ // Wait for components (navbar/footer) to be injected
+ document.addEventListener('components:ready', init);
+
+ // Also run on DOMContentLoaded in case components.js isn't used
+ document.addEventListener('DOMContentLoaded', () => {
+ // Small delay to ensure component injection has happened
+ setTimeout(() => {
+ if (!document.getElementById('main-navbar')) init();
+ }, 50);
+ });
+
+})();
